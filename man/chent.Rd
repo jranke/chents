@@ -24,9 +24,12 @@ from the internet.
 \item{\code{mw}}{Molecular weight, with attribute 'source'}
 
 \item{\code{pubchem}}{List of information retreived from PubChem}
+
+\item{\code{rdkit}}{List of information obtained with RDKit}
 }}
 \examples{
-oct <- chent$new("1-octanol")
+oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
+oct$try_pubchem()
 print(oct)
 }
 \keyword{data}
