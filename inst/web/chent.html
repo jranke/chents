@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>chent. chents 0.2-1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">chents 0.2-1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>An R6 class for chemical entities with associated data</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>chent</div></pre>
+        
+    <div class="Format">
+      <h2>Format</h2>
+
+      <p>An <code><a href='http://www.inside-r.org/packages/cran/R6/docs/R6Class'>R6Class</a></code> generator object</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>The class is initialised with an identifier. Chemical information is retrieved from
+the internet. Additionally, it can be generated using RDKit if RDKit and its
+python bindings are installed.</p>
+  
+    </div>
+
+    <div class="Fields">
+      <h2>Fields</h2>
+
+      <p></p>
+  
+      <p><dl>
+<dt><code>identifier</code></dt><dd>The identifier that was used to initiate the object, with attribute 'source'</dd></p>
+  
+      <p><dt><code>inchikey</code></dt><dd>InChI Key, with attribute 'source'</dd></p>
+  
+      <p><dt><code>smiles</code></dt><dd>SMILES code, with attribute 'source'</dd></p>
+  
+      <p><dt><code>mw</code></dt><dd>Molecular weight, with attribute 'source'</dd></p>
+  
+      <p><dt><code>pubchem</code></dt><dd>List of information retreived from PubChem</dd></p>
+  
+      <p><dt><code>rdkit</code></dt><dd>List of information obtained with RDKit</dd></p>
+  
+      <p><dt><code>Picture</code></dt><dd>Graph as a <code><a href='http://www.inside-r.org/packages/cran/grImport/docs/picture'>picture</a></code> object obtained using grImport</dd></p>
+  
+      <p></dl></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>oct &lt;- chent$new(&quot;1-octanol&quot;, smiles = &quot;CCCCCCCCO&quot;)
+oct$try_pubchem()
+</div>
+<strong class='message'>http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?retmax=100000&amp;db=pccompound&amp;term=1-octanol</strong>
+<strong class='message'>Found 1 entries in PubChem, using the first one.</strong>
+<strong class='message'>http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?retmax=100000&amp;db=pccompound&amp;ID=957</strong>
+<div class='input'>print(oct)
+</div>
+<div class='output'>&lt;chent&gt;
+Identifier $identifier 1-octanol 
+InChI Key $inchikey KBPLFHHGFOOTCA-UHFFFAOYSA-N 
+SMILES string $smiles CCCCCCCCO 
+Molecular weight $mw: 130.2 
+PubChem synonyms (first 10):
+ [1] &quot;1-octanol&quot;        &quot;Octan-1-ol&quot;       &quot;octanol&quot;          &quot;N-octanol&quot;        &quot;Capryl alcohol&quot;   &quot;Octyl alcohol&quot;   
+ [7] &quot;n-Octyl alcohol&quot;  &quot;caprylic alcohol&quot; &quot;Heptyl carbinol&quot;  &quot;1-Hydroxyoctane&quot; 
+</div>
+<div class='input'>plot(oct)
+</div>
+<div class='input'>caffeine &lt;- chent$new(&quot;caffeine&quot;, source = &quot;pubchem&quot;)
+</div>
+<strong class='message'>http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?retmax=100000&amp;db=pccompound&amp;term=caffeine</strong>
+<strong class='message'>Found 217 entries in PubChem, using the first one.</strong>
+<strong class='message'>http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?retmax=100000&amp;db=pccompound&amp;ID=1188</strong>
+<div class='input'>print(caffeine)
+</div>
+<div class='output'>&lt;chent&gt;
+Identifier $identifier caffeine 
+InChI Key $inchikey LRFVTYWOQMYALW-UHFFFAOYSA-N 
+SMILES string $smiles C1=NC2=C(N1)C(=O)NC(=O)N2 
+Molecular weight $mw: 152.1 
+PubChem synonyms (first 10):
+ [1] &quot;xanthine&quot;            &quot;2,6-Dihydroxypurine&quot; &quot;69-89-6&quot;             &quot;Xanthin&quot;             &quot;2,6-dioxopurine&quot;    
+ [6] &quot;Pseudoxanthine&quot;      &quot;Isoxanthine&quot;         &quot;Xanthic oxide&quot;       &quot;1H-Purine-2,6-diol&quot;  &quot;Purine-2,6-diol&quot;    
+</div>
+<div class='input'>caffeine$get_rdkit()
+plot(caffeine)
+</div>
+<p><img src='chent-15.png' alt='' width='540' height='400' /></p></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>chent</li>
+    </ul>
+    <ul>
+      <li>data</li>
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

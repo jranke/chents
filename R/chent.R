@@ -17,21 +17,27 @@
 
 #' An R6 class for chemical entities with associated data
 #' 
-#' The class is initialised with an identifier. Chemical information is retrieved
-#' from the internet.
+#' The class is initialised with an identifier. Chemical information is retrieved from
+#' the internet. Additionally, it can be generated using RDKit if RDKit and its
+#' python bindings are installed.
 #'
 #' @docType class
 #' @export
 #' @format An \code{\link{R6Class}} generator object
 #' @importFrom R6 R6Class
 #' @importFrom webchem get_cid cid_compinfo
+#' @importFrom grImport PostScriptTrace readPicture
+#' @importFrom PythonInR pyIsConnected pyConnect pyImport pyExec pyExecg
+#' @importFrom yaml yaml.load_file
 #' @field identifier The identifier that was used to initiate the object, with attribute 'source'
 #' @field inchikey InChI Key, with attribute 'source'
 #' @field smiles SMILES code, with attribute 'source'
 #' @field mw Molecular weight, with attribute 'source'
 #' @field pubchem List of information retreived from PubChem
 #' @field rdkit List of information obtained with RDKit
-#' @example inst/examples/chents.R
+#' @field Picture Graph as a \code{\link{picture}} object obtained using grImport
+#' @example inst/examples/octanol.R
+#' @example inst/examples/caffeine.R
 #' @keywords data
 
 chent <- R6Class("chent",
@@ -42,6 +48,8 @@ chent <- R6Class("chent",
     mw = NULL,
     pubchem = NULL,
     rdkit = NULL,
+    Picture = NULL,
+    chyaml = NULL,
     initialize = function(identifier, smiles = NULL,
                           source = c("rdkit", "pubchem")) {
       self$identifier <- identifier
@@ -96,25 +104,41 @@ chent <- R6Class("chent",
       }
     },
     get_rdkit = function() {
-      if (require(PythonInR)) {
-        id <- names(self$identifier)
-        try_rdkit <- try(pyImport("Chem", from = "rdkit"))
-        if (inherits(try_rdkit, "try-error")) {
-          message("Could not import RDKit in Python session")
-        } else {
-          self$rdkit <- list()
-          pyImport("Descriptors", from = "rdkit.Chem")
-          pyExec(paste0("mol = Chem.MolFromSmiles('", self$smiles, "')"))
-          self$rdkit$mw <- pyExecg("mw = Descriptors.MolWt(mol)", "mw")
-          if (!is.null(self$mw)) {
-            if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {
-              message("RDKit mw is ", self$rdkit$mw)
-              message("mw is ", self$mw)
-            }
+      id <- names(self$identifier)
+      if (!pyIsConnected()) {
+        pyConnect()
+      }
+      try_rdkit <- try(pyImport("Chem", from = "rdkit"))
+      if (inherits(try_rdkit, "try-error")) {
+        message("Could not import RDKit in Python session")
+      } else {
+        self$rdkit <- list()
+        pyImport("Descriptors", from = "rdkit.Chem")
+        pyExec(paste0("mol = Chem.MolFromSmiles('", self$smiles, "')"))
+        self$rdkit$mw <- pyExecg("mw = Descriptors.MolWt(mol)", "mw")
+        if (!is.null(self$mw)) {
+          if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {
+            message("RDKit mw is ", self$rdkit$mw)
+            message("mw is ", self$mw)
           }
         }
-      } else {
-        stop("rdkit not available as PythonInR is not installed")
+
+        # Create a grImport Picture 
+        pyImport("Draw", from = "rdkit.Chem")
+        psfile <- tempfile(fileext = ".ps")
+        xmlfile <- tempfile(fileext = ".xml")
+        cmd <- paste0("Draw.MolToFile(mol, '", psfile, "')")
+        pyExec(cmd)
+        PostScriptTrace(psfile, outfilename = xmlfile)
+        unlink(paste0("capture", basename(psfile)))
+        self$Picture <- readPicture(xmlfile)
+      }
+    },
+    get_chyaml = function(repo = c("local", "web")) {
+      repo = match.arg(repo)
+      if (repo == "local") {
+        self$chyaml = yaml.load_file(file.path("~", "git/chyaml", 
+                                               paste0(URLencode(self$identifier), ".yaml")))
       }
     },
     TPs = list(),
@@ -158,6 +182,7 @@ chent <- R6Class("chent",
                                             stringsAsFactors = FALSE),
     add_soil_degradation_endpoints = function(destination, DT50 = NA,
                                               comment = "", pages = NA) {
+      if (length(pages) > 1) pages = paste(pages, collapse = ", ")
       i <- nrow(self$soil_degradation_endpoints) + 1
       self$soil_degradation_endpoints[i, c("destination", "comment", "pages")] <- 
         c(destination, comment, pages)
@@ -183,6 +208,45 @@ print.chent = function(x, ...) {
   }
 }
 
+#' Draw SVG graph from a chent object using RDKit
+#'
+#' @importFrom PythonInR pyIsConnected pyConnect pyImport pyExec
+#' @param x The chent object to be plotted
+#' @param width The desired width in pixels
+#' @param height The desired height in pixels
+#' @param filename The filename
+#' @param subdir The path to which the file should be written
+#' @export
+draw_svg.chent = function(x, width = 300, height = 150,
+                          filename = paste0(names(x$identifier), ".svg"),
+                          subdir = "svg") {
+  if (!pyIsConnected()) {
+    pyConnect()
+  }
+  try_rdkit <- try(pyImport("Chem", from = "rdkit"))
+  if (inherits(try_rdkit, "try-error")) {
+    message("Could not import RDKit in Python session")
+  } else {
+    if (!dir.exists(subdir)) dir.create(subdir)
+    pyExec(paste0("mol = Chem.MolFromSmiles('", x$smiles, "')"))
+    pyImport("Draw", from = "rdkit.Chem")
+    cmd <- paste0("Draw.MolToFile(mol, '", file.path(subdir, filename), 
+                  "', size = (", width, ", ", height, "))")
+    pyExec(cmd)
+  }
+}
+
+#' Plot method for chent objects
+#'
+#' @importFrom grImport grid.picture
+#' @param x The chent object to be plotted
+#' @param ... Further arguments passed to \code{\link{grid.picture}}
+#' @example inst/examples/caffeine.R
+#' @export
+plot.chent = function(x, ...) {
+  grid.picture(x$Picture)
+}
+
 #' An R6 class for pesticidal active ingredients and associated data
 #' 
 #' The class is initialised with an identifier which is generally an ISO common name.
@@ -194,7 +258,7 @@ print.chent = function(x, ...) {
 #' @format An \code{\link{R6Class}} generator object
 #' @field iso ISO common name according to ISO 1750 as retreived from www.alanwood.net/pesticides
 #' @field alanwood List of information retreived from www.alanwood.net/pesticides
-#' @example inst/examples/ai.R
+#' @example inst/examples/pai.R
 #' @keywords data
 
 pai <- R6Class("pai",

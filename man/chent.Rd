@@ -9,8 +9,9 @@
 chent
 }
 \description{
-The class is initialised with an identifier. Chemical information is retrieved
-from the internet.
+The class is initialised with an identifier. Chemical information is retrieved from
+the internet. Additionally, it can be generated using RDKit if RDKit and its
+python bindings are installed.
 }
 \section{Fields}{
 
@@ -26,11 +27,18 @@ from the internet.
 \item{\code{pubchem}}{List of information retreived from PubChem}
 
 \item{\code{rdkit}}{List of information obtained with RDKit}
+
+\item{\code{Picture}}{Graph as a \code{\link{picture}} object obtained using grImport}
 }}
 \examples{
 oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
 oct$try_pubchem()
 print(oct)
+plot(oct)
+caffeine <- chent$new("caffeine", source = "pubchem")
+print(caffeine)
+caffeine$get_rdkit()
+plot(caffeine)
 }
 \keyword{data}
 

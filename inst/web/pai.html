@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>pai. chents 0.2-1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">chents 0.2-1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>An R6 class for pesticidal active ingredients and associated data</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>pai</div></pre>
+        
+    <div class="Format">
+      <h2>Format</h2>
+
+      <p>An <code><a href='http://www.inside-r.org/packages/cran/R6/docs/R6Class'>R6Class</a></code> generator object</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>The class is initialised with an identifier which is generally an ISO common name.
+Additional chemical information is retrieved from the internet.</p>
+  
+    </div>
+
+    <div class="Fields">
+      <h2>Fields</h2>
+
+      <p></p>
+  
+      <p><dl>
+<dt><code>iso</code></dt><dd>ISO common name according to ISO 1750 as retreived from www.alanwood.net/pesticides</dd></p>
+  
+      <p><dt><code>alanwood</code></dt><dd>List of information retreived from www.alanwood.net/pesticides</dd></p>
+  
+      <p></dl></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>atr &lt;- pai$new(&quot;atrazine&quot;)
+</div>
+<strong class='message'>Querying atrazine.html</strong>
+<strong class='message'>http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?retmax=100000&amp;db=pccompound&amp;term=atrazine</strong>
+<strong class='message'>http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?retmax=100000&amp;db=pccompound&amp;ID=2256</strong>
+<div class='input'>print(atr)
+</div>
+<div class='output'>&lt;pai&gt; with ISO common name $iso atrazine 
+&lt;chent&gt;
+Identifier $identifier atrazine 
+InChI Key $inchikey MXWJVTOOROXGIU-UHFFFAOYSA-N 
+SMILES string $smiles CCNC1=NC(=NC(=N1)Cl)NC(C)C 
+Molecular weight $mw: 215.7 
+PubChem synonyms (first 10):
+ [1] &quot;atrazine&quot;     &quot;1912-24-9&quot;    &quot;Atazinax&quot;     &quot;Atrasine&quot;     &quot;Chromozin&quot;    &quot;Fenatrol&quot;     &quot;Gesaprim&quot;     &quot;Gesoprim&quot;    
+ [9] &quot;Hungazin&quot;     &quot;Oleogesaprim&quot;
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>pai</li>
+    </ul>
+    <ul>
+      <li>data</li>
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

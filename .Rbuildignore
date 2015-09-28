@@ -1,4 +1,5 @@
-^chents_*.tar.gz
+^chents_.*.tar.gz
 GNUmakefile
 README.html
 sd/*
+^test.log$

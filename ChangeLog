@@ -1,3 +1,20 @@
+commit a52eab41324f4bf13555b822ad3c2f9e89422455
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2015-09-28 21:34:23 +0200
+
+    Several changes heading for a release to the public
+    
+    - Add tests
+    - Add staticdocs
+    - Documentation improvements
+    - Several small code improvements
+
+commit 1df33dbb3d310f94ccddbf57906e12bd6fa93c3f
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2015-09-11 10:04:54 +0200
+
+    Working version with basic functionality
+
 commit 7cc5df2ad1e2a1aa5c6d4d9f5865491c6b30ee2a
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2015-08-26 13:24:57 +0200

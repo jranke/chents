@@ -1,0 +1,15 @@
+Loading chents
+Loading required package: testthat
+Loading required package: methods
+
+Initialize Python Version 2.7.9 (default, Mar  1 2015, 13:01:26) 
+[GCC 4.9.2]
+
+Testing chents
+Generation of chent objects : ......
+Generation of pai objects : Querying glyphosate.html
+http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?retmax=100000&db=pccompound&term=glyphosate
+http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?retmax=100000&db=pccompound&ID=3496
+........
+
+DONE 
