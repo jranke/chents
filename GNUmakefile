@@ -10,23 +10,19 @@ DATE    := $(shell date +%Y-%m-%d)
 usage:
 	@echo "Usage: make TARGET with TARGET being:"
 	@echo ""
-	@echo "  clean     - Clean up."
 	@echo "  roxygen   - Roxygenize."
 	@echo "  build     - Build source package."
-	@echo "  quickcheck - Run check on the package."
-	@echo "  check     - Run CRAN check on the package."
+	@echo "  check     - Run check on the package."
+	@echo "  crancheck - Run CRAN check on the package."
 	@echo "  install   - Install the package."
 
 pkgfiles = DESCRIPTION \
 	README.html \
 	R/* \
 	inst/examples/*.R \
-	inst/staticdocs/index.r
-
-clean:
-	@echo "Cleaning up..."
-	rm -fR chents.Rcheck
-	@echo "DONE."
+	inst/staticdocs/index.r \
+	tests/testthat.R \
+	tests/testthat/*
 
 roxygen: 
 	@echo "Roxygenizing package..."
