@@ -29,15 +29,17 @@ python bindings are installed.
 \item{\code{rdkit}}{List of information obtained with RDKit}
 
 \item{\code{Picture}}{Graph as a \code{\link{picture}} object obtained using grImport}
+
+\item{\code{chyaml}}{List of information obtained from a YAML file}
+
+\item{\code{degradation}}{List of degradation endpoints}
 }}
 \examples{
 oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
-oct$try_pubchem()
 print(oct)
 plot(oct)
-caffeine <- chent$new("caffeine", source = "pubchem")
+caffeine <- chent$new("caffeine")
 print(caffeine)
-caffeine$get_rdkit()
 plot(caffeine)
 }
 \keyword{data}

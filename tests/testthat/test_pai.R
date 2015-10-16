@@ -1,6 +1,6 @@
 context("Generation of pai objects")
 
-glyphosate <- pai$new("glyphosate")
+glyphosate <- pai$new("glyphosate", chyaml = FALSE)
 
 test_that("We can generate a pai object from its ISO common name", {
   expect_equivalent(glyphosate$alanwood$cas, "1071-83-6")
@@ -19,7 +19,5 @@ test_that("RDKit information was added", {
 test_that("PubChem information was added via webchem", {
   expect_equivalent(round(glyphosate$mw, 2), 169.07) 
   smiles <- "C(C(=O)O)NCP(=O)(O)O"
-  attr(smiles, "source") <- "pubchem"
-  attr(smiles, "type") <- "canonical"
-  expect_equal(glyphosate$smiles, smiles)
+  expect_equal(glyphosate$smiles[["PubChem_Canonical"]], smiles)
 })

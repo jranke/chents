@@ -36,6 +36,8 @@
 #' @field pubchem List of information retreived from PubChem
 #' @field rdkit List of information obtained with RDKit
 #' @field Picture Graph as a \code{\link{picture}} object obtained using grImport
+#' @field chyaml List of information obtained from a YAML file
+#' @field degradation List of degradation endpoints
 #' @example inst/examples/octanol.R
 #' @example inst/examples/caffeine.R
 #' @keywords data
@@ -50,29 +52,40 @@ chent <- R6Class("chent",
     rdkit = NULL,
     Picture = NULL,
     chyaml = NULL,
-    initialize = function(identifier, smiles = NULL,
-                          source = c("rdkit", "pubchem")) {
+    degradation = NULL,
+    initialize = function(identifier, smiles = NULL, 
+                          rdkit = TRUE, pubchem = TRUE,
+                          chyaml = TRUE) {
+
       self$identifier <- identifier
       names(self$identifier) <- make.names(identifier)
-      source = match.arg(source)
-      switch(source,
-        pubchem = {
-          self$try_pubchem(identifier)
-        },
-        rdkit = {
-          if (is.null(smiles)) {
-            stop("rdkit needs smiles as input")
-          } else {
-            self$smiles <- smiles
-            self$get_rdkit()
-            self$mw <- self$rdkit$mw
-            attr(self$mw, "source") <- "rdkit"
-          }
+
+      self$smiles <- c(user = smiles)
+
+      if (pubchem) {
+        self$try_pubchem(identifier)
+      }
+
+      if (rdkit) {
+        if (is.null(self$smiles)) {
+          stop("RDKit needs a SMILES code")
+        } else {
+          message("Trying to get chemical information from RDKit using ",
+                  names(self$smiles)[1], " SMILES\n",
+                  self$smiles[1])
+          self$get_rdkit()
+          self$mw <- self$rdkit$mw
+          attr(self$mw, "source") <- "rdkit"
         }
-      )
+      }
+
+      if (chyaml) {
+        self$get_chyaml()
+      }
       invisible(self)
     },
     try_pubchem = function(identifier) {
+      message("PubChem:")
       if (missing(identifier)) identifier <- self$identifier
       pubchem_cids = webchem::get_cid(identifier)
 
@@ -86,9 +99,10 @@ chent <- R6Class("chent",
     get_pubchem = function(pubchem_cid) {
       self$pubchem = webchem::cid_compinfo(pubchem_cid)
 
-      self$smiles = self$pubchem$CanonicalSmiles
-      attr(self$smiles, "source") <- "pubchem"
-      attr(self$smiles, "type") <- "canonical"
+      self$smiles["PubChem_Canonical"] <- self$pubchem$CanonicalSmiles
+      if (self$pubchem$IsomericSmiles != self$pubchem$CanonicalSmiles) {
+          self$smiles["PubChem_Isomeric"] <- self$pubchem$IsomericSmiles
+      }
 
       self$mw = as.numeric(self$pubchem$MolecularWeight)
       attr(self$mw, "source") <- "pubchem"
@@ -98,8 +112,9 @@ chent <- R6Class("chent",
         attr(self$inchikey, "source") <- "pubchem"
       } else {
         if (self$pubchem$InChIKey != self$inchikey) {
-          stop("InChiKey of PubChem record does not the one retreived from ", 
-               attr(self$inchi, "source"))
+          message("InChiKey ", self$pubchem$InChIKey, " from PubChem record does not match\n",
+                  "InChiKey ", self$inchikey, " retreived from ",
+                  attr(self$inchikey, "source"))
         }
       }
     },
@@ -114,7 +129,7 @@ chent <- R6Class("chent",
       } else {
         self$rdkit <- list()
         pyImport("Descriptors", from = "rdkit.Chem")
-        pyExec(paste0("mol = Chem.MolFromSmiles('", self$smiles, "')"))
+        pyExec(paste0("mol = Chem.MolFromSmiles('", self$smiles[1], "')"))
         self$rdkit$mw <- pyExecg("mw = Descriptors.MolWt(mol)", "mw")
         if (!is.null(self$mw)) {
           if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {
@@ -134,11 +149,32 @@ chent <- R6Class("chent",
         self$Picture <- readPicture(xmlfile)
       }
     },
-    get_chyaml = function(repo = c("local", "web")) {
+    get_chyaml = function(repo = c("wd", "local", "web"), 
+                          chyaml = paste0(URLencode(self$identifier), ".yaml")) {
       repo = match.arg(repo)
-      if (repo == "local") {
-        self$chyaml = yaml.load_file(file.path("~", "git/chyaml", 
-                                               paste0(URLencode(self$identifier), ".yaml")))
+      paths = c(wd = ".", 
+                local = file.path("~", "git/chyaml"))
+
+      chyaml_handlers = list(
+        expr = function(x) NULL, # To avoid security risks from reading chyaml files
+        dataframe = function(x) 
+          eval(parse(text = paste0("data.frame(", x, ", stringsAsFactors = FALSE)"))))
+
+      if (repo %in% c("wd", "local")) {
+        path = paths[repo]
+        full = file.path(path, chyaml)
+        if (!file.exists(full)) {
+          message("Did not find chyaml file ", full)
+        } else {
+          if (is(try(self$chyaml <- yaml.load_file(chyaml, handlers = chyaml_handlers)), 
+                 "try-error")) {
+            message("Could not load ", full)
+          } else {
+            message("Loaded ", full)
+          }
+        }
+      } else {
+        message("web repositories not implemented")
       }
     },
     TPs = list(),
@@ -200,7 +236,8 @@ print.chent = function(x, ...) {
   cat("<chent>\n")
   cat("Identifier $identifier", x$identifier, "\n")
   cat ("InChI Key $inchikey", x$inchikey, "\n")
-  cat ("SMILES string $smiles", x$smiles, "\n")
+  cat ("SMILES string $smiles:\n")
+  print(x$smiles)
   if (!is.null(x$mw)) cat ("Molecular weight $mw:", round(x$mw, 1), "\n")
   if (!is.null(x$pubchem)) {
     cat ("PubChem synonyms (first 10):\n")
@@ -266,37 +303,26 @@ pai <- R6Class("pai",
   public <- list(
     iso = NULL,
     alanwood = NULL,
-    initialize = function(identifier, type = c("name", "smiles"), 
-                          source = c("alanwood", "pubchem")) {
-      self$identifier <- identifier
-      names(self$identifier) <- make.names(identifier)
-      type = match.arg(type)
-      attr(self$identifier, "type") <- type
-      source = match.arg(source)      
-      switch(source,
-        alanwood = {
-          self$alanwood = webchem::alanwood(identifier, type = "commonname")
-          if (is.na(self$alanwood[1])) {
-            message("Common name ", identifier, " is not known at www.alanwood.net, trying PubChem")
-            self$try_pubchem(identifier)
-          } else {
-            self$iso = self$alanwood$cname
-            attr(self$iso, "source") <- "alanwood"
-            attr(self$iso, "status") <- self$alanwood$status
-            self$inchikey = self$alanwood$inchikey
-            attr(self$inchikey, "source") <- "alanwood"
+    initialize = function(iso, identifier = iso, smiles = NULL, alanwood = TRUE,
+                          pubchem = TRUE, rdkit = TRUE, chyaml = TRUE) {
 
-            # Get additional information from PubChem
-            pubchem_cids = get_cid(identifier)
-            self$get_pubchem(pubchem_cids[[1]])
-            self$get_rdkit()
-          }
-        },
-        pubchem = {
-          self$try_pubchem(identifier)
-          self$get_rdkit()
+
+      if (!missing(iso) & alanwood) {
+        message("alanwood.net:")
+        self$alanwood = webchem::alanwood(identifier, type = "commonname")
+        if (is.na(self$alanwood[1])) {
+          message("Common name ", identifier, " is not known at www.alanwood.net, trying PubChem")
+        } else {
+          self$iso = self$alanwood$cname
+          attr(self$iso, "source") <- "alanwood"
+          attr(self$iso, "status") <- self$alanwood$status
+          self$inchikey = self$alanwood$inchikey
+          attr(self$inchikey, "source") <- "alanwood"
         }
-      )
+      }
+      super$initialize(identifier = identifier, smiles = smiles,
+                       pubchem = pubchem, rdkit = rdkit, chyaml = chyaml)
+
       invisible(self)
     }
   )

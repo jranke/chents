@@ -15,9 +15,8 @@
 Plot method for chent objects
 }
 \examples{
-caffeine <- chent$new("caffeine", source = "pubchem")
+caffeine <- chent$new("caffeine")
 print(caffeine)
-caffeine$get_rdkit()
 plot(caffeine)
 }
 

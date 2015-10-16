@@ -1,11 +1,11 @@
 context("Generation of chent objects")
 
-oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
+oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE, chyaml = FALSE)
 
 test_that("We can generate a chent object from SMILES using RDKit", {
   expect_equivalent(round(oct$mw, 2), 130.23) 
   expect_equal(names(oct$identifier), "X1.octanol")
-  expect_equal(oct$smiles, "CCCCCCCCO")
+  expect_equal(oct$smiles[["user"]], "CCCCCCCCO")
 })
 
 test_that("We can add information retrieved from PubChem via webchem", {
@@ -14,8 +14,5 @@ test_that("We can add information retrieved from PubChem via webchem", {
   ik = "KBPLFHHGFOOTCA-UHFFFAOYSA-N"
   attr(ik, "source") <- "pubchem"
   expect_equal(oct$inchikey, ik)
-  smiles <- "CCCCCCCCO"
-  attr(smiles, "source") <- "pubchem"
-  attr(smiles, "type") <- "canonical"
-  expect_equal(oct$smiles, smiles)
+  expect_equal(oct$smiles[["PubChem_Canonical"]], "CCCCCCCCO")
 })
