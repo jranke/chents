@@ -29,6 +29,11 @@ roxygen:
 	"$(R_HOME)/bin/Rscript" -e 'library(devtools); document(".")'
 	@echo "DONE."
 
+sd: roxygen
+	@echo "Building static documentation..."
+	"$(R_HOME)/bin/Rscript" -e 'staticdocs::build_site()'
+	@echo "DONE."
+
 $(TGZ): $(pkgfiles)
 	sed -i -e "s/Date:.*/Date: $(DATE)/" DESCRIPTION
 	@echo "Roxygenizing package..."
