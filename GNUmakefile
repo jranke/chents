@@ -45,7 +45,7 @@ $(TGZ): $(pkgfiles)
 	@echo "DONE."
 
 README.html: README.md
-	"$(R_HOME)/bin/Rscript" -e "rmarkdown::render('README.md')"
+	"$(R_HOME)/bin/Rscript" -e "rmarkdown::render('README.md', output_format = 'html_document')"
 
 build: $(TGZ)
 
