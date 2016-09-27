@@ -1,6 +1,5 @@
-^chents_.*.tar.gz
-GNUmakefile
-README.html
-sd/*
+^chents_.*.tar.gz$
+^GNUmakefile$
+^README.html$
 ^test.log$
 ^docs$
