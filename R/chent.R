@@ -1,4 +1,4 @@
-# Copyright (C) 2015  Johannes Ranke
+# Copyright (C) 2016  Johannes Ranke
 # Contact: jranke@uni-bremen.de
 # This file is part of the R package chents
 
@@ -19,7 +19,7 @@
 #' 
 #' The class is initialised with an identifier. Chemical information is retrieved from
 #' the internet. Additionally, it can be generated using RDKit if RDKit and its
-#' python bindings are installed.
+#' python bindings are installed and configured for use with PythonInR.
 #'
 #' @docType class
 #' @export
@@ -27,14 +27,14 @@
 #' @importFrom R6 R6Class
 #' @importFrom webchem get_cid cid_compinfo
 #' @importFrom grImport PostScriptTrace readPicture
-#' @importFrom PythonInR pyIsConnected pyConnect pyImport pyExec pyExecg
 #' @importFrom yaml yaml.load_file
 #' @field identifier The identifier that was used to initiate the object, with attribute 'source'
 #' @field inchikey InChI Key, with attribute 'source'
 #' @field smiles SMILES code, with attribute 'source'
 #' @field mw Molecular weight, with attribute 'source'
 #' @field pubchem List of information retreived from PubChem
-#' @field rdkit List of information obtained with RDKit
+#' @field rdkit List of information obtained with RDKit, if installed and
+#'   configured for use with PythonInR
 #' @field Picture Graph as a \code{\link{picture}} object obtained using grImport
 #' @field chyaml List of information obtained from a YAML file
 #' @field degradation List of degradation endpoints
@@ -67,15 +67,17 @@ chent <- R6Class("chent",
       }
 
       if (rdkit) {
-        if (is.null(self$smiles)) {
-          stop("RDKit needs a SMILES code")
-        } else {
-          message("Trying to get chemical information from RDKit using ",
-                  names(self$smiles)[1], " SMILES\n",
-                  self$smiles[1])
-          self$get_rdkit()
-          self$mw <- self$rdkit$mw
-          attr(self$mw, "source") <- "rdkit"
+        if(requireNamespace("PythonInR")) {
+          if (is.null(self$smiles)) {
+            stop("RDKit needs a SMILES code")
+          } else {
+            message("Trying to get chemical information from RDKit using ",
+                    names(self$smiles)[1], " SMILES\n",
+                    self$smiles[1])
+            self$get_rdkit()
+            self$mw <- self$rdkit$mw
+            attr(self$mw, "source") <- "rdkit"
+          }
         }
       }
 
@@ -89,19 +91,21 @@ chent <- R6Class("chent",
       if (missing(identifier)) identifier <- self$identifier
       pubchem_cids = webchem::get_cid(identifier)
 
-        if (is.na(pubchem_cids[1])) {
-          stop("Query ", identifier, " did not give results at PubChem")
-        } else {
-          message("Found ", length(pubchem_cids), " entries in PubChem, using the first one.")
-          self$get_pubchem(pubchem_cids[1])
-        }
+      if (is.na(pubchem_cids[1])) {
+        message("Query ", identifier, " did not give results at PubChem")
+      } else {
+        message("Found ", length(pubchem_cids), " entries in PubChem, using the first one.")
+        self$get_pubchem(pubchem_cids[1])
+      }
     },
     get_pubchem = function(pubchem_cid) {
-      self$pubchem = webchem::cid_compinfo(pubchem_cid)
+      self$pubchem = as.list(webchem::pc_prop(pubchem_cid, from = "cid"))
+      self$pubchem$synonyms = webchem::pc_synonyms(pubchem_cid, from ="cid")[[1]]
 
-      self$smiles["PubChem_Canonical"] <- self$pubchem$CanonicalSmiles
-      if (self$pubchem$IsomericSmiles != self$pubchem$CanonicalSmiles) {
-          self$smiles["PubChem_Isomeric"] <- self$pubchem$IsomericSmiles
+      self$smiles["PubChem_Canonical"] <- self$pubchem$CanonicalSMILES
+
+      if (self$pubchem$IsomericSMILES != self$pubchem$CanonicalSMILES) {
+          self$smiles["PubChem_Isomeric"] <- self$pubchem$IsomericSMILES
       }
 
       self$mw = as.numeric(self$pubchem$MolecularWeight)
@@ -119,18 +123,20 @@ chent <- R6Class("chent",
       }
     },
     get_rdkit = function() {
+      if (!requireNamespace("PythonInR"))
+        stop("PythonInR can not be loaded")
       id <- names(self$identifier)
-      if (!pyIsConnected()) {
-        pyConnect()
+      if (!PythonInR::pyIsConnected()) {
+        PythonInR::pyConnect()
       }
-      try_rdkit <- try(pyImport("Chem", from = "rdkit"))
+      try_rdkit <- try(PythonInR::pyImport("Chem", from = "rdkit"))
       if (inherits(try_rdkit, "try-error")) {
         message("Could not import RDKit in Python session")
       } else {
         self$rdkit <- list()
-        pyImport("Descriptors", from = "rdkit.Chem")
-        pyExec(paste0("mol = Chem.MolFromSmiles('", self$smiles[1], "')"))
-        self$rdkit$mw <- pyExecg("mw = Descriptors.MolWt(mol)", "mw")
+        PythonInR::pyImport("Descriptors", from = "rdkit.Chem")
+        PythonInR::pyExec(paste0("mol = Chem.MolFromSmiles('", self$smiles[1], "')"))
+        self$rdkit$mw <- PythonInR::pyExecg("mw = Descriptors.MolWt(mol)", "mw")
         if (!is.null(self$mw)) {
           if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {
             message("RDKit mw is ", self$rdkit$mw)
@@ -139,11 +145,11 @@ chent <- R6Class("chent",
         }
 
         # Create a grImport Picture 
-        pyImport("Draw", from = "rdkit.Chem")
+        PythonInR::pyImport("Draw", from = "rdkit.Chem")
         psfile <- tempfile(fileext = ".ps")
         xmlfile <- tempfile(fileext = ".xml")
         cmd <- paste0("Draw.MolToFile(mol, '", psfile, "')")
-        pyExec(cmd)
+        PythonInR::pyExec(cmd)
         PostScriptTrace(psfile, outfilename = xmlfile)
         unlink(paste0("capture", basename(psfile)))
         self$Picture <- readPicture(xmlfile)
@@ -209,7 +215,8 @@ chent <- R6Class("chent",
                                                max_occurrence = max_occurrence, 
                                                comment = comment, 
                                                source = source,
-                                               pages = pages))
+                                               pages = pages,
+                                               stringsAsFactors = FALSE))
     },
     soil_degradation_endpoints = data.frame(destination = character(0), 
                                             DT50 = numeric(0),
@@ -223,6 +230,17 @@ chent <- R6Class("chent",
       self$soil_degradation_endpoints[i, c("destination", "comment", "pages")] <- 
         c(destination, comment, pages)
       self$soil_degradation_endpoints[i, "DT50"] <- DT50
+    },
+    ff = data.frame(from = character(0), to = character(0), ff = numeric(0),
+                    comment = character(0), pages = character(0),
+                    stringsAsFactors = FALSE),
+    add_ff = function(from = "parent", to, ff = 1, comment = "", pages = NA) {
+      i <- nrow(self$ff) + 1
+      if (from != "parent") {
+        if (!exists(from, self$TPs)) stop(from, " was not found in TPs")
+      }
+      if (!exists(to, self$TPs)) stop(to, " was not found in TPs")
+      self$ff[i, ] <- c(from, to, ff, comment, pages)
     }
   )
 )
@@ -231,6 +249,7 @@ chent <- R6Class("chent",
 #'
 #' @param x The chent object to be printed
 #' @param ... Further arguments for compatibility with the S3 method
+#' @importFrom utils head
 #' @export
 print.chent = function(x, ...) {
   cat("<chent>\n")
@@ -239,15 +258,14 @@ print.chent = function(x, ...) {
   cat ("SMILES string $smiles:\n")
   print(x$smiles)
   if (!is.null(x$mw)) cat ("Molecular weight $mw:", round(x$mw, 1), "\n")
-  if (!is.null(x$pubchem)) {
-    cat ("PubChem synonyms (first 10):\n")
+  if (!is.null(x$pubchem$synonyms)) {
+    cat ("PubChem synonyms (up to 10):\n")
     print(head(x$pubchem$synonyms, n = 10L))
   }
 }
 
 #' Draw SVG graph from a chent object using RDKit
 #'
-#' @importFrom PythonInR pyIsConnected pyConnect pyImport pyExec
 #' @param x The chent object to be plotted
 #' @param width The desired width in pixels
 #' @param height The desired height in pixels
@@ -257,19 +275,19 @@ print.chent = function(x, ...) {
 draw_svg.chent = function(x, width = 300, height = 150,
                           filename = paste0(names(x$identifier), ".svg"),
                           subdir = "svg") {
-  if (!pyIsConnected()) {
-    pyConnect()
+  if (!PythonInR::pyIsConnected()) {
+    PythonInR::pyConnect()
   }
-  try_rdkit <- try(pyImport("Chem", from = "rdkit"))
+  try_rdkit <- try(PythonInR::pyImport("Chem", from = "rdkit"))
   if (inherits(try_rdkit, "try-error")) {
     message("Could not import RDKit in Python session")
   } else {
     if (!dir.exists(subdir)) dir.create(subdir)
-    pyExec(paste0("mol = Chem.MolFromSmiles('", x$smiles, "')"))
-    pyImport("Draw", from = "rdkit.Chem")
+    PythonInR::pyExec(paste0("mol = Chem.MolFromSmiles('", x$smiles, "')"))
+    PythonInR::pyImport("Draw", from = "rdkit.Chem")
     cmd <- paste0("Draw.MolToFile(mol, '", file.path(subdir, filename), 
                   "', size = (", width, ", ", height, "))")
-    pyExec(cmd)
+    PythonInR::pyExec(cmd)
   }
 }
 
@@ -309,7 +327,7 @@ pai <- R6Class("pai",
 
       if (!missing(iso) & alanwood) {
         message("alanwood.net:")
-        self$alanwood = webchem::alanwood(identifier, type = "commonname")
+        self$alanwood = webchem::aw_query(identifier, type = "commonname")[[1]]
         if (is.na(self$alanwood[1])) {
           message("Common name ", identifier, " is not known at www.alanwood.net, trying PubChem")
         } else {
@@ -320,6 +338,7 @@ pai <- R6Class("pai",
           attr(self$inchikey, "source") <- "alanwood"
         }
       }
+
       super$initialize(identifier = identifier, smiles = smiles,
                        pubchem = pubchem, rdkit = rdkit, chyaml = chyaml)
 

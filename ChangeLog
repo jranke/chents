@@ -1,3 +1,15 @@
+commit f48d2ddb338c3050b3b6ccaed636366a546c5275
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-09-27 15:08:20 +0200
+
+    PythonInR (and RDkit) optional, adapt to current webchem
+
+commit 26748e386a386f8459edb4f061012f099d34de7d
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2015-10-16 15:35:33 +0200
+
+    Some improvements, especially in loading chyaml
+
 commit a892d1dc3c2a3724063f4d671f7f261ff5392884
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2015-10-02 13:01:38 +0200
