@@ -1,3 +1,9 @@
+---
+output: 
+  html_document:
+    mathjax: null
+---
+
 # chents
 
 The R package **chents** provides some utilities for working with chemical 

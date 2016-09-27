@@ -1,8 +1,26 @@
-commit f48d2ddb338c3050b3b6ccaed636366a546c5275
+commit b3e6adc8da99f895fa9d289133de60ce1d5bd889
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-09-27 16:43:15 +0200
+
+    Add a bit of info to README
+
+commit 1532aadbd632a3b82032de3f0b0f377660617a9f
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-09-27 16:14:36 +0200
+
+    Add pp to the list of classes for staticdocs
+
+commit 40d06320e097434a924c0d57b26e5e1a7574625c
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-09-27 16:11:25 +0200
+
+    Add staticdocs
+
+commit 81672751d5b23ed73c9b05bb02c52f0ee854de77
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2016-09-27 15:08:20 +0200
 
-    PythonInR (and RDkit) optional, adapt to current webchem
+    PythonInR optional, adapt to current webchem
 
 commit 26748e386a386f8459edb4f061012f099d34de7d
 Author: Johannes Ranke <jranke@uni-bremen.de>

@@ -3,3 +3,4 @@ GNUmakefile
 README.html
 sd/*
 ^test.log$
+^docs$
