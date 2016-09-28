@@ -69,6 +69,9 @@ install: build
 	"$(R_HOME)/bin/R" CMD INSTALL --no-multiarch $(TGZ)
 	@echo "DONE."
 
+drat: build
+	"$(R_HOME)/bin/Rscript" -e "drat::insertPackage('$(TGZ)', commit = TRUE)"
+
 winbuilder: build
 	date
 	@echo "Uploading to R-release on win-builder"
