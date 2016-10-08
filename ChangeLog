@@ -1,3 +1,39 @@
+commit d22214d9f1b17bd3ab2febe810ab996bebb01410
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-09-28 08:56:57 +0200
+
+    Add drat target
+
+commit cc5ba9d7cf9435bc6243222691b76d35c866aea5
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-09-27 19:31:04 +0200
+
+    Update .Rbuildignore
+
+commit 7915ca3a209a052902893cb583e15cee85854821
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-09-27 17:48:38 +0200
+
+    Make the new README
+
+commit 2985771a8fad29e2ebeef533adcf81d621fb5a35
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-09-27 17:46:59 +0200
+
+    Remove header with metadata, misrendered on github
+
+commit e23da46d572df2636d68572710b1f2ffbf27b7bd
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-09-27 17:39:28 +0200
+
+    Remove mathjax from README
+
+commit 5bec469048899cfd785dec4f91ec3840cff18adb
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-09-27 16:43:15 +0200
+
+    Add a bit of info to README
+
 commit b3e6adc8da99f895fa9d289133de60ce1d5bd889
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2016-09-27 16:43:15 +0200

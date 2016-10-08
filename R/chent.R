@@ -241,6 +241,20 @@ chent <- R6Class("chent",
       }
       if (!exists(to, self$TPs)) stop(to, " was not found in TPs")
       self$ff[i, ] <- c(from, to, ff, comment, pages)
+    },
+    pdf = function(file = paste0(self$identifier, ".pdf"), dir = "structures") {
+      if (!dir.exists("structures")) {
+        message("Directory '", dir, "' does not exist")
+        message("Creating directory '", dir, "'")
+        dir.create(dir)
+      }
+      path = file.path(dir, file)
+      message("Creating file '", path, "'")
+      pdf(path)
+      plot(self)
+      dev.off()
+      message("Cropping file '", path, "' using pdfcrop")
+      system(paste("pdfcrop --margin 10", path, path, "> /dev/null"))
     }
   )
 )
