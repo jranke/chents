@@ -67,7 +67,7 @@ chent <- R6Class("chent",
       }
 
       if (rdkit) {
-        if(requireNamespace("PythonInR")) {
+        if(requireNamespace("PythonInR", quietly = TRUE)) {
           if (is.null(self$smiles)) {
             stop("RDKit needs a SMILES code")
           } else {
