@@ -9,16 +9,6 @@ all: install
 
 .PHONEY: usage check clean roxygen sd
 
-usage:
-	@echo "Usage: make TARGET with TARGET being:"
-	@echo ""
-	@echo "  roxygen   - Roxygenize."
-	@echo "  sd        - Roxygenize and build static docs."
-	@echo "  build     - Build source package."
-	@echo "  check     - Run check on the package."
-	@echo "  crancheck - Run CRAN check on the package."
-	@echo "  install   - Install the package."
-
 pkgfiles = DESCRIPTION \
 	README.html \
 	R/* \
