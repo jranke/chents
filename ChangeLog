@@ -1,3 +1,9 @@
+commit 291337e920cc95510fce3c0cdcc62b4443cd3bc4
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-10-13 14:03:19 +0200
+
+    Fix retrieving pubchem infos for ambiguous names
+
 commit 65c481910d65f6935b7f52450ea809586e71d384
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2016-10-13 10:08:32 +0200
