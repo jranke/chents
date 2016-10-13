@@ -1,3 +1,15 @@
+commit 65c481910d65f6935b7f52450ea809586e71d384
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-10-13 10:08:32 +0200
+
+    Do not fail if PythonInR is not installed
+
+commit 7517eb0ed1a66488b937c039d4bcadefeff6b479
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-10-08 03:07:50 +0200
+
+    Add a method to write cropped pdf files
+
 commit d22214d9f1b17bd3ab2febe810ab996bebb01410
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2016-09-28 08:56:57 +0200

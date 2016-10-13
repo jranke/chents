@@ -5,6 +5,8 @@ TGZ     := $(PKGNAME)_$(PKGVERS).tar.gz
 R_HOME  ?= $(shell R RHOME)
 DATE    := $(shell date +%Y-%m-%d)
 
+all: install
+
 .PHONEY: usage check clean roxygen sd
 
 usage:

@@ -89,7 +89,7 @@ chent <- R6Class("chent",
     try_pubchem = function(identifier) {
       message("PubChem:")
       if (missing(identifier)) identifier <- self$identifier
-      pubchem_cids = webchem::get_cid(identifier)
+      pubchem_cids = webchem::get_cid(identifier)[[identifier]]
 
       if (is.na(pubchem_cids[1])) {
         message("Query ", identifier, " did not give results at PubChem")

@@ -1,23 +1,22 @@
 Loading chents
 Loading required package: testthat
-
+Testing chents
+Generation of chent objects: 
 Initialize Python Version 2.7.9 (default, Jun 29 2016, 13:11:10) 
 [GCC 4.9.2]
 
-Testing chents
-Generation of chent objects: Trying to get chemical information from RDKit using user SMILES
+Trying to get chemical information from RDKit using user SMILES
 CCCCCCCCO
 ......
 Generation of pai objects: alanwood.net:
 Querying glyphosate.html
 PubChem:
-http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/glyphosate/cids/JSON
-No encoding supplied: defaulting to UTF-8.
+http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/cids/JSON
 Found 1 entries in PubChem, using the first one.
 http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/property/MolecularFormula,MolecularWeight,CanonicalSMILES,IsomericSMILES,InChI,InChIKey,IUPACName,XLogP,ExactMass,MonoisotopicMass,TPSA,Complexity,Charge,HBondDonorCount,HBondAcceptorCount,RotatableBondCount,HeavyAtomCount,IsotopeAtomCount,AtomStereoCount,DefinedAtomStereoCount,UndefinedAtomStereoCount,BondStereoCount,DefinedBondStereoCount,UndefinedBondStereoCount,CovalentUnitCount,Volume3D,XStericQuadrupole3D,YStericQuadrupole3D,ZStericQuadrupole3D,FeatureCount3D,FeatureAcceptorCount3D,FeatureDonorCount3D,FeatureAnionCount3D,FeatureCationCount3D,FeatureRingCount3D,FeatureHydrophobeCount3D,ConformerModelRMSD3D,EffectiveRotorCount3D,ConformerCount3D,Fingerprint2D/JSON
 http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/synonyms/JSON
 Trying to get chemical information from RDKit using PubChem_Canonical SMILES
 C(C(=O)O)NCP(=O)(O)O
-........
+.......
 
 DONE ===========================================================================
