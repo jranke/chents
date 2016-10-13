@@ -2,12 +2,11 @@ PKGSRC  := $(shell basename $(CURDIR))
 PKGNAME := $(shell sed -n "s/Package: *\([^ ]*\)/\1/p" DESCRIPTION)
 PKGVERS := $(shell sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION)
 TGZ     := $(PKGNAME)_$(PKGVERS).tar.gz
+WINBIN  := $(PKGNAME)_$(PKGVERS).zip
 R_HOME  ?= $(shell R RHOME)
 DATE    := $(shell date +%Y-%m-%d)
 
 all: install
-
-.PHONEY: usage check clean roxygen sd
 
 pkgfiles = DESCRIPTION \
 	README.html \
@@ -19,7 +18,7 @@ pkgfiles = DESCRIPTION \
 
 roxygen: 
 	@echo "Roxygenizing package..."
-	"$(R_HOME)/bin/Rscript" -e 'library(devtools); document(".")'
+	"$(R_HOME)/bin/Rscript" -e 'library(devtools); document()'
 	@echo "DONE."
 
 sd: roxygen
@@ -30,7 +29,7 @@ sd: roxygen
 $(TGZ): $(pkgfiles)
 	sed -i -e "s/Date:.*/Date: $(DATE)/" DESCRIPTION
 	@echo "Roxygenizing package..."
-	"$(R_HOME)/bin/Rscript" -e 'library(devtools); document(".")'
+	"$(R_HOME)/bin/Rscript" -e 'library(devtools); document()'
 	@echo "Building package..."
 	git log --no-merges -M --date=iso > ChangeLog
 	"$(R_HOME)/bin/R" CMD build .
@@ -41,9 +40,16 @@ README.html: README.md
 
 build: $(TGZ)
 
+$(WINBIN): build
+	@echo "Building windows binary package..."
+	"$(R_HOME)/bin/R" CMD INSTALL $(TGZ) --build
+	@echo "DONE."
+
+winbin: $(WINBIN)
+
 test: build
 	@echo "Running testthat tests..."
-	"$(R_HOME)/bin/Rscript" -e 'library(devtools); devtools::test(".")' 2>&1 | tee test.log
+	"$(R_HOME)/bin/Rscript" -e 'library(devtools); devtools::test()' 2>&1 | tee test.log
 	@echo "DONE."
 
 quickcheck: build
@@ -63,6 +69,9 @@ install: build
 
 drat: build
 	"$(R_HOME)/bin/Rscript" -e "drat::insertPackage('$(TGZ)', commit = TRUE)"
+
+dratwin: winbin
+	"$(R_HOME)/bin/Rscript" -e "drat::insertPackage('$(WINBIN)', 'e:/git/drat/', commit = TRUE)"
 
 winbuilder: build
 	date
