@@ -1,3 +1,15 @@
+commit e85f61000c139492ec6497aa3c6206a66b54d783
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-10-14 15:24:43 +0200
+
+    Better handling of ambiguous names and "source"s
+
+commit 70e16d8ca726ed9d894bd219018838ce4b0f22a0
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-10-13 20:13:27 +0200
+
+    chents for windows!
+
 commit 6cfe5fbd827ca37f24134e8356e8144520ee1265
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2016-10-13 17:28:14 +0200

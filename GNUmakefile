@@ -54,7 +54,7 @@ test: build
 
 quickcheck: build
 	@echo "Running check..."
-	"$(R_HOME)/bin/R" CMD check $(TGZ)
+	"$(R_HOME)/bin/R" CMD check $(TGZ) --no-tests
 	@echo "DONE."
 
 check: build

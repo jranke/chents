@@ -31,6 +31,10 @@ configured for use with PythonInR}
 
 \item{\code{Picture}}{Graph as a \code{\link{picture}} object obtained using grImport}
 
+\item{\code{Pict_font_size}}{Font size as extracted from the intermediate PostScript file}
+
+\item{\code{pdf_height}}{Height of the MediaBox in the pdf after cropping}
+
 \item{\code{chyaml}}{List of information obtained from a YAML file}
 
 \item{\code{degradation}}{List of degradation endpoints}

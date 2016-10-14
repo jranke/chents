@@ -36,6 +36,8 @@
 #' @field rdkit List of information obtained with RDKit, if installed and
 #'   configured for use with PythonInR
 #' @field Picture Graph as a \code{\link{picture}} object obtained using grImport
+#' @field Pict_font_size Font size as extracted from the intermediate PostScript file
+#' @field pdf_height Height of the MediaBox in the pdf after cropping
 #' @field chyaml List of information obtained from a YAML file
 #' @field degradation List of degradation endpoints
 #' @example inst/examples/octanol.R
@@ -51,6 +53,8 @@ chent <- R6Class("chent",
     pubchem = NULL,
     rdkit = NULL,
     Picture = NULL,
+    Pict_font_size = NULL,
+    pdf_height = NULL,
     chyaml = NULL,
     degradation = NULL,
     initialize = function(identifier, smiles = NULL, smiles_source = 'user',
@@ -110,7 +114,12 @@ chent <- R6Class("chent",
       }
     },
     get_pubchem = function(pubchem_cid) {
-      self$pubchem = as.list(webchem::pc_prop(pubchem_cid, from = "cid"))
+      self$pubchem = as.list(webchem::pc_prop(pubchem_cid, from = "cid",
+        properties = c("MolecularFormula", "MolecularWeight", 
+                       "CanonicalSMILES", "IsomericSMILES", 
+                       "InChI", "InChIKey", "IUPACName", 
+                       "XLogP", "TPSA", "Complexity", "Charge",
+                       "HBondDonorCount", "HBondAcceptorCount")))
       self$pubchem$synonyms = webchem::pc_synonyms(pubchem_cid, from ="cid")[[1]]
 
       self$smiles["PubChem_Canonical"] <- self$pubchem$CanonicalSMILES
@@ -171,6 +180,10 @@ chent <- R6Class("chent",
         xmlfile <- tempfile(fileext = ".xml")
         cmd <- paste0("Draw.MolToFile(mol, '", psfile, "')")
         PythonInR::pyExec(cmd)
+        ps_font_line <- grep("Tm$", readLines(psfile), value = TRUE)[1]
+        ps_font_size <- gsub(" .*$", "", ps_font_line)
+
+        self$Pict_font_size = as.numeric(ps_font_size)
         PostScriptTrace(psfile, outfilename = xmlfile)
         unlink(paste0("capture", basename(psfile)))
         self$Picture <- readPicture(xmlfile)
@@ -263,11 +276,11 @@ chent <- R6Class("chent",
       if (!exists(to, self$TPs)) stop(to, " was not found in TPs")
       self$ff[i, ] <- c(from, to, ff, comment, pages)
     },
-    pdf = function(file = paste0(self$identifier, ".pdf"), dir = "structures") {
-      if (!dir.exists("structures")) {
+    pdf = function(file = paste0(self$identifier, ".pdf"), dir = "structures/pdf") {
+      if (!dir.exists(dir)) {
         message("Directory '", dir, "' does not exist")
-        message("Creating directory '", dir, "'")
-        dir.create(dir)
+        message("Trying to create directory '", dir, "'")
+        dir.create(dir, recursive = TRUE)
       }
       path = file.path(dir, file)
       message("Creating file '", path, "'")
@@ -276,6 +289,24 @@ chent <- R6Class("chent",
       dev.off()
       message("Cropping file '", path, "' using pdfcrop")
       system(paste("pdfcrop --margin 10", path, path, "> /dev/null"))
+
+      # Get the height of the MediaBox
+      head <- readLines(path, n = 20, skipNul = TRUE)
+      m_line <- suppressWarnings(grep("MediaBox", head, value = TRUE))
+      self$pdf_height <- as.numeric(gsub("/MediaBox \\[.* (.*)\\]", "\\1", m_line))
+    },
+    png = function(file = paste0(self$identifier, ".png"), dir = "structures/png",
+                   antialias = 'gray') {
+      if (!dir.exists(dir)) {
+        message("Directory '", dir, "' does not exist")
+        message("Trying to create directory '", dir, "'")
+        dir.create(dir, recursive = TRUE)
+      }
+      path = file.path(dir, file)
+      message("Creating file '", path, "'")
+      png(path, antialias = antialias)
+      plot(self)
+      dev.off()
     }
   )
 )
