@@ -53,23 +53,31 @@ chent <- R6Class("chent",
     Picture = NULL,
     chyaml = NULL,
     degradation = NULL,
-    initialize = function(identifier, smiles = NULL, 
-                          rdkit = TRUE, pubchem = TRUE,
+    initialize = function(identifier, smiles = NULL, smiles_source = 'user',
+                          inchikey = NULL, inchikey_source = 'user',
+                          pubchem = TRUE, pubchem_from = c('name', 'smiles', 'inchikey'),
+                          rdkit = TRUE, 
                           chyaml = TRUE) {
 
       self$identifier <- identifier
       names(self$identifier) <- make.names(identifier)
+      pubchem_from = match.arg(pubchem_from)
 
       self$smiles <- c(user = smiles)
 
       if (pubchem) {
-        self$try_pubchem(identifier)
+        if (pubchem_from == 'name') {
+          query = identifier
+        } else {
+          query = get(pubchem_from)
+        }
+        self$try_pubchem(query, from = pubchem_from)
       }
 
       if (rdkit) {
         if(requireNamespace("PythonInR", quietly = TRUE)) {
           if (is.null(self$smiles)) {
-            stop("RDKit needs a SMILES code")
+            message("RDKit would need a SMILES code")
           } else {
             message("Trying to get chemical information from RDKit using ",
                     names(self$smiles)[1], " SMILES\n",
@@ -86,16 +94,19 @@ chent <- R6Class("chent",
       }
       invisible(self)
     },
-    try_pubchem = function(identifier) {
+    try_pubchem = function(query, from = 'name') {
       message("PubChem:")
-      if (missing(identifier)) identifier <- self$identifier
-      pubchem_cids = webchem::get_cid(identifier)[[identifier]]
+      if (missing(query)) query <- self$identifier
+      pubchem_result = webchem::get_cid(query, from = from)
 
-      if (is.na(pubchem_cids[1])) {
-        message("Query ", identifier, " did not give results at PubChem")
+      if (is.na(pubchem_result[[1]][1])) {
+        message("Query ", query, " did not give results at PubChem")
       } else {
-        message("Found ", length(pubchem_cids), " entries in PubChem, using the first one.")
-        self$get_pubchem(pubchem_cids[1])
+        n_results = length(pubchem_result[[1]])
+        if (n_results > 1) {
+          warning("Found ", n_results, " entries in PubChem, using the first one.")
+        }
+        self$get_pubchem(pubchem_result[[1]][1])
       }
     },
     get_pubchem = function(pubchem_cid) {
@@ -115,10 +126,20 @@ chent <- R6Class("chent",
         self$inchikey <- self$pubchem$InChIKey
         attr(self$inchikey, "source") <- "pubchem"
       } else {
-        if (self$pubchem$InChIKey != self$inchikey) {
-          message("InChiKey ", self$pubchem$InChIKey, " from PubChem record does not match\n",
-                  "InChiKey ", self$inchikey, " retreived from ",
-                  attr(self$inchikey, "source"))
+        if (length(self$inchikey) > 1) {
+          message("InChIKey ", self$inchikey, " retreived from ",
+                  attr(self$inchikey, "source"), 
+                  " has length > 1, using PubChem InChIKey")
+          self$inchikey <- self$pubchem$InChIKey
+          attr(self$inchikey, "source") <- "pubchem"
+        } else {
+          if (self$pubchem$InChIKey != self$inchikey) {
+            message("InChiKey ", self$pubchem$InChIKey, " from PubChem record does not match\n",
+                    "InChiKey ", self$inchikey, " retreived from ",
+                    attr(self$inchikey, "source"))
+          } else {
+            attr(self$inchikey, "source") <- c(attr(self$inchikey, "source"), "pubchem")
+          }
         }
       }
     },
@@ -319,7 +340,7 @@ plot.chent = function(x, ...) {
 #' An R6 class for pesticidal active ingredients and associated data
 #' 
 #' The class is initialised with an identifier which is generally an ISO common name.
-#' Additional chemical information is retrieved from the internet.
+#' Additional chemical information is retrieved from the internet if available. 
 #'
 #' @docType class
 #' @importFrom R6 R6Class
@@ -335,26 +356,60 @@ pai <- R6Class("pai",
   public <- list(
     iso = NULL,
     alanwood = NULL,
-    initialize = function(iso, identifier = iso, smiles = NULL, alanwood = TRUE,
-                          pubchem = TRUE, rdkit = TRUE, chyaml = TRUE) {
+    initialize = function(iso, identifier = iso, 
+                          smiles = NULL, smiles_source = 'user',
+                          inchikey = NULL, inchikey_source = 'user',
+                          alanwood = TRUE, 
+                          pubchem = TRUE, pubchem_from = 'auto',
+                          rdkit = TRUE, chyaml = TRUE)
+    {
 
+      if (!is.null(inchikey)) {
+        self$inchikey = inchikey
+        attr(self$inchikey, "source") <- "user"
+      }
 
       if (!missing(iso) & alanwood) {
         message("alanwood.net:")
-        self$alanwood = webchem::aw_query(identifier, type = "commonname")[[1]]
-        if (is.na(self$alanwood[1])) {
+        aw_result = webchem::aw_query(identifier, type = "commonname")
+
+        # Use first element of list, as we passed a query of length one
+        if (is.na(aw_result[[1]][1])) {
           message("Common name ", identifier, " is not known at www.alanwood.net, trying PubChem")
         } else {
+          self$alanwood = aw_result[[1]]
           self$iso = self$alanwood$cname
           attr(self$iso, "source") <- "alanwood"
           attr(self$iso, "status") <- self$alanwood$status
-          self$inchikey = self$alanwood$inchikey
-          attr(self$inchikey, "source") <- "alanwood"
+          aw_ik = self$alanwood$inchikey
+          if (length(aw_ik) == 1 && nchar(aw_ik) == 27 && !is.na(aw_ik)) {
+            if (is.null(self$inchikey)) {
+              self$inchikey = self$alanwood$inchikey
+              attr(self$inchikey, "source") <- "alanwood"
+            } else {
+              if (aw_ik == self$inchikey) {
+                attr(self$inchikey, "source") = c(attr(self$inchikey, "source"), "alanwood")
+              } else {
+                warning("InChIKey ", self$inchikey, " differs from ", aw_ik, " obtained from alanwood.net")
+              }
+            }
+          }
+        }
+      } 
+
+      # Set pubchem_from if not specified
+      if (pubchem_from == 'auto') {
+        pubchem_from = 'name'
+        if (!is.null(self$inchikey)) {
+          pubchem_from = 'inchikey'
         }
       }
 
-      super$initialize(identifier = identifier, smiles = smiles,
-                       pubchem = pubchem, rdkit = rdkit, chyaml = chyaml)
+      super$initialize(identifier = identifier, 
+                       smiles = smiles, smiles_source = smiles_source,
+                       inchikey = self$inchikey,
+                       pubchem = pubchem, pubchem_from = pubchem_from,
+                       rdkit = rdkit, chyaml = chyaml)
 
       invisible(self)
     }

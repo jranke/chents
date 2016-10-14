@@ -1,3 +1,15 @@
+commit 6cfe5fbd827ca37f24134e8356e8144520ee1265
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-10-13 17:28:14 +0200
+
+    Remove unmaintained usage
+
+commit 5a9a777987fd7ac0d5724e4cfdb2178fa1567281
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-10-13 17:23:12 +0200
+
+    Commit changelog as test for mirroring on github
+
 commit 291337e920cc95510fce3c0cdcc62b4443cd3bc4
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2016-10-13 14:03:19 +0200

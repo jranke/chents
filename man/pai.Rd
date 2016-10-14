@@ -10,7 +10,7 @@ pai
 }
 \description{
 The class is initialised with an identifier which is generally an ISO common name.
-Additional chemical information is retrieved from the internet.
+Additional chemical information is retrieved from the internet if available.
 }
 \section{Fields}{
 
