@@ -29,6 +29,8 @@ python bindings are installed and configured for use with PythonInR.
 \item{\code{rdkit}}{List of information obtained with RDKit, if installed and
 configured for use with PythonInR}
 
+\item{\code{svg}}{SVG code}
+
 \item{\code{Picture}}{Graph as a \code{\link{picture}} object obtained using grImport}
 
 \item{\code{Pict_font_size}}{Font size as extracted from the intermediate PostScript file}

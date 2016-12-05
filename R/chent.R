@@ -35,6 +35,7 @@
 #' @field pubchem List of information retreived from PubChem
 #' @field rdkit List of information obtained with RDKit, if installed and
 #'   configured for use with PythonInR
+#' @field svg SVG code
 #' @field Picture Graph as a \code{\link{picture}} object obtained using grImport
 #' @field Pict_font_size Font size as extracted from the intermediate PostScript file
 #' @field pdf_height Height of the MediaBox in the pdf after cropping
@@ -52,6 +53,7 @@ chent <- R6Class("chent",
     mw = NULL,
     pubchem = NULL,
     rdkit = NULL,
+    svg = NULL,
     Picture = NULL,
     Pict_font_size = NULL,
     pdf_height = NULL,
@@ -174,19 +176,31 @@ chent <- R6Class("chent",
           }
         }
 
-        # Create a grImport Picture 
+        # Create an SVG representation
         PythonInR::pyImport("Draw", from = "rdkit.Chem")
+        PythonInR::pyImport("rdMolDraw2D", from = "rdkit.Chem.Draw")
+        PythonInR::pyImport("rdDepictor", from = "rdkit.Chem")
+        PythonInR::pyExec("rdDepictor.Compute2DCoords(mol)")
+        PythonInR::pyExec("d2d = rdMolDraw2D.MolDraw2DSVG(200,250)")
+        PythonInR::pyExec("d2d.DrawMolecule(mol)")
+        PythonInR::pyExec("d2d.FinishDrawing()")
+        self$svg <- PythonInR::pyGet("d2d.GetDrawingText()")
+        svgfile <- tempfile(fileext = ".svg")
+        writeLines(self$svg, svgfile)
+
+        # Convert to PostScript, remembering size properties
         psfile <- tempfile(fileext = ".ps")
-        xmlfile <- tempfile(fileext = ".xml")
-        cmd <- paste0("Draw.MolToFile(mol, '", psfile, "')")
-        PythonInR::pyExec(cmd)
+        suppressMessages(grConvert::convertPicture(svgfile, psfile))
         ps_font_line <- grep("Tm$", readLines(psfile), value = TRUE)[1]
         ps_font_size <- gsub(" .*$", "", ps_font_line)
-
         self$Pict_font_size = as.numeric(ps_font_size)
+
+        # Read in to create Picture
+        xmlfile <- tempfile(fileext = ".xml")
         PostScriptTrace(psfile, outfilename = xmlfile)
         unlink(paste0("capture", basename(psfile)))
         self$Picture <- readPicture(xmlfile)
+        unlink(c(xmlfile, psfile, svgfile))
       }
     },
     get_chyaml = function(repo = c("wd", "local", "web"), 
