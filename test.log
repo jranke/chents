@@ -2,8 +2,8 @@ Loading chents
 Loading required package: testthat
 Testing chents
 Generation of chent objects: 
-Initialize Python Version 2.7.9 (default, Jun 29 2016, 13:11:10) 
-[GCC 4.9.2]
+Initialize Python Version 3.4.2 (default, Oct  8 2014, 10:47:48) 
+[GCC 4.9.1]
 
 Trying to get chemical information from RDKit using user SMILES
 CCCCCCCCO

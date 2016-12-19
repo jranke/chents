@@ -181,7 +181,7 @@ chent <- R6Class("chent",
         PythonInR::pyImport("rdMolDraw2D", from = "rdkit.Chem.Draw")
         PythonInR::pyImport("rdDepictor", from = "rdkit.Chem")
         PythonInR::pyExec("rdDepictor.Compute2DCoords(mol)")
-        PythonInR::pyExec("d2d = rdMolDraw2D.MolDraw2DSVG(200,250)")
+        PythonInR::pyExec("d2d = rdMolDraw2D.MolDraw2DSVG(400,500)")
         PythonInR::pyExec("d2d.DrawMolecule(mol)")
         PythonInR::pyExec("d2d.FinishDrawing()")
         self$svg <- PythonInR::pyGet("d2d.GetDrawingText()")

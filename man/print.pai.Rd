@@ -14,4 +14,3 @@
 \description{
 Printing method for pai objects (pesticidal active ingredients)
 }
-

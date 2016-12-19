@@ -22,5 +22,5 @@ An R6 class for holding information about a product with at least one active ing
 
 \item{\code{concentration_units}}{Defaults to g/L}
 }}
-\keyword{data}
 
+\keyword{data}

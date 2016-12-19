@@ -1,3 +1,19 @@
+commit 762114a5ea6393cc73a09616b937397349c1a259
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-12-05 16:00:39 +0100
+
+    Use new rdkit drawing code
+    
+    This is SVG only, therefore use grConvert to convert
+    to postscript before importing using grImport.
+    SVG size is currently hardcoded.
+
+commit 363046c178398593dea33712ba281fb5556541a6
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-10-15 01:01:21 +0200
+
+    Meta infos for pdf and self$Picture, png function
+
 commit e85f61000c139492ec6497aa3c6206a66b54d783
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2016-10-14 15:24:43 +0200

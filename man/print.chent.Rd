@@ -14,4 +14,3 @@
 \description{
 Printing method for chent objects
 }
-

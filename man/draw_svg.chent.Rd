@@ -21,4 +21,3 @@ draw_svg.chent(x, width = 300, height = 150,
 \description{
 Draw SVG graph from a chent object using RDKit
 }
-

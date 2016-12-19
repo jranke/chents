@@ -19,9 +19,9 @@ Additional chemical information is retrieved from the internet if available.
 
 \item{\code{alanwood}}{List of information retreived from www.alanwood.net/pesticides}
 }}
+
 \examples{
 atr <- pai$new("atrazine")
 print(atr)
 }
 \keyword{data}
-

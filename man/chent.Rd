@@ -41,6 +41,7 @@ configured for use with PythonInR}
 
 \item{\code{degradation}}{List of degradation endpoints}
 }}
+
 \examples{
 oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
 print(oct)
@@ -50,4 +51,3 @@ print(caffeine)
 plot(caffeine)
 }
 \keyword{data}
-
