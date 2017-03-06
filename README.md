@@ -27,4 +27,4 @@ be plotted
 - Additional information can be read from a local .yaml file
 
 Some examples are available from the 
-[Reference on jrwb.de](http://pkgdown.jrwb.de/chents/reference.html).
+[reference on jrwb.de](http://pkgdown.jrwb.de/chents/reference.html).
