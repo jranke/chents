@@ -12,7 +12,7 @@ pkgfiles = DESCRIPTION \
 	README.html \
 	R/* \
 	inst/examples/*.R \
-	inst/staticdocs/index.r \
+	_pkgdown.yml \
 	tests/testthat.R \
 	tests/testthat/*
 

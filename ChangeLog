@@ -1,3 +1,15 @@
+commit aac6606d2aee79e547f725353a42266c00ed2299
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2017-03-06 14:52:04 +0100
+
+    Switch to pkgdown and link to pkgdown.jrwb.de
+
+commit 6248971edad72b30f7f609a6bb2217d0b41498a0
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2016-12-19 22:08:48 +0100
+
+    Make the pdf structures larger, update docs
+
 commit 762114a5ea6393cc73a09616b937397349c1a259
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2016-12-05 16:00:39 +0100
