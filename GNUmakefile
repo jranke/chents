@@ -21,9 +21,9 @@ roxygen:
 	"$(R_HOME)/bin/Rscript" -e 'library(devtools); document()'
 	@echo "DONE."
 
-sd: roxygen
+pd: roxygen
 	@echo "Building static documentation..."
-	"$(R_HOME)/bin/Rscript" -e 'staticdocs::build_site()'
+	"$(R_HOME)/bin/Rscript" -e 'pkgdown::build_site()'
 	@echo "DONE."
 
 $(TGZ): $(pkgfiles)

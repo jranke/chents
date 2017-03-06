@@ -27,4 +27,4 @@ be plotted
 - Additional information can be read from a local .yaml file
 
 Some examples are available from the 
-[Reference on github](https://jranke.github.io/chents/reference.html).
+[Reference on github](https://pkgdown.jrwb.de/chents/reference.html).

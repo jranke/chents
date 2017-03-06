@@ -1,0 +1,16 @@
+title: chents
+
+template:
+  bootswatch: spacelab
+
+reference:
+  - title: Class definitions
+    desc:  R6 classes and their methods
+    contents:
+      - chent
+      - draw_svg.chent
+      - plot.chent
+      - print.chent
+      - pai
+      - print.pai
+      - pp
