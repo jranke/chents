@@ -28,3 +28,4 @@ be plotted
 
 Some examples are available from the 
 [reference on jrwb.de](http://pkgdown.jrwb.de/chents/reference).
+

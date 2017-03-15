@@ -4,8 +4,7 @@ template:
   bootswatch: spacelab
 
 reference:
-  - title: Class definitions
-    desc:  R6 classes and their methods
+  - title: R6 Class definitions and methods
     contents:
       - chent
       - draw_svg.chent
