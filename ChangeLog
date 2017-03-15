@@ -1,3 +1,39 @@
+commit db711aaff2cbe3a620c497b1ef2cc3669d89b2b6
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2017-03-15 09:16:19 +0100
+
+    Some minor cosmetics and pkgdown update
+
+commit b04bfb3648716a142167ac025c09239739c691f0
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2017-03-06 15:05:24 +0100
+
+    Correct link to the reference on pkgdown.jrwb.de
+
+commit 7733340571ba735bb15ad18249cbdd5ac43e4ccd
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2017-03-06 15:02:08 +0100
+
+    Type on README
+
+commit 62c0a43b968ff36786c73396e030a1de4ad4f326
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2017-03-06 14:58:00 +0100
+
+    Delete leftovers from staticdocs, rerun pkgdown
+
+commit 657ca16cf5364d79e0ac2ae763b4bbfea38f78f6
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2017-03-06 14:55:11 +0100
+
+    Update pkgdown
+
+commit beef9009a12623e62816f8ff322647481685b535
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2017-03-06 14:54:15 +0100
+
+    Some updates
+
 commit aac6606d2aee79e547f725353a42266c00ed2299
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2017-03-06 14:52:04 +0100
