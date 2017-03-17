@@ -1,3 +1,9 @@
+commit 13c59928390dd38073c7664ea1d2961d11ba60e2
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2017-03-15 15:16:34 +0100
+
+    Rerun pkgdown
+
 commit db711aaff2cbe3a620c497b1ef2cc3669d89b2b6
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2017-03-15 09:16:19 +0100

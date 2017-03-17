@@ -16,7 +16,7 @@
 # this program. If not, see <http://www.gnu.org/licenses/>
 
 #' An R6 class for chemical entities with associated data
-#' 
+#'
 #' The class is initialised with an identifier. Chemical information is retrieved from
 #' the internet. Additionally, it can be generated using RDKit if RDKit and its
 #' python bindings are installed and configured for use with PythonInR.
@@ -62,7 +62,7 @@ chent <- R6Class("chent",
     initialize = function(identifier, smiles = NULL, smiles_source = 'user',
                           inchikey = NULL, inchikey_source = 'user',
                           pubchem = TRUE, pubchem_from = c('name', 'smiles', 'inchikey'),
-                          rdkit = TRUE, 
+                          rdkit = TRUE, template = NULL,
                           chyaml = TRUE) {
 
       self$identifier <- identifier
@@ -88,7 +88,7 @@ chent <- R6Class("chent",
             message("Trying to get chemical information from RDKit using ",
                     names(self$smiles)[1], " SMILES\n",
                     self$smiles[1])
-            self$get_rdkit()
+            self$get_rdkit(template = template)
             self$mw <- self$rdkit$mw
             attr(self$mw, "source") <- "rdkit"
           }
@@ -117,9 +117,9 @@ chent <- R6Class("chent",
     },
     get_pubchem = function(pubchem_cid) {
       self$pubchem = as.list(webchem::pc_prop(pubchem_cid, from = "cid",
-        properties = c("MolecularFormula", "MolecularWeight", 
-                       "CanonicalSMILES", "IsomericSMILES", 
-                       "InChI", "InChIKey", "IUPACName", 
+        properties = c("MolecularFormula", "MolecularWeight",
+                       "CanonicalSMILES", "IsomericSMILES",
+                       "InChI", "InChIKey", "IUPACName",
                        "XLogP", "TPSA", "Complexity", "Charge",
                        "HBondDonorCount", "HBondAcceptorCount")))
       self$pubchem$synonyms = webchem::pc_synonyms(pubchem_cid, from ="cid")[[1]]
@@ -139,7 +139,7 @@ chent <- R6Class("chent",
       } else {
         if (length(self$inchikey) > 1) {
           message("InChIKey ", self$inchikey, " retreived from ",
-                  attr(self$inchikey, "source"), 
+                  attr(self$inchikey, "source"),
                   " has length > 1, using PubChem InChIKey")
           self$inchikey <- self$pubchem$InChIKey
           attr(self$inchikey, "source") <- "pubchem"
@@ -154,7 +154,7 @@ chent <- R6Class("chent",
         }
       }
     },
-    get_rdkit = function() {
+    get_rdkit = function(template = NULL) {
       if (!requireNamespace("PythonInR"))
         stop("PythonInR can not be loaded")
       id <- names(self$identifier)
@@ -181,6 +181,12 @@ chent <- R6Class("chent",
         PythonInR::pyImport("rdMolDraw2D", from = "rdkit.Chem.Draw")
         PythonInR::pyImport("rdDepictor", from = "rdkit.Chem")
         PythonInR::pyExec("rdDepictor.Compute2DCoords(mol)")
+        if (!is.null(template)) {
+          PythonInR::pyImport("AllChem", from = "rdkit.Chem")
+          PythonInR::pyExec(paste0("template = Chem.MolFromSmiles('", template, "')"))
+          PythonInR::pyExec("AllChem.Compute2DCoords(template)")
+          PythonInR::pyExec("AllChem.GenerateDepictionMatching2DStructure(mol, template)")
+        }
         PythonInR::pyExec("d2d = rdMolDraw2D.MolDraw2DSVG(400,500)")
         PythonInR::pyExec("d2d.DrawMolecule(mol)")
         PythonInR::pyExec("d2d.FinishDrawing()")
@@ -203,15 +209,15 @@ chent <- R6Class("chent",
         unlink(c(xmlfile, psfile, svgfile))
       }
     },
-    get_chyaml = function(repo = c("wd", "local", "web"), 
+    get_chyaml = function(repo = c("wd", "local", "web"),
                           chyaml = paste0(URLencode(self$identifier), ".yaml")) {
       repo = match.arg(repo)
-      paths = c(wd = ".", 
+      paths = c(wd = ".",
                 local = file.path("~", "git/chyaml"))
 
       chyaml_handlers = list(
         expr = function(x) NULL, # To avoid security risks from reading chyaml files
-        dataframe = function(x) 
+        dataframe = function(x)
           eval(parse(text = paste0("data.frame(", x, ", stringsAsFactors = FALSE)"))))
 
       if (repo %in% c("wd", "local")) {
@@ -220,7 +226,7 @@ chent <- R6Class("chent",
         if (!file.exists(full)) {
           message("Did not find chyaml file ", full)
         } else {
-          if (is(try(self$chyaml <- yaml.load_file(chyaml, handlers = chyaml_handlers)), 
+          if (is(try(self$chyaml <- yaml.load_file(chyaml, handlers = chyaml_handlers)),
                  "try-error")) {
             message("Could not load ", full)
           } else {
@@ -238,17 +244,17 @@ chent <- R6Class("chent",
         chent <- x
       } else {
         id <- make.names(x)
-        chent <- chent$new(x, smiles) 
+        chent <- chent$new(x, smiles)
       }
       self$TPs[[id]] <- chent
     },
     transformations = data.frame(study_type = character(0),
-                                 TP_identifier = character(0), 
-                                 max_occurrence = numeric(0), 
-                                 source = character(0), 
+                                 TP_identifier = character(0),
+                                 max_occurrence = numeric(0),
+                                 source = character(0),
                                  pages = character(0),
                                  stringsAsFactors = FALSE),
-    add_transformation = function(study_type, TP_identifier, max_occurrence, 
+    add_transformation = function(study_type, TP_identifier, max_occurrence,
                                   comment = "", source = NA, pages = NA) {
       TP_name = make.names(TP_identifier)
       if (!inherits(self$TPs[[TP_name]], "chent")) {
@@ -257,16 +263,16 @@ chent <- R6Class("chent",
       TP_chent <- self$TPs[TP_name]
       if (is.numeric(pages)) pages <- paste(pages, collapse = ", ")
       cn <- colnames(self$transformations)
-      self$transformations <- rbind(self$transformations, 
-                                    data.frame(study_type = study_type, 
-                                               TP_identifier = TP_identifier, 
-                                               max_occurrence = max_occurrence, 
-                                               comment = comment, 
+      self$transformations <- rbind(self$transformations,
+                                    data.frame(study_type = study_type,
+                                               TP_identifier = TP_identifier,
+                                               max_occurrence = max_occurrence,
+                                               comment = comment,
                                                source = source,
                                                pages = pages,
                                                stringsAsFactors = FALSE))
     },
-    soil_degradation_endpoints = data.frame(destination = character(0), 
+    soil_degradation_endpoints = data.frame(destination = character(0),
                                             DT50 = numeric(0),
                                             comment = character(0),
                                             pages = character(0),
@@ -275,7 +281,7 @@ chent <- R6Class("chent",
                                               comment = "", pages = NA) {
       if (length(pages) > 1) pages = paste(pages, collapse = ", ")
       i <- nrow(self$soil_degradation_endpoints) + 1
-      self$soil_degradation_endpoints[i, c("destination", "comment", "pages")] <- 
+      self$soil_degradation_endpoints[i, c("destination", "comment", "pages")] <-
         c(destination, comment, pages)
       self$soil_degradation_endpoints[i, "DT50"] <- DT50
     },
@@ -290,7 +296,8 @@ chent <- R6Class("chent",
       if (!exists(to, self$TPs)) stop(to, " was not found in TPs")
       self$ff[i, ] <- c(from, to, ff, comment, pages)
     },
-    pdf = function(file = paste0(self$identifier, ".pdf"), dir = "structures/pdf") {
+    pdf = function(file = paste0(self$identifier, ".pdf"), dir = "structures/pdf",
+                   template = NULL) {
       if (!dir.exists(dir)) {
         message("Directory '", dir, "' does not exist")
         message("Trying to create directory '", dir, "'")
@@ -365,7 +372,7 @@ draw_svg.chent = function(x, width = 300, height = 150,
     if (!dir.exists(subdir)) dir.create(subdir)
     PythonInR::pyExec(paste0("mol = Chem.MolFromSmiles('", x$smiles, "')"))
     PythonInR::pyImport("Draw", from = "rdkit.Chem")
-    cmd <- paste0("Draw.MolToFile(mol, '", file.path(subdir, filename), 
+    cmd <- paste0("Draw.MolToFile(mol, '", file.path(subdir, filename),
                   "', size = (", width, ", ", height, "))")
     PythonInR::pyExec(cmd)
   }
@@ -383,9 +390,9 @@ plot.chent = function(x, ...) {
 }
 
 #' An R6 class for pesticidal active ingredients and associated data
-#' 
+#'
 #' The class is initialised with an identifier which is generally an ISO common name.
-#' Additional chemical information is retrieved from the internet if available. 
+#' Additional chemical information is retrieved from the internet if available.
 #'
 #' @docType class
 #' @importFrom R6 R6Class
@@ -401,12 +408,13 @@ pai <- R6Class("pai",
   public <- list(
     iso = NULL,
     alanwood = NULL,
-    initialize = function(iso, identifier = iso, 
+    initialize = function(iso, identifier = iso,
                           smiles = NULL, smiles_source = 'user',
                           inchikey = NULL, inchikey_source = 'user',
-                          alanwood = TRUE, 
+                          alanwood = TRUE,
                           pubchem = TRUE, pubchem_from = 'auto',
-                          rdkit = TRUE, chyaml = TRUE)
+                          rdkit = TRUE, template = NULL,
+                          chyaml = TRUE)
     {
 
       if (!is.null(inchikey)) {
@@ -440,7 +448,7 @@ pai <- R6Class("pai",
             }
           }
         }
-      } 
+      }
 
       # Set pubchem_from if not specified
       if (pubchem_from == 'auto') {
@@ -450,11 +458,11 @@ pai <- R6Class("pai",
         }
       }
 
-      super$initialize(identifier = identifier, 
+      super$initialize(identifier = identifier,
                        smiles = smiles, smiles_source = smiles_source,
                        inchikey = self$inchikey,
                        pubchem = pubchem, pubchem_from = pubchem_from,
-                       rdkit = rdkit, chyaml = chyaml)
+                       rdkit = rdkit, template = template, chyaml = chyaml)
 
       invisible(self)
     }
