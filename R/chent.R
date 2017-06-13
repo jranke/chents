@@ -191,22 +191,26 @@ chent <- R6Class("chent",
         PythonInR::pyExec("d2d.DrawMolecule(mol)")
         PythonInR::pyExec("d2d.FinishDrawing()")
         self$svg <- PythonInR::pyGet("d2d.GetDrawingText()")
-        svgfile <- tempfile(fileext = ".svg")
-        writeLines(self$svg, svgfile)
 
-        # Convert to PostScript, remembering size properties
-        psfile <- tempfile(fileext = ".ps")
-        suppressMessages(grConvert::convertPicture(svgfile, psfile))
-        ps_font_line <- grep("Tm$", readLines(psfile), value = TRUE)[1]
-        ps_font_size <- gsub(" .*$", "", ps_font_line)
-        self$Pict_font_size = as.numeric(ps_font_size)
+        if (!requireNamespace("grConvert")) {
+          stop("grConvert is not available, self$Picture will not be created")
+        } else {
+          # Convert to PostScript, remembering size properties
+          svgfile <- tempfile(fileext = ".svg")
+          writeLines(self$svg, svgfile)
+          psfile <- tempfile(fileext = ".ps")
+          suppressMessages(grConvert::convertPicture(svgfile, psfile))
+          ps_font_line <- grep("Tm$", readLines(psfile), value = TRUE)[1]
+          ps_font_size <- gsub(" .*$", "", ps_font_line)
+          self$Pict_font_size = as.numeric(ps_font_size)
 
-        # Read in to create Picture
-        xmlfile <- tempfile(fileext = ".xml")
-        PostScriptTrace(psfile, outfilename = xmlfile)
-        unlink(paste0("capture", basename(psfile)))
-        self$Picture <- readPicture(xmlfile)
-        unlink(c(xmlfile, psfile, svgfile))
+          # Read in to create Picture
+          xmlfile <- tempfile(fileext = ".xml")
+          PostScriptTrace(psfile, outfilename = xmlfile)
+          unlink(paste0("capture", basename(psfile)))
+          self$Picture <- readPicture(xmlfile)
+          unlink(c(xmlfile, psfile, svgfile))
+        }
       }
     },
     get_chyaml = function(repo = c("wd", "local", "web"),
