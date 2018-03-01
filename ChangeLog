@@ -1,3 +1,9 @@
+commit 3f82707cd1e974848185b1141c69734e2573594d
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2017-06-13 16:05:39 +0200
+
+    Make grConvert optional as it vanished on Windows
+
 commit f5b36dc73e7778091a08eaed51fd9d4f8677fbc1
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2017-03-17 21:19:14 +0100
