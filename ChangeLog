@@ -1,3 +1,9 @@
+commit 4bd4606c76dfc152547e0f5899a98494a4290d33
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2018-03-01 09:48:02 +0100
+
+    Rebuild static documentation with current pkdown
+
 commit 3f82707cd1e974848185b1141c69734e2573594d
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2017-06-13 16:05:39 +0200

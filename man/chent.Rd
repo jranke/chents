@@ -37,6 +37,10 @@ configured for use with PythonInR}
 
 \item{\code{pdf_height}}{Height of the MediaBox in the pdf after cropping}
 
+\item{\code{p0}}{Vapour pressure in Pa}
+
+\item{\code{cwsat}}{Water solubility in mg/L}
+
 \item{\code{chyaml}}{List of information obtained from a YAML file}
 
 \item{\code{degradation}}{List of degradation endpoints}

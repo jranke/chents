@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Johannes Ranke
+# Copyright (C) 2016,2017,2018  Johannes Ranke
 # Contact: jranke@uni-bremen.de
 # This file is part of the R package chents
 
@@ -39,6 +39,8 @@
 #' @field Picture Graph as a \code{\link{picture}} object obtained using grImport
 #' @field Pict_font_size Font size as extracted from the intermediate PostScript file
 #' @field pdf_height Height of the MediaBox in the pdf after cropping
+#' @field p0 Vapour pressure in Pa
+#' @field cwsat Water solubility in mg/L
 #' @field chyaml List of information obtained from a YAML file
 #' @field degradation List of degradation endpoints
 #' @example inst/examples/octanol.R
@@ -57,6 +59,8 @@ chent <- R6Class("chent",
     Picture = NULL,
     Pict_font_size = NULL,
     pdf_height = NULL,
+    p0 = NULL,
+    cwsat = NULL,
     chyaml = NULL,
     degradation = NULL,
     initialize = function(identifier, smiles = NULL, smiles_source = 'user',
@@ -241,6 +245,21 @@ chent <- R6Class("chent",
         message("web repositories not implemented")
       }
     },
+    add_p0 = function(p0, T = NA, source = NA, page = NA, remark = "") {
+      self$p0 <- p0
+      attr(self$p0, "T") <- T
+      attr(self$p0, "source") <- source
+      attr(self$p0, "page") <- page
+      attr(self$p0, "remark") <- remark
+    },
+    add_cwsat = function(cwsat, T = NA, pH = NA, source = NA, page = NA, remark = "") {
+      self$cwsat <- cwsat
+      attr(self$cwsat, "T") <- T
+      attr(self$cwsat, "pH") <- pH
+      attr(self$cwsat, "source") <- source
+      attr(self$cwsat, "page") <- page
+      attr(self$cwsat, "remark") <- remark
+    },
     TPs = list(),
     add_TP = function(x, smiles = NULL) {
       if (inherits(x, "chent")) {
@@ -259,7 +278,7 @@ chent <- R6Class("chent",
                                  pages = character(0),
                                  stringsAsFactors = FALSE),
     add_transformation = function(study_type, TP_identifier, max_occurrence,
-                                  comment = "", source = NA, pages = NA) {
+                                  remark = "", source = NA, pages = NA) {
       TP_name = make.names(TP_identifier)
       if (!inherits(self$TPs[[TP_name]], "chent")) {
         stop(paste("Please add the TP", TP_identifier, "first using chent$add_TP()"))
@@ -271,34 +290,34 @@ chent <- R6Class("chent",
                                     data.frame(study_type = study_type,
                                                TP_identifier = TP_identifier,
                                                max_occurrence = max_occurrence,
-                                               comment = comment,
+                                               remark = remark,
                                                source = source,
                                                pages = pages,
                                                stringsAsFactors = FALSE))
     },
     soil_degradation_endpoints = data.frame(destination = character(0),
                                             DT50 = numeric(0),
-                                            comment = character(0),
+                                            remark = character(0),
                                             pages = character(0),
                                             stringsAsFactors = FALSE),
     add_soil_degradation_endpoints = function(destination, DT50 = NA,
-                                              comment = "", pages = NA) {
+                                              remark = "", pages = NA) {
       if (length(pages) > 1) pages = paste(pages, collapse = ", ")
       i <- nrow(self$soil_degradation_endpoints) + 1
-      self$soil_degradation_endpoints[i, c("destination", "comment", "pages")] <-
-        c(destination, comment, pages)
+      self$soil_degradation_endpoints[i, c("destination", "remark", "pages")] <-
+        c(destination, remark, pages)
       self$soil_degradation_endpoints[i, "DT50"] <- DT50
     },
     ff = data.frame(from = character(0), to = character(0), ff = numeric(0),
-                    comment = character(0), pages = character(0),
+                    remark = character(0), pages = character(0),
                     stringsAsFactors = FALSE),
-    add_ff = function(from = "parent", to, ff = 1, comment = "", pages = NA) {
+    add_ff = function(from = "parent", to, ff = 1, remark = "", pages = NA) {
       i <- nrow(self$ff) + 1
       if (from != "parent") {
         if (!exists(from, self$TPs)) stop(from, " was not found in TPs")
       }
       if (!exists(to, self$TPs)) stop(to, " was not found in TPs")
-      self$ff[i, ] <- c(from, to, ff, comment, pages)
+      self$ff[i, ] <- c(from, to, ff, remark, pages)
     },
     pdf = function(file = paste0(self$identifier, ".pdf"), dir = "structures/pdf",
                    template = NULL) {
