@@ -1,3 +1,11 @@
+commit 12e69e162df47660d139cb3c4a5c9bff0f6a1d85
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2018-05-16 17:13:05 +0200
+
+    Vapour pressure and water solubility, use remark
+    
+    instead of comment, as comment is a special attribute in R
+
 commit 4bd4606c76dfc152547e0f5899a98494a4290d33
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2018-03-01 09:48:02 +0100

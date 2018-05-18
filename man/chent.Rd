@@ -43,7 +43,13 @@ configured for use with PythonInR}
 
 \item{\code{chyaml}}{List of information obtained from a YAML file}
 
-\item{\code{degradation}}{List of degradation endpoints}
+\item{\code{soil_degradation}}{Dataframe of modelling DT50 values}
+
+\item{\code{soil_ff}}{Dataframe of formation fractions}
+
+\item{\code{soil_sorption}}{Dataframe of soil sorption data}
+
+\item{\code{PUF}}{Plant uptake factor}
 }}
 
 \examples{

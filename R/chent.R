@@ -42,7 +42,10 @@
 #' @field p0 Vapour pressure in Pa
 #' @field cwsat Water solubility in mg/L
 #' @field chyaml List of information obtained from a YAML file
-#' @field degradation List of degradation endpoints
+#' @field soil_degradation Dataframe of modelling DT50 values
+#' @field soil_ff Dataframe of formation fractions
+#' @field soil_sorption Dataframe of soil sorption data
+#' @field PUF Plant uptake factor
 #' @example inst/examples/octanol.R
 #' @example inst/examples/caffeine.R
 #' @keywords data
@@ -61,8 +64,8 @@ chent <- R6Class("chent",
     pdf_height = NULL,
     p0 = NULL,
     cwsat = NULL,
+    PUF = NULL,
     chyaml = NULL,
-    degradation = NULL,
     initialize = function(identifier, smiles = NULL, smiles_source = 'user',
                           inchikey = NULL, inchikey_source = 'user',
                           pubchem = TRUE, pubchem_from = c('name', 'smiles', 'inchikey'),
@@ -260,6 +263,12 @@ chent <- R6Class("chent",
       attr(self$cwsat, "page") <- page
       attr(self$cwsat, "remark") <- remark
     },
+    add_PUF = function(PUF = 0, source = "focus_generic_gw_2014", page = 41, remark = "Conservative default value") {
+      self$PUF <- PUF
+      attr(self$PUF, "source") <- source
+      attr(self$PUF, "page") <- page
+      attr(self$PUF, "remark") <- remark
+    },
     TPs = list(),
     add_TP = function(x, smiles = NULL) {
       if (inherits(x, "chent")) {
@@ -295,29 +304,72 @@ chent <- R6Class("chent",
                                                pages = pages,
                                                stringsAsFactors = FALSE))
     },
-    soil_degradation_endpoints = data.frame(destination = character(0),
-                                            DT50 = numeric(0),
-                                            remark = character(0),
-                                            pages = character(0),
-                                            stringsAsFactors = FALSE),
-    add_soil_degradation_endpoints = function(destination, DT50 = NA,
-                                              remark = "", pages = NA) {
-      if (length(pages) > 1) pages = paste(pages, collapse = ", ")
-      i <- nrow(self$soil_degradation_endpoints) + 1
-      self$soil_degradation_endpoints[i, c("destination", "remark", "pages")] <-
-        c(destination, remark, pages)
-      self$soil_degradation_endpoints[i, "DT50"] <- DT50
-    },
-    ff = data.frame(from = character(0), to = character(0), ff = numeric(0),
-                    remark = character(0), pages = character(0),
-                    stringsAsFactors = FALSE),
-    add_ff = function(from = "parent", to, ff = 1, remark = "", pages = NA) {
-      i <- nrow(self$ff) + 1
-      if (from != "parent") {
-        if (!exists(from, self$TPs)) stop(from, " was not found in TPs")
+    soil_degradation = NULL,
+    add_soil_degradation = function(soils, DT50,
+                                    type = NA,
+                                    pH_orig = NA, pH_type = NA, pH_H2O = NA,
+                                    temperature = NA, moisture = NA,
+                                    category = "lab", formulation = NA,
+                                    remark = "", source, page = NA) {
+      new_soil_degradation = data.frame(
+        soil = soils,
+        DT50 = DT50,
+        type = type,
+        pH_orig = pH_orig,
+        pH_type = pH_type,
+        pH_H2O = pH_H2O,
+        temperature = temperature,
+        moisture = moisture,
+        category = category,
+        formulation = formulation,
+        remark = remark,
+        source = source,
+        page = page,
+        stringsAsFactors = FALSE)
+      if (is.null(self$soil_degradation)) {
+        self$soil_degradation <- new_soil_degradation
+      } else {
+        self$soil_degradation <- rbind(self$soil_degradation, new_soil_degradation)
       }
-      if (!exists(to, self$TPs)) stop(to, " was not found in TPs")
-      self$ff[i, ] <- c(from, to, ff, remark, pages)
+    },
+    soil_ff = NULL,
+    add_soil_ff = function(target, soils, ff = 1, remark = "", source, page = NA) {
+      new_soil_ff = data.frame(
+        target = target,
+        soil = soils,
+        ff = ff,
+        remark = remark,
+        source = source,
+        page = page,
+        stringsAsFactors = FALSE)
+      if (is.null(self$soil_ff)) {
+        self$soil_ff <- new_soil_ff
+      } else {
+        self$soil_ff <- rbind(self$soil_ff, new_soil_ff)
+      }
+    },
+    soil_sorption = NULL,
+    add_soil_sorption = function(type, Kf, Kfoc, N,
+                                 pH_orig = NA, pH_type = NA,
+                                 pH_H2O = NA,
+                                 perc_OC = NA, perc_clay = NA, CEC = NA,
+                                 remark = "", source, page = NA) {
+      new_soil_sorption = data.frame(
+        type = type,
+        Kf = Kf, Kfoc = Kfoc, N = N,
+        pH_orig = pH_orig,
+        pH_type = pH_type,
+        pH_H2O = pH_H2O,
+        perc_OC = perc_OC, perc_clay = perc_clay, CEC = CEC,
+        remark = remark,
+        source = source,
+        page = page,
+        stringsAsFactors = FALSE)
+      if (is.null(self$soil_sorption)) {
+        self$soil_sorption <- new_soil_sorption
+      } else {
+        self$soil_sorption <- rbind(self$soil_sorption, new_soil_sorption)
+      }
     },
     pdf = function(file = paste0(self$identifier, ".pdf"), dir = "structures/pdf",
                    template = NULL) {
