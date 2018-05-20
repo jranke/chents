@@ -1,3 +1,9 @@
+commit 7ac3347283fdcaa0a8c76af20b0a7cfa423368b9
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2018-05-18 17:32:47 +0200
+
+    Revisited soil degradation and sorption
+
 commit 12e69e162df47660d139cb3c4a5c9bff0f6a1d85
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2018-05-16 17:13:05 +0200
