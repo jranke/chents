@@ -1,3 +1,9 @@
+commit d1786a315fe7bc68a6543de15685d59a56eaa1b1
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2018-05-20 12:25:51 +0200
+
+    Change pH_type to pH_medium
+
 commit 7ac3347283fdcaa0a8c76af20b0a7cfa423368b9
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2018-05-18 17:32:47 +0200
