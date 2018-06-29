@@ -1,3 +1,9 @@
+commit 9cd6a79cd5c0fc69ca0b2c689d3a77f46978beba
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2018-06-21 12:29:51 +0200
+
+    Add country field to soil degradation data
+
 commit d1786a315fe7bc68a6543de15685d59a56eaa1b1
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2018-05-20 12:25:51 +0200
