@@ -355,14 +355,16 @@ chent <- R6Class("chent",
       }
     },
     soil_sorption = NULL,
-    add_soil_sorption = function(type, Kf, Kfoc, N,
+    add_soil_sorption = function(soils, Kf, Kfoc, N,
+                                 type = NA,
                                  pH_orig = NA, pH_medium = NA,
                                  pH_H2O = NA,
                                  perc_OC = NA, perc_clay = NA, CEC = NA,
                                  remark = "", source, page = NA) {
       new_soil_sorption = data.frame(
-        type = type,
+        soils = soils,
         Kf = Kf, Kfoc = Kfoc, N = N,
+        type = type,
         pH_orig = pH_orig,
         pH_medium = pH_medium,
         pH_H2O = pH_H2O,
