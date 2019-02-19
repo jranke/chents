@@ -463,6 +463,7 @@ draw_svg.chent = function(x, width = 300, height = 150,
 #' @example inst/examples/caffeine.R
 #' @export
 plot.chent = function(x, ...) {
+  if (is.null(x$Picture)) stop("No Picture object in chent, was RDKit available during creation?")
   grid.picture(x$Picture)
 }
 

@@ -1,3 +1,18 @@
+commit 95a067f0ed8fb580cc3652acd4c7885eb000244a
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2019-02-19 18:55:27 +0100
+
+    Skip plotting in examples if grConvert is missing
+
+commit 132bd73395033a95163080517b5a7c371cf512a2
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2019-02-19 18:17:38 +0100
+
+    Fix check for rdkit availability
+    
+    Also remove python-rdkit from the travis config as its version is too
+    old on travis (Ubuntu trusty)
+
 commit aa80ce4f46f9ff1a2851ba9ba873a55a8f6ebc6d
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2019-02-19 17:17:48 +0100

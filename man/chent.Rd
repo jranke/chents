@@ -55,12 +55,12 @@ configured for use with PythonInR}
 \examples{
 oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
 print(oct)
-if (requireNamespace("grConvert")) {
+if (!is.null(caffeine$Picture)) {
   plot(oct)
 }
 caffeine <- chent$new("caffeine")
 print(caffeine)
-if (requireNamespace("grConvert")) {
+if (!is.null(caffeine$Picture)) {
   plot(caffeine)
 }
 }

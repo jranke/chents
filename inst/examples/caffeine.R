@@ -1,5 +1,5 @@
 caffeine <- chent$new("caffeine")
 print(caffeine)
-if (requireNamespace("grConvert")) {
+if (!is.null(caffeine$Picture)) {
   plot(caffeine)
 }

@@ -8,11 +8,11 @@ The following objects are masked from ‘package:devtools’:
 
 Testing chents
 ✔ | OK F W S | Context
-⠏ |  0       | Generation of chent objects⠋ |  1       | Generation of chent objects⠙ |  2       | Generation of chent objects⠹ |  3       | Generation of chent objects⠸ |  4       | Generation of chent objects⠼ |  5       | Generation of chent objects⠴ |  6       | Generation of chent objects✔ |  6       | Generation of chent objects [2.8 s]
-⠏ |  0       | Generation of pai objects⠋ |  1       | Generation of pai objects⠙ |  2       | Generation of pai objects⠹ |  3       | Generation of pai objects⠸ |  4       | Generation of pai objects⠼ |  5       | Generation of pai objects⠴ |  6       | Generation of pai objects⠦ |  7       | Generation of pai objects⠧ |  8       | Generation of pai objects⠇ |  9       | Generation of pai objects✔ |  9       | Generation of pai objects [6.4 s]
+⠏ |  0       | Generation of chent objects⠋ |  1       | Generation of chent objects⠙ |  2       | Generation of chent objects⠹ |  3       | Generation of chent objects⠸ |  4       | Generation of chent objects⠼ |  5       | Generation of chent objects⠴ |  6       | Generation of chent objects✔ |  6       | Generation of chent objects [5.3 s]
+⠏ |  0       | Generation of pai objects⠋ |  1       | Generation of pai objects⠙ |  2       | Generation of pai objects⠹ |  3       | Generation of pai objects⠸ |  4       | Generation of pai objects⠼ |  5       | Generation of pai objects⠴ |  6       | Generation of pai objects⠦ |  7       | Generation of pai objects⠧ |  8       | Generation of pai objects⠇ |  9       | Generation of pai objects✔ |  9       | Generation of pai objects [6.8 s]
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 9.2 s
+Duration: 12.1 s
 
 OK:       15
 Failed:   0
