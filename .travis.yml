@@ -3,3 +3,5 @@ cache: packages
 r:
   - release
   - devel
+apt_packages:
+  - python-rdkit
