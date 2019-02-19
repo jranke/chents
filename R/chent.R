@@ -28,6 +28,7 @@
 #' @importFrom webchem get_cid cid_compinfo
 #' @importFrom grImport PostScriptTrace readPicture
 #' @importFrom yaml yaml.load_file
+#' @importFrom rsvg rsvg_ps
 #' @field identifier The identifier that was used to initiate the object, with attribute 'source'
 #' @field inchikey InChI Key, with attribute 'source'
 #' @field smiles SMILES code, with attribute 'source'
@@ -193,26 +194,22 @@ chent <- R6Class("chent",
       PythonInR::pyExec("d2d.DrawMolecule(mol)")
       PythonInR::pyExec("d2d.FinishDrawing()")
       self$svg <- PythonInR::pyGet("d2d.GetDrawingText()")
+      svgfile <- tempfile(fileext = ".svg")      
+      psfile <- tempfile(fileext = ".ps")
+      writeLines(self$svg, svgfile)
+      rsvg::rsvg_ps(svgfile, psfile)
 
-      if (!requireNamespace("grConvert")) {
-        stop("grConvert is not available, self$Picture will not be created")
-      } else {
-        # Convert to PostScript, remembering size properties
-        svgfile <- tempfile(fileext = ".svg")
-        writeLines(self$svg, svgfile)
-        psfile <- tempfile(fileext = ".ps")
-        suppressMessages(grConvert::convertPicture(svgfile, psfile))
-        ps_font_line <- grep("Tm$", readLines(psfile), value = TRUE)[1]
-        ps_font_size <- gsub(" .*$", "", ps_font_line)
-        self$Pict_font_size = as.numeric(ps_font_size)
+      # Get size properties useful for plotting
+      ps_font_line <- grep("Tm$", readLines(psfile), value = TRUE)[1]
+      ps_font_size <- gsub(" .*$", "", ps_font_line)
+      self$Pict_font_size = as.numeric(ps_font_size)
 
-        # Read in to create Picture
-        xmlfile <- tempfile(fileext = ".xml")
-        PostScriptTrace(psfile, outfilename = xmlfile)
-        unlink(paste0("capture", basename(psfile)))
-        self$Picture <- readPicture(xmlfile)
-        unlink(c(xmlfile, psfile, svgfile))
-      }
+      # Read in to create Picture
+      xmlfile <- tempfile(fileext = ".xml")
+      PostScriptTrace(psfile, outfilename = xmlfile)
+      unlink(paste0("capture", basename(psfile)))
+      self$Picture <- readPicture(xmlfile)
+      unlink(c(xmlfile, psfile, svgfile))
     },
     get_chyaml = function(repo = c("wd", "local", "web"),
                           chyaml = paste0(URLencode(self$identifier), ".yaml")) {
@@ -610,7 +607,7 @@ rdkit_available <- function()
       PythonInR::pyConnect()
     }
     sink(tempfile())
-    try_rdkit <- try(PythonInR::pyImport("Chem", from = "rdkit"), 
+    try_rdkit <- try(PythonInR::pyImport("Chem", from = "rdkit"),
                      silent = TRUE)
     sink()
     if (inherits(try_rdkit, "try-error")) {
