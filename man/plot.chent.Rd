@@ -17,5 +17,7 @@ Plot method for chent objects
 \examples{
 caffeine <- chent$new("caffeine")
 print(caffeine)
-plot(caffeine)
+if (requireNamespace("grConvert")) {
+  plot(caffeine)
+}
 }

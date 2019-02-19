@@ -55,9 +55,13 @@ configured for use with PythonInR}
 \examples{
 oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
 print(oct)
-plot(oct)
+if (requireNamespace("grConvert")) {
+  plot(oct)
+}
 caffeine <- chent$new("caffeine")
 print(caffeine)
-plot(caffeine)
+if (requireNamespace("grConvert")) {
+  plot(caffeine)
+}
 }
 \keyword{data}
