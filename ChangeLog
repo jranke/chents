@@ -1,3 +1,17 @@
+commit 433f66e88d96aaf745116b97d7fdaa6ce2abde30
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2019-02-19 20:46:18 +0100
+
+    Fix example
+
+commit b883e6075bd76f979fbffdb768313665681315a0
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2019-02-19 20:17:59 +0100
+
+    Only plot when a Picture object is there
+    
+    grConvert is not needed for plotting
+
 commit 95a067f0ed8fb580cc3652acd4c7885eb000244a
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2019-02-19 18:55:27 +0100
