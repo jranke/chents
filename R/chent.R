@@ -1,4 +1,4 @@
-# Copyright (C) 2016,2017,2018  Johannes Ranke
+# Copyright (C) 2016-2019  Johannes Ranke
 # Contact: jranke@uni-bremen.de
 # This file is part of the R package chents
 
@@ -88,7 +88,7 @@ chent <- R6Class("chent",
       }
 
       if (rdkit) {
-        if(requireNamespace("PythonInR", quietly = TRUE)) {
+        if(rdkit_available()) {
           if (is.null(self$smiles)) {
             message("RDKit would need a SMILES code")
           } else {
@@ -99,6 +99,8 @@ chent <- R6Class("chent",
             self$mw <- self$rdkit$mw
             attr(self$mw, "source") <- "rdkit"
           }
+        } else {
+          message("RDKit is not available via PythonInR")
         }
       }
 
@@ -162,62 +164,54 @@ chent <- R6Class("chent",
       }
     },
     get_rdkit = function(template = NULL) {
-      if (!requireNamespace("PythonInR"))
-        stop("PythonInR can not be loaded")
-      id <- names(self$identifier)
-      if (!PythonInR::pyIsConnected()) {
-        PythonInR::pyConnect()
+      if(!rdkit_available()) {
+        stop("RDKit is not available via PythonInR")
       }
-      try_rdkit <- try(PythonInR::pyImport("Chem", from = "rdkit"))
-      if (inherits(try_rdkit, "try-error")) {
-        message("Could not import RDKit in Python session")
+      self$rdkit <- list()
+      PythonInR::pyImport("Descriptors", from = "rdkit.Chem")
+      PythonInR::pyExec(paste0("mol = Chem.MolFromSmiles('", self$smiles[1], "')"))
+      self$rdkit$mw <- PythonInR::pyExecg("mw = Descriptors.MolWt(mol)", "mw")
+      if (!is.null(self$mw)) {
+        if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {
+          message("RDKit mw is ", self$rdkit$mw)
+          message("mw is ", self$mw)
+        }
+      }
+
+      # Create an SVG representation
+      PythonInR::pyImport("Draw", from = "rdkit.Chem")
+      PythonInR::pyImport("rdMolDraw2D", from = "rdkit.Chem.Draw")
+      PythonInR::pyImport("rdDepictor", from = "rdkit.Chem")
+      PythonInR::pyExec("rdDepictor.Compute2DCoords(mol)")
+      if (!is.null(template)) {
+        PythonInR::pyImport("AllChem", from = "rdkit.Chem")
+        PythonInR::pyExec(paste0("template = Chem.MolFromSmiles('", template, "')"))
+        PythonInR::pyExec("AllChem.Compute2DCoords(template)")
+        PythonInR::pyExec("AllChem.GenerateDepictionMatching2DStructure(mol, template)")
+      }
+      PythonInR::pyExec("d2d = rdMolDraw2D.MolDraw2DSVG(400,500)")
+      PythonInR::pyExec("d2d.DrawMolecule(mol)")
+      PythonInR::pyExec("d2d.FinishDrawing()")
+      self$svg <- PythonInR::pyGet("d2d.GetDrawingText()")
+
+      if (!requireNamespace("grConvert")) {
+        stop("grConvert is not available, self$Picture will not be created")
       } else {
-        self$rdkit <- list()
-        PythonInR::pyImport("Descriptors", from = "rdkit.Chem")
-        PythonInR::pyExec(paste0("mol = Chem.MolFromSmiles('", self$smiles[1], "')"))
-        self$rdkit$mw <- PythonInR::pyExecg("mw = Descriptors.MolWt(mol)", "mw")
-        if (!is.null(self$mw)) {
-          if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {
-            message("RDKit mw is ", self$rdkit$mw)
-            message("mw is ", self$mw)
-          }
-        }
+        # Convert to PostScript, remembering size properties
+        svgfile <- tempfile(fileext = ".svg")
+        writeLines(self$svg, svgfile)
+        psfile <- tempfile(fileext = ".ps")
+        suppressMessages(grConvert::convertPicture(svgfile, psfile))
+        ps_font_line <- grep("Tm$", readLines(psfile), value = TRUE)[1]
+        ps_font_size <- gsub(" .*$", "", ps_font_line)
+        self$Pict_font_size = as.numeric(ps_font_size)
 
-        # Create an SVG representation
-        PythonInR::pyImport("Draw", from = "rdkit.Chem")
-        PythonInR::pyImport("rdMolDraw2D", from = "rdkit.Chem.Draw")
-        PythonInR::pyImport("rdDepictor", from = "rdkit.Chem")
-        PythonInR::pyExec("rdDepictor.Compute2DCoords(mol)")
-        if (!is.null(template)) {
-          PythonInR::pyImport("AllChem", from = "rdkit.Chem")
-          PythonInR::pyExec(paste0("template = Chem.MolFromSmiles('", template, "')"))
-          PythonInR::pyExec("AllChem.Compute2DCoords(template)")
-          PythonInR::pyExec("AllChem.GenerateDepictionMatching2DStructure(mol, template)")
-        }
-        PythonInR::pyExec("d2d = rdMolDraw2D.MolDraw2DSVG(400,500)")
-        PythonInR::pyExec("d2d.DrawMolecule(mol)")
-        PythonInR::pyExec("d2d.FinishDrawing()")
-        self$svg <- PythonInR::pyGet("d2d.GetDrawingText()")
-
-        if (!requireNamespace("grConvert")) {
-          stop("grConvert is not available, self$Picture will not be created")
-        } else {
-          # Convert to PostScript, remembering size properties
-          svgfile <- tempfile(fileext = ".svg")
-          writeLines(self$svg, svgfile)
-          psfile <- tempfile(fileext = ".ps")
-          suppressMessages(grConvert::convertPicture(svgfile, psfile))
-          ps_font_line <- grep("Tm$", readLines(psfile), value = TRUE)[1]
-          ps_font_size <- gsub(" .*$", "", ps_font_line)
-          self$Pict_font_size = as.numeric(ps_font_size)
-
-          # Read in to create Picture
-          xmlfile <- tempfile(fileext = ".xml")
-          PostScriptTrace(psfile, outfilename = xmlfile)
-          unlink(paste0("capture", basename(psfile)))
-          self$Picture <- readPicture(xmlfile)
-          unlink(c(xmlfile, psfile, svgfile))
-        }
+        # Read in to create Picture
+        xmlfile <- tempfile(fileext = ".xml")
+        PostScriptTrace(psfile, outfilename = xmlfile)
+        unlink(paste0("capture", basename(psfile)))
+        self$Picture <- readPicture(xmlfile)
+        unlink(c(xmlfile, psfile, svgfile))
       }
     },
     get_chyaml = function(repo = c("wd", "local", "web"),
@@ -607,4 +601,24 @@ pp <- R6Class("pp",
     }
   )
 )
+
+rdkit_available <- function()
+{
+  if(requireNamespace("PythonInR", quietly = TRUE)) {
+    if (!PythonInR::pyIsConnected()) {
+      PythonInR::pyConnect()
+    }
+    sink(tempfile())
+    try_rdkit <- try(PythonInR::pyImport("Chem", from = "rdkit"), 
+                     silent = TRUE)
+    sink()
+    if (inherits(try_rdkit, "try-error")) {
+      return(FALSE)
+    } else {
+      return(TRUE)
+    }
+  } else {
+    return(FALSE)
+  }
+}
 # vim: set ts=2 sw=2 expandtab:

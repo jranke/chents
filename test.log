@@ -1,13 +1,20 @@
 Loading chents
-Loading required package: testthat
+
+Attaching package: ‘testthat’
+
+The following objects are masked from ‘package:devtools’:
+
+    setup, test_file
+
 Testing chents
-Generation of chent objects: 
-Initialize Python Version 3.4.2 (default, Oct  8 2014, 10:47:48) 
-[GCC 4.9.1]
+✔ | OK F W S | Context
+⠏ |  0       | Generation of chent objects⠋ |  1       | Generation of chent objects⠙ |  2       | Generation of chent objects⠹ |  3       | Generation of chent objects⠸ |  4       | Generation of chent objects⠼ |  5       | Generation of chent objects⠴ |  6       | Generation of chent objects✔ |  6       | Generation of chent objects [2.8 s]
+⠏ |  0       | Generation of pai objects⠋ |  1       | Generation of pai objects⠙ |  2       | Generation of pai objects⠹ |  3       | Generation of pai objects⠸ |  4       | Generation of pai objects⠼ |  5       | Generation of pai objects⠴ |  6       | Generation of pai objects⠦ |  7       | Generation of pai objects⠧ |  8       | Generation of pai objects⠇ |  9       | Generation of pai objects✔ |  9       | Generation of pai objects [6.4 s]
 
-Trying to get chemical information from RDKit using user SMILES
-CCCCCCCCO
-......
-Generation of pai objects: .........
+══ Results ═════════════════════════════════════════════════════════════════════
+Duration: 9.2 s
 
-DONE ===========================================================================
+OK:       15
+Failed:   0
+Warnings: 0
+Skipped:  0
