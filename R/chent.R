@@ -270,13 +270,13 @@ chent <- R6Class("chent",
       attr(self$PUF, "remark") <- remark
     },
     TPs = list(),
-    add_TP = function(x, smiles = NULL) {
+    add_TP = function(x, smiles = NULL, pubchem = FALSE) {
       if (inherits(x, "chent")) {
         id <- names(x$identifier)
         chent <- x
       } else {
         id <- make.names(x)
-        chent <- chent$new(x, smiles)
+        chent <- chent$new(x, smiles, pubchem = pubchem)
       }
       self$TPs[[id]] <- chent
     },

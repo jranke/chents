@@ -3,3 +3,5 @@
 ^README.html$
 ^test.log$
 ^docs$
+^_pkgdown\.yml$
+^\.travis\.yml$

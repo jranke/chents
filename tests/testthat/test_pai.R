@@ -16,6 +16,6 @@ test_that("a pai object is correctly generated from an ambiguous name, with warn
   attr(ik, "source") <- c("alanwood", "pubchem")
   expect_equal(glyphosate$inchikey, ik)
   expect_equivalent(round(glyphosate$mw, 2), 169.07) 
-  smiles <- "C(C(=O)O)[NH2+]CP(=O)(O)[O-]"
+  smiles <- "C(C(=O)O)NCP(=O)(O)O"
   expect_equal(glyphosate$smiles[["PubChem_Canonical"]], smiles)
 })
