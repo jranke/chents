@@ -27,5 +27,5 @@ LazyLoad: yes
 LazyData: yes
 Encoding: UTF-8
 VignetteBuilder: knitr
-URL: http://cgit.jrwb.de/chents
+URL: https://github.com/jranke/chents
 RoxygenNote: 6.1.1
