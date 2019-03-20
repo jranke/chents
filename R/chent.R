@@ -194,7 +194,7 @@ chent <- R6Class("chent",
       PythonInR::pyExec("d2d.DrawMolecule(mol)")
       PythonInR::pyExec("d2d.FinishDrawing()")
       self$svg <- PythonInR::pyGet("d2d.GetDrawingText()")
-      svgfile <- tempfile(fileext = ".svg")      
+      svgfile <- tempfile(fileext = ".svg")
       psfile <- tempfile(fileext = ".ps")
       writeLines(self$svg, svgfile)
       rsvg::rsvg_ps(svgfile, psfile)
@@ -383,7 +383,8 @@ chent <- R6Class("chent",
       plot(self)
       dev.off()
       message("Cropping file '", path, "' using pdfcrop")
-      system(paste("pdfcrop --margin 10", path, path, "> /dev/null"))
+      bash_path <- shQuote(path)
+      system(paste("pdfcrop --margin 10", bash_path, bash_path, "> /dev/null"))
 
       # Get the height of the MediaBox
       head <- readLines(path, n = 20, skipNul = TRUE)

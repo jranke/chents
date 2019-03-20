@@ -1,3 +1,17 @@
+commit fe9c6bf06cb89ced0f61015bb24a88990a2c8fe8
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2019-02-21 16:00:30 +0100
+
+    Use codecov and update docs
+
+commit bfa20a8c262580e38d30cfa95e75d1b01b568d07
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2019-02-19 23:19:31 +0100
+
+    Use rsvg instead of grConvert
+    
+    as grConvert is not on CRAN
+
 commit a7e2c2008699b590325ccd848562881251676faf
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2019-02-19 20:46:18 +0100
