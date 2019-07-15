@@ -403,6 +403,21 @@ chent <- R6Class("chent",
       png(path, antialias = antialias)
       plot(self)
       dev.off()
+    },
+    emf = function(file = paste0(self$identifier, ".emf"), dir = "structures/emf") {
+      if (!requireNamespace("devEMF")) {
+        stop("You need to have the devEMF package installed for this function")
+      }
+      if (!dir.exists(dir)) {
+        message("Directory '", dir, "' does not exist")
+        message("Trying to create directory '", dir, "'")
+        dir.create(dir, recursive = TRUE)
+      }
+      path = file.path(dir, file)
+      message("Creating file '", path, "'")
+      devEMF::emf(path)
+      plot(self)
+      dev.off()
     }
   )
 )

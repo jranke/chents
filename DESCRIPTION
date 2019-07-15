@@ -1,8 +1,8 @@
 Package: chents
 Type: Package
 Title: Chemical Entities as R Objects
-Version: 0.2-7
-Date: 2019-03-20
+Version: 0.2-8
+Date: 2019-07-13
 Authors@R: c(person("Johannes", "Ranke", role = c("aut", "cre", "cph"),
                     email = "jranke@uni-bremen.de"))
 Description: Utilities for dealing with chemical entities and associated
@@ -21,7 +21,8 @@ Suggests:
     knitr,
     testthat,
     PythonInR,
-    covr
+    covr,
+    devEMF
 License: GPL
 LazyLoad: yes
 LazyData: yes
