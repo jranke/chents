@@ -4,24 +4,91 @@
 \name{pai}
 \alias{pai}
 \title{An R6 class for pesticidal active ingredients and associated data}
-\format{An \code{\link{R6Class}} generator object}
-\usage{
-pai
+\format{
+An \code{\link{R6Class}} generator object
 }
 \description{
 The class is initialised with an identifier which is generally an ISO common name.
 Additional chemical information is retrieved from the internet if available.
 }
-\section{Fields}{
-
+\keyword{data}
+\section{Super class}{
+\code{\link[chents:chent]{chents::chent}} -> \code{pai}
+}
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{iso}}{ISO common name according to ISO 1750 as retreived from www.alanwood.net/pesticides}
 
 \item{\code{alanwood}}{List of information retreived from www.alanwood.net/pesticides}
-}}
-
-\examples{
-atr <- pai$new("atrazine")
-print(atr)
 }
-\keyword{data}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{pai$new()}}
+\item \href{#method-clone}{\code{pai$clone()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_PUF">}\href{../../chents/html/chent.html#method-add_PUF}{\code{chents::chent$add_PUF()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_TP">}\href{../../chents/html/chent.html#method-add_TP}{\code{chents::chent$add_TP()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_cwsat">}\href{../../chents/html/chent.html#method-add_cwsat}{\code{chents::chent$add_cwsat()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_p0">}\href{../../chents/html/chent.html#method-add_p0}{\code{chents::chent$add_p0()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_degradation">}\href{../../chents/html/chent.html#method-add_soil_degradation}{\code{chents::chent$add_soil_degradation()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_ff">}\href{../../chents/html/chent.html#method-add_soil_ff}{\code{chents::chent$add_soil_ff()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_sorption">}\href{../../chents/html/chent.html#method-add_soil_sorption}{\code{chents::chent$add_soil_sorption()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_transformation">}\href{../../chents/html/chent.html#method-add_transformation}{\code{chents::chent$add_transformation()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="emf">}\href{../../chents/html/chent.html#method-emf}{\code{chents::chent$emf()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_chyaml">}\href{../../chents/html/chent.html#method-get_chyaml}{\code{chents::chent$get_chyaml()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_pubchem">}\href{../../chents/html/chent.html#method-get_pubchem}{\code{chents::chent$get_pubchem()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_rdkit">}\href{../../chents/html/chent.html#method-get_rdkit}{\code{chents::chent$get_rdkit()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="pdf">}\href{../../chents/html/chent.html#method-pdf}{\code{chents::chent$pdf()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="png">}\href{../../chents/html/chent.html#method-png}{\code{chents::chent$png()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="try_pubchem">}\href{../../chents/html/chent.html#method-try_pubchem}{\code{chents::chent$try_pubchem()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{pai$new(
+  iso,
+  identifier = iso,
+  smiles = NULL,
+  smiles_source = "user",
+  inchikey = NULL,
+  inchikey_source = "user",
+  alanwood = TRUE,
+  pubchem = TRUE,
+  pubchem_from = "auto",
+  rdkit = TRUE,
+  template = NULL,
+  chyaml = TRUE
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{pai$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

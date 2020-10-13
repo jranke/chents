@@ -54,12 +54,12 @@ test: build
 
 quickcheck: build
 	@echo "Running check..."
-	"$(R_HOME)/bin/R" CMD check $(TGZ) --no-tests
+	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(R_HOME)/bin/R" CMD check $(TGZ) --no-tests
 	@echo "DONE."
 
 check: build
 	@echo "Running CRAN check..."
-	"$(R_HOME)/bin/R" CMD check --as-cran $(TGZ)
+	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(R_HOME)/bin/R" CMD check --as-cran $(TGZ)
 	@echo "DONE."
 
 install: build

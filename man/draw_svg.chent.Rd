@@ -4,8 +4,13 @@
 \alias{draw_svg.chent}
 \title{Draw SVG graph from a chent object using RDKit}
 \usage{
-draw_svg.chent(x, width = 300, height = 150,
-  filename = paste0(names(x$identifier), ".svg"), subdir = "svg")
+draw_svg.chent(
+  x,
+  width = 300,
+  height = 150,
+  filename = paste0(names(x$identifier), ".svg"),
+  subdir = "svg"
+)
 }
 \arguments{
 \item{x}{The chent object to be plotted}

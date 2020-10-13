@@ -4,15 +4,15 @@
 \name{pp}
 \alias{pp}
 \title{R6 class for holding a product with at least one active ingredient}
-\format{An \code{\link{R6Class}} generator object.}
-\usage{
-pp
+\format{
+An \code{\link{R6Class}} generator object.
 }
 \description{
 An R6 class for holding information about a product with at least one active ingredient
 }
-\section{Fields}{
-
+\keyword{data}
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{name}}{The name of the product}
 
@@ -21,6 +21,57 @@ An R6 class for holding information about a product with at least one active ing
 \item{\code{concentrations}}{The concentration of the ais}
 
 \item{\code{concentration_units}}{Defaults to g/L}
-}}
+}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{pp$new()}}
+\item \href{#method-print}{\code{pp$print()}}
+\item \href{#method-clone}{\code{pp$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{pp$new(
+  name,
+  ...,
+  concentrations,
+  concentration_units = "g/L",
+  density = 1000,
+  density_units = "g/L"
+)}\if{html}{\out{</div>}}
+}
 
-\keyword{data}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
+\subsection{Method \code{print()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{pp$print()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{pp$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

@@ -1,3 +1,9 @@
+commit c8bfe56bd627e1945815631ce5c2ac27333fa246
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2019-07-15 14:45:52 +0200
+
+    Add chent$emf() function based on devEMF
+
 commit 1cc812d69311a1b3f846d0fb160a68a26fe11d65
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2019-03-20 15:58:34 +0100

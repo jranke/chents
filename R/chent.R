@@ -21,7 +21,6 @@
 #' the internet. Additionally, it can be generated using RDKit if RDKit and its
 #' python bindings are installed and configured for use with PythonInR.
 #'
-#' @docType class
 #' @export
 #' @format An \code{\link{R6Class}} generator object
 #' @importFrom R6 R6Class
@@ -47,8 +46,6 @@
 #' @field soil_ff Dataframe of formation fractions
 #' @field soil_sorption Dataframe of soil sorption data
 #' @field PUF Plant uptake factor
-#' @example inst/examples/octanol.R
-#' @example inst/examples/caffeine.R
 #' @keywords data
 
 chent <- R6Class("chent",
@@ -122,7 +119,7 @@ chent <- R6Class("chent",
         if (n_results > 1) {
           warning("Found ", n_results, " entries in PubChem, using the first one.")
         }
-        self$get_pubchem(pubchem_result[[1]][1])
+        self$get_pubchem(pubchem_result[[1, "cid"]])
       }
     },
     get_pubchem = function(pubchem_cid) {
@@ -296,7 +293,7 @@ chent <- R6Class("chent",
                                                stringsAsFactors = FALSE))
     },
     soil_degradation = NULL,
-    add_soil_degradation = function(soils, DT50,
+    add_soil_degradation = function(soils, DT50_mod, DT50_mod_ref,
                                     type = NA, country = NA,
                                     pH_orig = NA, pH_medium = NA, pH_H2O = NA,
                                     perc_OC = NA,
@@ -306,7 +303,8 @@ chent <- R6Class("chent",
                                     remark = "", source, page = NA) {
       new_soil_degradation = data.frame(
         soil = soils,
-        DT50 = DT50,
+        DT50_mod = DT50_mod,
+        DT50_mod_ref = DT50_mod_ref,
         type = type,
         country = country,
         pH_orig = pH_orig,
@@ -473,7 +471,6 @@ draw_svg.chent = function(x, width = 300, height = 150,
 #' @importFrom grImport grid.picture
 #' @param x The chent object to be plotted
 #' @param ... Further arguments passed to \code{\link{grid.picture}}
-#' @example inst/examples/caffeine.R
 #' @export
 plot.chent = function(x, ...) {
   if (is.null(x$Picture)) stop("No Picture object in chent, was RDKit available during creation?")
@@ -491,7 +488,6 @@ plot.chent = function(x, ...) {
 #' @format An \code{\link{R6Class}} generator object
 #' @field iso ISO common name according to ISO 1750 as retreived from www.alanwood.net/pesticides
 #' @field alanwood List of information retreived from www.alanwood.net/pesticides
-#' @example inst/examples/pai.R
 #' @keywords data
 
 pai <- R6Class("pai",
