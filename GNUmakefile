@@ -50,6 +50,7 @@ winbin: $(WINBIN)
 test: build
 	@echo "Running testthat tests..."
 	"$(R_HOME)/bin/Rscript" -e 'library(devtools); devtools::test()' 2>&1 | tee test.log
+	sed -i -e "s/\r.*\r//" test.log
 	@echo "DONE."
 
 quickcheck: build
@@ -59,7 +60,7 @@ quickcheck: build
 
 check: build
 	@echo "Running CRAN check..."
-	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(R_HOME)/bin/R" CMD check --as-cran $(TGZ)
+	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(R_HOME)/bin/R" CMD check --as-cran $(TGZ) --no-tests
 	@echo "DONE."
 
 install: build

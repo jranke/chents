@@ -4,9 +4,9 @@ require(testthat)
 
 context("Generation of pai objects")
 
-test_that("a pai object is correctly generated from an ambiguous name, with warning", {
-  expect_warning(glyphosate <- pai$new("glyphosate", chyaml = FALSE))
-  expect_warning(pai$new("benzalkonium chloride", chyaml = FALSE))
+test_that("a pai object is correctly generated from an ambiguous name", {
+  glyphosate <- pai$new("glyphosate", chyaml = FALSE)
+  expect_message(pai$new("benzalkonium chloride", chyaml = FALSE), "did not give results")
 
   expect_equivalent(glyphosate$alanwood$cas, "1071-83-6")
   expect_equivalent(glyphosate$alanwood$formula, "C3H8NO5P")
@@ -15,7 +15,7 @@ test_that("a pai object is correctly generated from an ambiguous name, with warn
   ik = "XDDAORKBJWWYJS-UHFFFAOYSA-N"
   attr(ik, "source") <- c("alanwood", "pubchem")
   expect_equal(glyphosate$inchikey, ik)
-  expect_equivalent(round(glyphosate$mw, 2), 169.07) 
+  expect_equivalent(round(glyphosate$mw, 2), 169.07)
   smiles <- "C(C(=O)O)NCP(=O)(O)O"
   expect_equal(glyphosate$smiles[["PubChem_Canonical"]], smiles)
 })

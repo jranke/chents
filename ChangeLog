@@ -1,3 +1,11 @@
+commit 6937e41d317b953d8246203814500166dbe89470
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2020-10-13 11:26:03 +0200
+
+    Temporarily remove @example tags
+    
+    Due to r-lib/roxygen2#1158
+
 commit c8bfe56bd627e1945815631ce5c2ac27333fa246
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2019-07-15 14:45:52 +0200

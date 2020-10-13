@@ -110,15 +110,11 @@ chent <- R6Class("chent",
     try_pubchem = function(query, from = 'name') {
       message("PubChem:")
       if (missing(query)) query <- self$identifier
-      pubchem_result = webchem::get_cid(query, from = from)
+      pubchem_result = webchem::get_cid(query, from = from, match = "first")
 
-      if (is.na(pubchem_result[[1]][1])) {
+      if (is.na(pubchem_result[[1, "cid"]])) {
         message("Query ", query, " did not give results at PubChem")
       } else {
-        n_results = length(pubchem_result[[1]])
-        if (n_results > 1) {
-          warning("Found ", n_results, " entries in PubChem, using the first one.")
-        }
         self$get_pubchem(pubchem_result[[1, "cid"]])
       }
     },
@@ -511,7 +507,7 @@ pai <- R6Class("pai",
 
       if (!missing(iso) & alanwood) {
         message("alanwood.net:")
-        aw_result = webchem::aw_query(identifier, type = "commonname")
+        aw_result = webchem::aw_query(identifier, from = "name")
 
         # Use first element of list, as we passed a query of length one
         if (is.na(aw_result[[1]][1])) {
