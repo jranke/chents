@@ -1,3 +1,30 @@
+commit d032fb8ba7b0827bb896b6d9a07d6449d88cf511
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2021-11-18 23:52:32 +0100
+
+    We are on Xenial, no python3-rdkit...
+
+commit 368edcfe670c674391d79a27a5d0490fbc1a7ef2
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2021-11-18 23:48:41 +0100
+
+    Another attempt to get python3-rdkit on Travis
+
+commit f91a75460fbf756e27bd280b969284d043c5a451
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2021-11-18 23:22:32 +0100
+
+    Install python3-rdkit on Travis
+
+commit ae755fbb06c3dda0740e9bb9323fbdfe3f2788a4
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2021-11-18 23:03:16 +0100
+
+    Use reticulate instead of PythonInR, alanwood has moved
+    
+    Because the pesticide compendium at alanwood.net has moved to bcpc.org,
+    we need to depend on a development branch of webchem at the moment.
+
 commit 898d598bcbb022ac767e0105e868798130f2c74c
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2020-10-13 15:10:03 +0200

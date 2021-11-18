@@ -1,12 +1,11 @@
 Loading required package: usethis
-Loading chents
+ℹ Loading chents
+ℹ Testing chents
+✔ | F W S  OK | Context
+✔ |         6 | Generation of chent objects [3.3s]
+✔ |         8 | Generation of pai objects [8.1s]
 
-Attaching package: ‘testthat’
+══ Results ═════════════════════════════════════════════════════════════════════
+Duration: 11.4 s
 
-The following object is masked from ‘package:devtools’:
-
-    test_file
-
-Testing chents
-✔ |  OK F W S | Context
-⠏ |   0       | Generation of chent objects⠋ |   1       | Generation of chent objects
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 14 ]

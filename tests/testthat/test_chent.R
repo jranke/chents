@@ -2,7 +2,7 @@ context("Generation of chent objects")
 
 # Check if we can use RDKit
 skip_if_no_rdkit <- function() {
-  if (!chents:::rdkit_available()) skip("RDKit is not available via PythonInR")
+  if (!chents:::rdkit_available) skip("RDKit is not available via reticulate")
 }
 
 oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE, chyaml = FALSE)
