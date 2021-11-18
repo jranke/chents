@@ -1,3 +1,12 @@
+commit 898d598bcbb022ac767e0105e868798130f2c74c
+Author: Johannes Ranke <jranke@uni-bremen.de>
+Date:   2020-10-13 15:10:03 +0200
+
+    Adapt to changes in webchem
+    
+    Unfortunately, tests only pass sometimes, it seems PubChem is not always
+    responding
+
 commit 6937e41d317b953d8246203814500166dbe89470
 Author: Johannes Ranke <jranke@uni-bremen.de>
 Date:   2020-10-13 11:26:03 +0200

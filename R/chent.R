@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019  Johannes Ranke
+# Copyright (C) 2016-2021  Johannes Ranke
 # Contact: jranke@uni-bremen.de
 # This file is part of the R package chents
 
@@ -19,7 +19,7 @@
 #'
 #' The class is initialised with an identifier. Chemical information is retrieved from
 #' the internet. Additionally, it can be generated using RDKit if RDKit and its
-#' python bindings are installed and configured for use with PythonInR.
+#' python bindings are installed.
 #'
 #' @export
 #' @format An \code{\link{R6Class}} generator object
@@ -33,8 +33,8 @@
 #' @field smiles SMILES code, with attribute 'source'
 #' @field mw Molecular weight, with attribute 'source'
 #' @field pubchem List of information retreived from PubChem
-#' @field rdkit List of information obtained with RDKit, if installed and
-#'   configured for use with PythonInR
+#' @field rdkit List of information obtained with RDKit
+#' @field mol <rdkit.Chem.rdchem.Mol> object
 #' @field svg SVG code
 #' @field Picture Graph as a \code{\link{picture}} object obtained using grImport
 #' @field Pict_font_size Font size as extracted from the intermediate PostScript file
@@ -47,6 +47,18 @@
 #' @field soil_sorption Dataframe of soil sorption data
 #' @field PUF Plant uptake factor
 #' @keywords data
+#' @examples
+#' oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
+#' print(oct)
+#' if (!is.null(oct$Picture)) {
+#'   plot(oct)
+#' }
+#'
+#' caffeine <- chent$new("caffeine")
+#' print(caffeine)
+#' if (!is.null(caffeine$Picture)) {
+#'   plot(caffeine)
+#' }
 
 chent <- R6Class("chent",
   public <- list(
@@ -56,6 +68,7 @@ chent <- R6Class("chent",
     mw = NULL,
     pubchem = NULL,
     rdkit = NULL,
+    mol = NULL,
     svg = NULL,
     Picture = NULL,
     Pict_font_size = NULL,
@@ -86,7 +99,7 @@ chent <- R6Class("chent",
       }
 
       if (rdkit) {
-        if(rdkit_available()) {
+        if(rdkit_available) {
           if (is.null(self$smiles)) {
             message("RDKit would need a SMILES code")
           } else {
@@ -98,7 +111,7 @@ chent <- R6Class("chent",
             attr(self$mw, "source") <- "rdkit"
           }
         } else {
-          message("RDKit is not available via PythonInR")
+          message("RDKit is not available")
         }
       }
 
@@ -158,13 +171,12 @@ chent <- R6Class("chent",
       }
     },
     get_rdkit = function(template = NULL) {
-      if(!rdkit_available()) {
-        stop("RDKit is not available via PythonInR")
+      if(!rdkit_available) {
+        stop("RDKit is not available")
       }
       self$rdkit <- list()
-      PythonInR::pyImport("Descriptors", from = "rdkit.Chem")
-      PythonInR::pyExec(paste0("mol = Chem.MolFromSmiles('", self$smiles[1], "')"))
-      self$rdkit$mw <- PythonInR::pyExecg("mw = Descriptors.MolWt(mol)", "mw")
+      self$mol <- rdkit_module$Chem$MolFromSmiles(self$smiles[1])
+      self$rdkit$mw <- rdkit_module$Chem$Descriptors$MolWt(self$mol)
       if (!is.null(self$mw)) {
         if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {
           message("RDKit mw is ", self$rdkit$mw)
@@ -173,20 +185,16 @@ chent <- R6Class("chent",
       }
 
       # Create an SVG representation
-      PythonInR::pyImport("Draw", from = "rdkit.Chem")
-      PythonInR::pyImport("rdMolDraw2D", from = "rdkit.Chem.Draw")
-      PythonInR::pyImport("rdDepictor", from = "rdkit.Chem")
-      PythonInR::pyExec("rdDepictor.Compute2DCoords(mol)")
+      rdkit_module$Chem$rdDepictor$Compute2DCoords(self$mol)
       if (!is.null(template)) {
-        PythonInR::pyImport("AllChem", from = "rdkit.Chem")
-        PythonInR::pyExec(paste0("template = Chem.MolFromSmiles('", template, "')"))
-        PythonInR::pyExec("AllChem.Compute2DCoords(template)")
-        PythonInR::pyExec("AllChem.GenerateDepictionMatching2DStructure(mol, template)")
+        rdkit_template <- rdkit_module$Chem$MolFromSmiles(template)
+        rdkit_module$Chem$rdDepictor$Compute2DCoords(template)
+        rdkit$Chem$AllChem$GenerateDepictionMatching2DStructure(self$mol, template)
       }
-      PythonInR::pyExec("d2d = rdMolDraw2D.MolDraw2DSVG(400,500)")
-      PythonInR::pyExec("d2d.DrawMolecule(mol)")
-      PythonInR::pyExec("d2d.FinishDrawing()")
-      self$svg <- PythonInR::pyGet("d2d.GetDrawingText()")
+      d2d <- rdkit_module$Chem$Draw$rdMolDraw2D$MolDraw2DSVG(400L, 400L)
+      d2d$DrawMolecule(self$mol)
+      d2d$FinishDrawing()
+      self$svg <- d2d$GetDrawingText()
       svgfile <- tempfile(fileext = ".svg")
       psfile <- tempfile(fileext = ".ps")
       writeLines(self$svg, svgfile)
@@ -446,19 +454,14 @@ print.chent = function(x, ...) {
 draw_svg.chent = function(x, width = 300, height = 150,
                           filename = paste0(names(x$identifier), ".svg"),
                           subdir = "svg") {
-  if (!PythonInR::pyIsConnected()) {
-    PythonInR::pyConnect()
-  }
-  try_rdkit <- try(PythonInR::pyImport("Chem", from = "rdkit"))
-  if (inherits(try_rdkit, "try-error")) {
-    message("Could not import RDKit in Python session")
+  if (!rdkit_available) {
+    stop("RDkit is not available via reticulate")
   } else {
     if (!dir.exists(subdir)) dir.create(subdir)
-    PythonInR::pyExec(paste0("mol = Chem.MolFromSmiles('", x$smiles, "')"))
-    PythonInR::pyImport("Draw", from = "rdkit.Chem")
-    cmd <- paste0("Draw.MolToFile(mol, '", file.path(subdir, filename),
-                  "', size = (", width, ", ", height, "))")
-    PythonInR::pyExec(cmd)
+    mol <- rdkit_module$Chem$MolFromSmiles(x$smiles)
+
+    rdkit_module$Chem$Draw$MolToFile(mol, file.path(subdir, filename),
+      size = c(as.integer(width), as.integer(height)))
   }
 }
 
@@ -482,19 +485,25 @@ plot.chent = function(x, ...) {
 #' @importFrom R6 R6Class
 #' @export
 #' @format An \code{\link{R6Class}} generator object
-#' @field iso ISO common name according to ISO 1750 as retreived from www.alanwood.net/pesticides
-#' @field alanwood List of information retreived from www.alanwood.net/pesticides
+#' @field iso ISO common name according to ISO 1750 as retreived from pesticidecompendium.bcpc.org
+#' @field bcpc List of information retrieved from pesticidecompendium.bcpc.org
 #' @keywords data
+#' @examples
+#' atr <- pai$new("atrazine")
+#' print(atr)
+#' if (!is.null(atr$Picture)) {
+#'   plot(atr)
+#' }
 
 pai <- R6Class("pai",
   inherit = chent,
   public <- list(
     iso = NULL,
-    alanwood = NULL,
+    bcpc = NULL,
     initialize = function(iso, identifier = iso,
                           smiles = NULL, smiles_source = 'user',
                           inchikey = NULL, inchikey_source = 'user',
-                          alanwood = TRUE,
+                          bcpc = TRUE,
                           pubchem = TRUE, pubchem_from = 'auto',
                           rdkit = TRUE, template = NULL,
                           chyaml = TRUE)
@@ -505,28 +514,28 @@ pai <- R6Class("pai",
         attr(self$inchikey, "source") <- "user"
       }
 
-      if (!missing(iso) & alanwood) {
-        message("alanwood.net:")
-        aw_result = webchem::aw_query(identifier, from = "name")
+      if (!missing(iso) & bcpc) {
+        message("BCPC:")
+        bcpc_result = webchem::bcpc_query(identifier, from = "name")
 
         # Use first element of list, as we passed a query of length one
-        if (is.na(aw_result[[1]][1])) {
-          message("Common name ", identifier, " is not known at www.alanwood.net, trying PubChem")
+        if (is.na(bcpc_result[[1]][1])) {
+          message("Common name ", identifier, " is not known at the BCPC compendium, trying PubChem")
         } else {
-          self$alanwood = aw_result[[1]]
-          self$iso = self$alanwood$cname
-          attr(self$iso, "source") <- "alanwood"
-          attr(self$iso, "status") <- self$alanwood$status
-          aw_ik = self$alanwood$inchikey
-          if (length(aw_ik) == 1 && nchar(aw_ik) == 27 && !is.na(aw_ik)) {
+          self$bcpc = bcpc_result[[1]]
+          self$iso = self$bcpc$cname
+          attr(self$iso, "source") <- "bcpc"
+          attr(self$iso, "status") <- self$bcpc$status
+          bcpc_ik = self$bcpc$inchikey
+          if (length(bcpc_ik) == 1 && nchar(bcpc_ik) == 27 && !is.na(bcpc_ik)) {
             if (is.null(self$inchikey)) {
-              self$inchikey = self$alanwood$inchikey
-              attr(self$inchikey, "source") <- "alanwood"
+              self$inchikey = self$bcpc$inchikey
+              attr(self$inchikey, "source") <- "bcpc"
             } else {
-              if (aw_ik == self$inchikey) {
-                attr(self$inchikey, "source") = c(attr(self$inchikey, "source"), "alanwood")
+              if (bcpc_ik == self$inchikey) {
+                attr(self$inchikey, "source") = c(attr(self$inchikey, "source"), "bcpc")
               } else {
-                warning("InChIKey ", self$inchikey, " differs from ", aw_ik, " obtained from alanwood.net")
+                warning("InChIKey ", self$inchikey, " differs from ", bcpc_ik, " obtained from bcpc.org")
               }
             }
           }
@@ -608,23 +617,4 @@ pp <- R6Class("pp",
   )
 )
 
-rdkit_available <- function()
-{
-  if(requireNamespace("PythonInR", quietly = TRUE)) {
-    if (!PythonInR::pyIsConnected()) {
-      PythonInR::pyConnect()
-    }
-    sink(tempfile())
-    try_rdkit <- try(PythonInR::pyImport("Chem", from = "rdkit"),
-                     silent = TRUE)
-    sink()
-    if (inherits(try_rdkit, "try-error")) {
-      return(FALSE)
-    } else {
-      return(TRUE)
-    }
-  } else {
-    return(FALSE)
-  }
-}
 # vim: set ts=2 sw=2 expandtab:

@@ -11,6 +11,13 @@ An \code{\link{R6Class}} generator object
 The class is initialised with an identifier which is generally an ISO common name.
 Additional chemical information is retrieved from the internet if available.
 }
+\examples{
+atr <- pai$new("atrazine")
+print(atr)
+if (!is.null(atr$Picture)) {
+  plot(atr)
+}
+}
 \keyword{data}
 \section{Super class}{
 \code{\link[chents:chent]{chents::chent}} -> \code{pai}
@@ -18,9 +25,9 @@ Additional chemical information is retrieved from the internet if available.
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{iso}}{ISO common name according to ISO 1750 as retreived from www.alanwood.net/pesticides}
+\item{\code{iso}}{ISO common name according to ISO 1750 as retreived from pesticidecompendium.bcpc.org}
 
-\item{\code{alanwood}}{List of information retreived from www.alanwood.net/pesticides}
+\item{\code{bcpc}}{List of information retrieved from pesticidecompendium.bcpc.org}
 }
 \if{html}{\out{</div>}}
 }
@@ -64,7 +71,7 @@ Additional chemical information is retrieved from the internet if available.
   smiles_source = "user",
   inchikey = NULL,
   inchikey_source = "user",
-  alanwood = TRUE,
+  bcpc = TRUE,
   pubchem = TRUE,
   pubchem_from = "auto",
   rdkit = TRUE,

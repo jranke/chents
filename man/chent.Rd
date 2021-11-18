@@ -9,7 +9,20 @@ An \code{\link{R6Class}} generator object
 \description{
 The class is initialised with an identifier. Chemical information is retrieved from
 the internet. Additionally, it can be generated using RDKit if RDKit and its
-python bindings are installed and configured for use with PythonInR.
+python bindings are installed.
+}
+\examples{
+oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
+print(oct)
+if (!is.null(oct$Picture)) {
+  plot(oct)
+}
+
+caffeine <- chent$new("caffeine")
+print(caffeine)
+if (!is.null(caffeine$Picture)) {
+  plot(caffeine)
+}
 }
 \keyword{data}
 \section{Public fields}{
@@ -25,8 +38,9 @@ python bindings are installed and configured for use with PythonInR.
 
 \item{\code{pubchem}}{List of information retreived from PubChem}
 
-\item{\code{rdkit}}{List of information obtained with RDKit, if installed and
-configured for use with PythonInR}
+\item{\code{rdkit}}{List of information obtained with RDKit}
+
+\item{\code{mol}}{<rdkit.Chem.rdchem.Mol> object}
 
 \item{\code{svg}}{SVG code}
 
