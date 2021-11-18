@@ -5,6 +5,8 @@ r:
   - devel
 addons:
   apt:
+    sourceline:
+      - 'deb http://us.archive.ubuntu.com/ubuntu xenial universe'
     packages:
       - python3-rdkit
 github_packages:
