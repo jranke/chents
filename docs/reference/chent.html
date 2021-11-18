@@ -8,21 +8,29 @@
 
 <title>An R6 class for chemical entities with associated data — chent • chents</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +38,12 @@
 
 
 
-<meta property="og:title" content="An R6 class for chemical entities with associated data — chent" />
 
+<meta property="og:title" content="An R6 class for chemical entities with associated data — chent" />
 <meta property="og:description" content="The class is initialised with an identifier. Chemical information is retrieved from
 the internet. Additionally, it can be generated using RDKit if RDKit and its
-python bindings are installed and configured for use with PythonInR." />
-<meta name="twitter:card" content="summary" />
+python bindings are installed." />
+
 
 
 
@@ -49,9 +57,10 @@ python bindings are installed and configured for use with PythonInR." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -65,7 +74,7 @@ python bindings are installed and configured for use with PythonInR." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">chents</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -73,7 +82,7 @@ python bindings are installed and configured for use with PythonInR." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -81,11 +90,10 @@ python bindings are installed and configured for use with PythonInR." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jranke/chents">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/jranke/chents/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -96,6 +104,7 @@ python bindings are installed and configured for use with PythonInR." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -107,49 +116,262 @@ python bindings are installed and configured for use with PythonInR." />
     </div>
 
     <div class="ref-description">
-    
     <p>The class is initialised with an identifier. Chemical information is retrieved from
 the internet. Additionally, it can be generated using RDKit if RDKit and its
-python bindings are installed and configured for use with PythonInR.</p>
-    
+python bindings are installed.</p>
     </div>
 
-    <pre class="usage"><span class='no'>chent</span></pre>
-        
+
+
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>An <code>R6Class</code> generator object</p>
-    
-    <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
+    <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
+
+    <p><div class="r6-fields"></p><dl>
+<dt><code>identifier</code></dt><dd><p>The identifier that was used to initiate the object, with attribute 'source'</p></dd>
+
+<dt><code>inchikey</code></dt><dd><p>InChI Key, with attribute 'source'</p></dd>
+
+<dt><code>smiles</code></dt><dd><p>SMILES code, with attribute 'source'</p></dd>
+
+<dt><code>mw</code></dt><dd><p>Molecular weight, with attribute 'source'</p></dd>
+
+<dt><code>pubchem</code></dt><dd><p>List of information retreived from PubChem</p></dd>
+
+<dt><code>rdkit</code></dt><dd><p>List of information obtained with RDKit</p></dd>
+
+<dt><code>mol</code></dt><dd><p>&lt;rdkit.Chem.rdchem.Mol&gt; object</p></dd>
+
+<dt><code>svg</code></dt><dd><p>SVG code</p></dd>
+
+<dt><code>Picture</code></dt><dd><p>Graph as a <code>picture</code> object obtained using grImport</p></dd>
+
+<dt><code>Pict_font_size</code></dt><dd><p>Font size as extracted from the intermediate PostScript file</p></dd>
+
+<dt><code>pdf_height</code></dt><dd><p>Height of the MediaBox in the pdf after cropping</p></dd>
+
+<dt><code>p0</code></dt><dd><p>Vapour pressure in Pa</p></dd>
+
+<dt><code>cwsat</code></dt><dd><p>Water solubility in mg/L</p></dd>
+
+<dt><code>chyaml</code></dt><dd><p>List of information obtained from a YAML file</p></dd>
+
+<dt><code>soil_degradation</code></dt><dd><p>Dataframe of modelling DT50 values</p></dd>
+
+<dt><code>soil_ff</code></dt><dd><p>Dataframe of formation fractions</p></dd>
+
+<dt><code>soil_sorption</code></dt><dd><p>Dataframe of soil sorption data</p></dd>
+
+<dt><code>PUF</code></dt><dd><p>Plant uptake factor</p></dd>
+
+</dl><p></div></p>
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
-    <dl class='dl-horizontal'>
-<dt><code>identifier</code></dt><dd><p>The identifier that was used to initiate the object, with attribute 'source'</p></dd>
-    <dt><code>inchikey</code></dt><dd><p>InChI Key, with attribute 'source'</p></dd>
-    <dt><code>smiles</code></dt><dd><p>SMILES code, with attribute 'source'</p></dd>
-    <dt><code>mw</code></dt><dd><p>Molecular weight, with attribute 'source'</p></dd>
-    <dt><code>pubchem</code></dt><dd><p>List of information retreived from PubChem</p></dd>
-    <dt><code>rdkit</code></dt><dd><p>List of information obtained with RDKit, if installed and
-configured for use with PythonInR</p></dd>
-    <dt><code>svg</code></dt><dd><p>SVG code</p></dd>
-    <dt><code>Picture</code></dt><dd><p>Graph as a <code>picture</code> object obtained using grImport</p></dd>
-    <dt><code>Pict_font_size</code></dt><dd><p>Font size as extracted from the intermediate PostScript file</p></dd>
-    <dt><code>pdf_height</code></dt><dd><p>Height of the MediaBox in the pdf after cropping</p></dd>
-    <dt><code>p0</code></dt><dd><p>Vapour pressure in Pa</p></dd>
-    <dt><code>cwsat</code></dt><dd><p>Water solubility in mg/L</p></dd>
-    <dt><code>chyaml</code></dt><dd><p>List of information obtained from a YAML file</p></dd>
-    <dt><code>soil_degradation</code></dt><dd><p>Dataframe of modelling DT50 values</p></dd>
-    <dt><code>soil_ff</code></dt><dd><p>Dataframe of formation fractions</p></dd>
-    <dt><code>soil_sorption</code></dt><dd><p>Dataframe of soil sorption data</p></dd>
-    <dt><code>PUF</code></dt><dd><p>Plant uptake factor</p></dd>
-</dl>
-    
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Public methods</h3>
+
+<ul>
+<li><p><a href='#method-new'><code>chent$new()</code></a></p></li>
+<li><p><a href='#method-try_pubchem'><code>chent$try_pubchem()</code></a></p></li>
+<li><p><a href='#method-get_pubchem'><code>chent$get_pubchem()</code></a></p></li>
+<li><p><a href='#method-get_rdkit'><code>chent$get_rdkit()</code></a></p></li>
+<li><p><a href='#method-get_chyaml'><code>chent$get_chyaml()</code></a></p></li>
+<li><p><a href='#method-add_p0'><code>chent$add_p0()</code></a></p></li>
+<li><p><a href='#method-add_cwsat'><code>chent$add_cwsat()</code></a></p></li>
+<li><p><a href='#method-add_PUF'><code>chent$add_PUF()</code></a></p></li>
+<li><p><a href='#method-add_TP'><code>chent$add_TP()</code></a></p></li>
+<li><p><a href='#method-add_transformation'><code>chent$add_transformation()</code></a></p></li>
+<li><p><a href='#method-add_soil_degradation'><code>chent$add_soil_degradation()</code></a></p></li>
+<li><p><a href='#method-add_soil_ff'><code>chent$add_soil_ff()</code></a></p></li>
+<li><p><a href='#method-add_soil_sorption'><code>chent$add_soil_sorption()</code></a></p></li>
+<li><p><a href='#method-pdf'><code>chent$pdf()</code></a></p></li>
+<li><p><a href='#method-png'><code>chent$png()</code></a></p></li>
+<li><p><a href='#method-emf'><code>chent$emf()</code></a></p></li>
+<li><p><a href='#method-clone'><code>chent$clone()</code></a></p></li>
+</ul>
+<p><hr>
+<a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
+  <span class='va'>identifier</span>,
+  smiles <span class='op'>=</span> <span class='cn'>NULL</span>,
+  smiles_source <span class='op'>=</span> <span class='st'>"user"</span>,
+  inchikey <span class='op'>=</span> <span class='cn'>NULL</span>,
+  inchikey_source <span class='op'>=</span> <span class='st'>"user"</span>,
+  pubchem <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  pubchem_from <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"name"</span>, <span class='st'>"smiles"</span>, <span class='st'>"inchikey"</span><span class='op'>)</span>,
+  rdkit <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  template <span class='op'>=</span> <span class='cn'>NULL</span>,
+  chyaml <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-try_pubchem"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>try_pubchem()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>try_pubchem</span><span class='op'>(</span><span class='va'>query</span>, from <span class='op'>=</span> <span class='st'>"name"</span><span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-get_pubchem"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>get_pubchem()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>get_pubchem</span><span class='op'>(</span><span class='va'>pubchem_cid</span><span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-get_rdkit"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>get_rdkit()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>get_rdkit</span><span class='op'>(</span>template <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-get_chyaml"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>get_chyaml()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>get_chyaml</span><span class='op'>(</span>
+  repo <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"wd"</span>, <span class='st'>"local"</span>, <span class='st'>"web"</span><span class='op'>)</span>,
+  chyaml <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/URLencode.html'>URLencode</a></span><span class='op'>(</span><span class='va'>self</span><span class='op'>$</span><span class='va'>identifier</span><span class='op'>)</span>, <span class='st'>".yaml"</span><span class='op'>)</span>
+<span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-add_p0"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>add_p0()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>add_p0</span><span class='op'>(</span><span class='va'>p0</span>, T <span class='op'>=</span> <span class='cn'>NA</span>, source <span class='op'>=</span> <span class='cn'>NA</span>, page <span class='op'>=</span> <span class='cn'>NA</span>, remark <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-add_cwsat"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>add_cwsat()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>add_cwsat</span><span class='op'>(</span><span class='va'>cwsat</span>, T <span class='op'>=</span> <span class='cn'>NA</span>, pH <span class='op'>=</span> <span class='cn'>NA</span>, source <span class='op'>=</span> <span class='cn'>NA</span>, page <span class='op'>=</span> <span class='cn'>NA</span>, remark <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-add_PUF"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>add_PUF()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>add_PUF</span><span class='op'>(</span>
+  PUF <span class='op'>=</span> <span class='fl'>0</span>,
+  source <span class='op'>=</span> <span class='st'>"focus_generic_gw_2014"</span>,
+  page <span class='op'>=</span> <span class='fl'>41</span>,
+  remark <span class='op'>=</span> <span class='st'>"Conservative default value"</span>
+<span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-add_TP"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>add_TP()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>add_TP</span><span class='op'>(</span><span class='va'>x</span>, smiles <span class='op'>=</span> <span class='cn'>NULL</span>, pubchem <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-add_transformation"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>add_transformation()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>add_transformation</span><span class='op'>(</span>
+  <span class='va'>study_type</span>,
+  <span class='va'>TP_identifier</span>,
+  <span class='va'>max_occurrence</span>,
+  remark <span class='op'>=</span> <span class='st'>""</span>,
+  source <span class='op'>=</span> <span class='cn'>NA</span>,
+  pages <span class='op'>=</span> <span class='cn'>NA</span>
+<span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-add_soil_degradation"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>add_soil_degradation()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>add_soil_degradation</span><span class='op'>(</span>
+  <span class='va'>soils</span>,
+  <span class='va'>DT50_mod</span>,
+  <span class='va'>DT50_mod_ref</span>,
+  type <span class='op'>=</span> <span class='cn'>NA</span>,
+  country <span class='op'>=</span> <span class='cn'>NA</span>,
+  pH_orig <span class='op'>=</span> <span class='cn'>NA</span>,
+  pH_medium <span class='op'>=</span> <span class='cn'>NA</span>,
+  pH_H2O <span class='op'>=</span> <span class='cn'>NA</span>,
+  perc_OC <span class='op'>=</span> <span class='cn'>NA</span>,
+  temperature <span class='op'>=</span> <span class='cn'>NA</span>,
+  moisture <span class='op'>=</span> <span class='cn'>NA</span>,
+  category <span class='op'>=</span> <span class='st'>"lab"</span>,
+  formulation <span class='op'>=</span> <span class='cn'>NA</span>,
+  model <span class='op'>=</span> <span class='cn'>NA</span>,
+  chi2 <span class='op'>=</span> <span class='cn'>NA</span>,
+  remark <span class='op'>=</span> <span class='st'>""</span>,
+  <span class='va'>source</span>,
+  page <span class='op'>=</span> <span class='cn'>NA</span>
+<span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-add_soil_ff"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>add_soil_ff()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>add_soil_ff</span><span class='op'>(</span><span class='va'>target</span>, <span class='va'>soils</span>, ff <span class='op'>=</span> <span class='fl'>1</span>, remark <span class='op'>=</span> <span class='st'>""</span>, <span class='va'>source</span>, page <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-add_soil_sorption"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>add_soil_sorption()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>add_soil_sorption</span><span class='op'>(</span>
+  <span class='va'>soils</span>,
+  <span class='va'>Kf</span>,
+  <span class='va'>Kfoc</span>,
+  <span class='va'>N</span>,
+  type <span class='op'>=</span> <span class='cn'>NA</span>,
+  pH_orig <span class='op'>=</span> <span class='cn'>NA</span>,
+  pH_medium <span class='op'>=</span> <span class='cn'>NA</span>,
+  pH_H2O <span class='op'>=</span> <span class='cn'>NA</span>,
+  perc_OC <span class='op'>=</span> <span class='cn'>NA</span>,
+  perc_clay <span class='op'>=</span> <span class='cn'>NA</span>,
+  CEC <span class='op'>=</span> <span class='cn'>NA</span>,
+  remark <span class='op'>=</span> <span class='st'>""</span>,
+  <span class='va'>source</span>,
+  page <span class='op'>=</span> <span class='cn'>NA</span>
+<span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-pdf"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/grDevices/pdf.html'>pdf()</a></code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>pdf</span><span class='op'>(</span>
+  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>self</span><span class='op'>$</span><span class='va'>identifier</span>, <span class='st'>".pdf"</span><span class='op'>)</span>,
+  dir <span class='op'>=</span> <span class='st'>"structures/pdf"</span>,
+  template <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-png"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/grDevices/png.html'>png()</a></code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>png</span><span class='op'>(</span>
+  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>self</span><span class='op'>$</span><span class='va'>identifier</span>, <span class='st'>".png"</span><span class='op'>)</span>,
+  dir <span class='op'>=</span> <span class='st'>"structures/png"</span>,
+  antialias <span class='op'>=</span> <span class='st'>"gray"</span>
+<span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-emf"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>emf()</code></h3>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>emf</span><span class='op'>(</span>file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>self</span><span class='op'>$</span><span class='va'>identifier</span>, <span class='st'>".emf"</span><span class='op'>)</span>, dir <span class='op'>=</span> <span class='st'>"structures/emf"</span><span class='op'>)</span></pre><p></div></p>
+
+<p><hr>
+<a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>chent</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+
+</dl><p></div></p>
+
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>oct</span> <span class='kw'>&lt;-</span> <span class='no'>chent</span>$<span class='fu'>new</span>(<span class='st'>"1-octanol"</span>, <span class='kw'>smiles</span> <span class='kw'>=</span> <span class='st'>"CCCCCCCCO"</span>)</div><div class='output co'>#&gt; <span class='message'>PubChem:</span></div><div class='output co'>#&gt; <span class='message'>https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/cids/JSON</span></div><div class='output co'>#&gt; <span class='message'>https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/property/MolecularFormula,MolecularWeight,CanonicalSMILES,IsomericSMILES,InChI,InChIKey,IUPACName,XLogP,TPSA,Complexity,Charge,HBondDonorCount,HBondAcceptorCount/JSON</span></div><div class='output co'>#&gt; <span class='message'>https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/synonyms/JSON</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Initialize Python Version 2.7.13 (default, Sep 26 2018, 18:42:22) </span>
-#&gt; <span class='message'>[GCC 6.3.0 20170516]</span></div><div class='output co'>#&gt; <span class='message'>Trying to get chemical information from RDKit using User SMILES</span>
-#&gt; <span class='message'>CCCCCCCCO</span></div><div class='output co'>#&gt; <span class='message'>Did not find chyaml file ./1-octanol.yaml</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>oct</span>)</div><div class='output co'>#&gt; &lt;chent&gt;
+    <pre class="examples"><div class='input'><span class='va'>oct</span> <span class='op'>&lt;-</span> <span class='va'>chent</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='st'>"1-octanol"</span>, smiles <span class='op'>=</span> <span class='st'>"CCCCCCCCO"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>PubChem:</span></div><div class='output co'>#&gt; <span class='message'>Trying to get chemical information from RDKit using user SMILES</span>
+#&gt; <span class='message'>CCCCCCCCO</span></div><div class='output co'>#&gt; <span class='message'>Did not find chyaml file ./1-octanol.yaml</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>oct</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;chent&gt;
 #&gt; Identifier $identifier 1-octanol 
 #&gt; InChI Key $inchikey KBPLFHHGFOOTCA-UHFFFAOYSA-N 
 #&gt; SMILES string $smiles:
@@ -157,12 +379,16 @@ configured for use with PythonInR</p></dd>
 #&gt;       "CCCCCCCCO"       "CCCCCCCCO" 
 #&gt; Molecular weight $mw: 130.2 
 #&gt; PubChem synonyms (up to 10):
-#&gt;  [1] "957"              "1-octanol"        "Octan-1-ol"       "octanol"         
-#&gt;  [5] "111-87-5"         "N-octanol"        "Capryl alcohol"   "Octyl alcohol"   
-#&gt;  [9] "caprylic alcohol" "n-Octyl alcohol" </div><div class='input'><span class='kw'>if</span> (!<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/NULL'>is.null</a></span>(<span class='no'>oct</span>$<span class='no'>Picture</span>)) {
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>oct</span>)
-}</div><div class='input'><span class='no'>caffeine</span> <span class='kw'>&lt;-</span> <span class='no'>chent</span>$<span class='fu'>new</span>(<span class='st'>"caffeine"</span>)</div><div class='output co'>#&gt; <span class='message'>PubChem:</span></div><div class='output co'>#&gt; <span class='message'>https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/cids/JSON</span></div><div class='output co'>#&gt; <span class='message'>https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/property/MolecularFormula,MolecularWeight,CanonicalSMILES,IsomericSMILES,InChI,InChIKey,IUPACName,XLogP,TPSA,Complexity,Charge,HBondDonorCount,HBondAcceptorCount/JSON</span></div><div class='output co'>#&gt; <span class='message'>https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/synonyms/JSON</span></div><div class='output co'>#&gt; <span class='message'>Trying to get chemical information from RDKit using PubChem_Canonical SMILES</span>
-#&gt; <span class='message'>CN1C=NC2=C1C(=O)N(C(=O)N2C)C</span></div><div class='output co'>#&gt; <span class='message'>Did not find chyaml file ./caffeine.yaml</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>caffeine</span>)</div><div class='output co'>#&gt; &lt;chent&gt;
+#&gt;  [1] "1-octanol"        "Octan-1-ol"       "octanol"          "111-87-5"        
+#&gt;  [5] "N-octanol"        "Octyl alcohol"    "Capryl alcohol"   "caprylic alcohol"
+#&gt;  [9] "n-Octyl alcohol"  "Heptyl carbinol" </div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>oct</span><span class='op'>$</span><span class='va'>Picture</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>oct</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='input'>
+<span class='va'>caffeine</span> <span class='op'>&lt;-</span> <span class='va'>chent</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='st'>"caffeine"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>PubChem:</span></div><div class='output co'>#&gt; <span class='message'>Trying to get chemical information from RDKit using PubChem_Canonical SMILES</span>
+#&gt; <span class='message'>CN1C=NC2=C1C(=O)N(C(=O)N2C)C</span></div><div class='output co'>#&gt; <span class='message'>Did not find chyaml file ./caffeine.yaml</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>caffeine</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;chent&gt;
 #&gt; Identifier $identifier caffeine 
 #&gt; InChI Key $inchikey RYYVLZVUVIJVGH-UHFFFAOYSA-N 
 #&gt; SMILES string $smiles:
@@ -170,27 +396,22 @@ configured for use with PythonInR</p></dd>
 #&gt; "CN1C=NC2=C1C(=O)N(C(=O)N2C)C" 
 #&gt; Molecular weight $mw: 194.2 
 #&gt; PubChem synonyms (up to 10):
-#&gt;  [1] "2519"                    "caffeine"               
-#&gt;  [3] "58-08-2"                 "Guaranine"              
-#&gt;  [5] "1,3,7-Trimethylxanthine" "Thein"                  
-#&gt;  [7] "Cafeina"                 "Methyltheobromine"      
-#&gt;  [9] "Koffein"                 "Mateina"                </div><div class='input'><span class='kw'>if</span> (!<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/NULL'>is.null</a></span>(<span class='no'>caffeine</span>$<span class='no'>Picture</span>)) {
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>caffeine</span>)
-}</div><div class='img'><img src='chent-1.png' alt='' width='700' height='433' /></div></pre>
+#&gt;  [1] "caffeine"                "58-08-2"                
+#&gt;  [3] "1,3,7-Trimethylxanthine" "Guaranine"              
+#&gt;  [5] "Thein"                   "Methyltheobromine"      
+#&gt;  [7] "Cafeina"                 "Theine"                 
+#&gt;  [9] "Koffein"                 "Mateina"                </div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>caffeine</span><span class='op'>$</span><span class='va'>Picture</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>caffeine</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='chent-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#fields">Fields</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -198,13 +419,16 @@ configured for use with PythonInR</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

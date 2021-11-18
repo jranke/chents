@@ -471,6 +471,12 @@ draw_svg.chent = function(x, width = 300, height = 150,
 #' @param x The chent object to be plotted
 #' @param ... Further arguments passed to \code{\link{grid.picture}}
 #' @export
+#' @examples
+#' caffeine <- chent$new("caffeine")
+#' print(caffeine)
+#' if (!is.null(caffeine$Picture)) {
+#'   plot(caffeine)
+#' }
 plot.chent = function(x, ...) {
   if (is.null(x$Picture)) stop("No Picture object in chent, was RDKit available during creation?")
   grid.picture(x$Picture)
