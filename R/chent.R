@@ -495,12 +495,17 @@ plot.chent = function(x, ...) {
 #' @field bcpc List of information retrieved from pesticidecompendium.bcpc.org
 #' @keywords data
 #' @examples
-#' \dontrun{
+#' # On Travis, we get a certificate validation error,
+#' # likely because the system (xenial) is so old,
+#' # therefore don't run this example on Travis
+#' if (Sys.getenv("TRAVIS") == "") {
+#'
 #' atr <- pai$new("atrazine")
 #' print(atr)
 #' if (!is.null(atr$Picture)) {
 #'   plot(atr)
 #' }
+#'
 #' }
 
 pai <- R6Class("pai",
