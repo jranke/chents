@@ -495,10 +495,12 @@ plot.chent = function(x, ...) {
 #' @field bcpc List of information retrieved from pesticidecompendium.bcpc.org
 #' @keywords data
 #' @examples
+#' \donttest{
 #' atr <- pai$new("atrazine")
 #' print(atr)
 #' if (!is.null(atr$Picture)) {
 #'   plot(atr)
+#' }
 #' }
 
 pai <- R6Class("pai",

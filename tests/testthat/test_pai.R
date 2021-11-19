@@ -5,6 +5,7 @@ require(testthat)
 context("Generation of pai objects")
 
 test_that("a pai object is correctly generated from an ambiguous name", {
+  skip_on_travis() # server certificate verification failed in curl_fetch_memory()
   glyphosate <- pai$new("glyphosate", chyaml = FALSE)
   expect_message(pai$new("benzalkonium chloride", chyaml = FALSE), "did not give results")
 
