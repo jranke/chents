@@ -4,8 +4,12 @@ r:
   - release
   - devel
 cache: packages
+repos:
+  CRAN: https://cloud.r-project.org
+  https: https://jranke.github.io/drat
+r_packages:
+  - webchem
 github_packages:
   - r-lib/covr
-  - jranke/webchem@bcpc
 after_success:
   - Rscript -e 'covr::codecov()'
