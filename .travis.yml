@@ -3,6 +3,7 @@ cache: packages
 r:
   - release
   - devel
+cache: packages
 github_packages:
   - r-lib/covr
   - jranke/webchem@bcpc
