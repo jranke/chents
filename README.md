@@ -10,9 +10,9 @@ entities in R.
 
 - Some chemical information is retrieved from the PubChem website using the webchem 
 package
-- If PythonInR is installed and configured, and RDKit is available via
-PythonInR, some additional chemical information is computed and a 2D graph can
-be plotted
+- If Python and RDKit (> 2015.03) are installed and configured for use with
+  'reticulate', some basic chemoinformatics functions some additional chemical
+  information is computed and a 2D graph can be plotted
 - Additional information can be read from a local .yaml file
 
 ## Examples
