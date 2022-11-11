@@ -41,34 +41,34 @@ if (!is.null(atr$Picture)) {
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{pai$new()}}
-\item \href{#method-clone}{\code{pai$clone()}}
+\item \href{#method-pai-new}{\code{pai$new()}}
+\item \href{#method-pai-clone}{\code{pai$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_PUF">}\href{../../chents/html/chent.html#method-add_PUF}{\code{chents::chent$add_PUF()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_TP">}\href{../../chents/html/chent.html#method-add_TP}{\code{chents::chent$add_TP()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_cwsat">}\href{../../chents/html/chent.html#method-add_cwsat}{\code{chents::chent$add_cwsat()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_p0">}\href{../../chents/html/chent.html#method-add_p0}{\code{chents::chent$add_p0()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_degradation">}\href{../../chents/html/chent.html#method-add_soil_degradation}{\code{chents::chent$add_soil_degradation()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_ff">}\href{../../chents/html/chent.html#method-add_soil_ff}{\code{chents::chent$add_soil_ff()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_sorption">}\href{../../chents/html/chent.html#method-add_soil_sorption}{\code{chents::chent$add_soil_sorption()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_transformation">}\href{../../chents/html/chent.html#method-add_transformation}{\code{chents::chent$add_transformation()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="emf">}\href{../../chents/html/chent.html#method-emf}{\code{chents::chent$emf()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_chyaml">}\href{../../chents/html/chent.html#method-get_chyaml}{\code{chents::chent$get_chyaml()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_pubchem">}\href{../../chents/html/chent.html#method-get_pubchem}{\code{chents::chent$get_pubchem()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_rdkit">}\href{../../chents/html/chent.html#method-get_rdkit}{\code{chents::chent$get_rdkit()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="pdf">}\href{../../chents/html/chent.html#method-pdf}{\code{chents::chent$pdf()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="png">}\href{../../chents/html/chent.html#method-png}{\code{chents::chent$png()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="try_pubchem">}\href{../../chents/html/chent.html#method-try_pubchem}{\code{chents::chent$try_pubchem()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_PUF"><a href='../../chents/html/chent.html#method-chent-add_PUF'><code>chents::chent$add_PUF()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_TP"><a href='../../chents/html/chent.html#method-chent-add_TP'><code>chents::chent$add_TP()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_cwsat"><a href='../../chents/html/chent.html#method-chent-add_cwsat'><code>chents::chent$add_cwsat()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_p0"><a href='../../chents/html/chent.html#method-chent-add_p0'><code>chents::chent$add_p0()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_degradation"><a href='../../chents/html/chent.html#method-chent-add_soil_degradation'><code>chents::chent$add_soil_degradation()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_ff"><a href='../../chents/html/chent.html#method-chent-add_soil_ff'><code>chents::chent$add_soil_ff()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_sorption"><a href='../../chents/html/chent.html#method-chent-add_soil_sorption'><code>chents::chent$add_soil_sorption()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_transformation"><a href='../../chents/html/chent.html#method-chent-add_transformation'><code>chents::chent$add_transformation()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="emf"><a href='../../chents/html/chent.html#method-chent-emf'><code>chents::chent$emf()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_chyaml"><a href='../../chents/html/chent.html#method-chent-get_chyaml'><code>chents::chent$get_chyaml()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_pubchem"><a href='../../chents/html/chent.html#method-chent-get_pubchem'><code>chents::chent$get_pubchem()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_rdkit"><a href='../../chents/html/chent.html#method-chent-get_rdkit'><code>chents::chent$get_rdkit()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="pdf"><a href='../../chents/html/chent.html#method-chent-pdf'><code>chents::chent$pdf()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="png"><a href='../../chents/html/chent.html#method-chent-png'><code>chents::chent$png()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="try_pubchem"><a href='../../chents/html/chent.html#method-chent-try_pubchem'><code>chents::chent$try_pubchem()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-pai-new"></a>}}
+\if{latex}{\out{\hypertarget{method-pai-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{pai$new(
@@ -89,8 +89,8 @@ if (!is.null(atr$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-pai-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-pai-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

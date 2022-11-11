@@ -69,28 +69,28 @@ if (!is.null(caffeine$Picture)) {
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{chent$new()}}
-\item \href{#method-try_pubchem}{\code{chent$try_pubchem()}}
-\item \href{#method-get_pubchem}{\code{chent$get_pubchem()}}
-\item \href{#method-get_rdkit}{\code{chent$get_rdkit()}}
-\item \href{#method-get_chyaml}{\code{chent$get_chyaml()}}
-\item \href{#method-add_p0}{\code{chent$add_p0()}}
-\item \href{#method-add_cwsat}{\code{chent$add_cwsat()}}
-\item \href{#method-add_PUF}{\code{chent$add_PUF()}}
-\item \href{#method-add_TP}{\code{chent$add_TP()}}
-\item \href{#method-add_transformation}{\code{chent$add_transformation()}}
-\item \href{#method-add_soil_degradation}{\code{chent$add_soil_degradation()}}
-\item \href{#method-add_soil_ff}{\code{chent$add_soil_ff()}}
-\item \href{#method-add_soil_sorption}{\code{chent$add_soil_sorption()}}
-\item \href{#method-pdf}{\code{chent$pdf()}}
-\item \href{#method-png}{\code{chent$png()}}
-\item \href{#method-emf}{\code{chent$emf()}}
-\item \href{#method-clone}{\code{chent$clone()}}
+\item \href{#method-chent-new}{\code{chent$new()}}
+\item \href{#method-chent-try_pubchem}{\code{chent$try_pubchem()}}
+\item \href{#method-chent-get_pubchem}{\code{chent$get_pubchem()}}
+\item \href{#method-chent-get_rdkit}{\code{chent$get_rdkit()}}
+\item \href{#method-chent-get_chyaml}{\code{chent$get_chyaml()}}
+\item \href{#method-chent-add_p0}{\code{chent$add_p0()}}
+\item \href{#method-chent-add_cwsat}{\code{chent$add_cwsat()}}
+\item \href{#method-chent-add_PUF}{\code{chent$add_PUF()}}
+\item \href{#method-chent-add_TP}{\code{chent$add_TP()}}
+\item \href{#method-chent-add_transformation}{\code{chent$add_transformation()}}
+\item \href{#method-chent-add_soil_degradation}{\code{chent$add_soil_degradation()}}
+\item \href{#method-chent-add_soil_ff}{\code{chent$add_soil_ff()}}
+\item \href{#method-chent-add_soil_sorption}{\code{chent$add_soil_sorption()}}
+\item \href{#method-chent-pdf}{\code{chent$pdf()}}
+\item \href{#method-chent-png}{\code{chent$png()}}
+\item \href{#method-chent-emf}{\code{chent$emf()}}
+\item \href{#method-chent-clone}{\code{chent$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-chent-new"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$new(
@@ -109,8 +109,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-try_pubchem"></a>}}
-\if{latex}{\out{\hypertarget{method-try_pubchem}{}}}
+\if{html}{\out{<a id="method-chent-try_pubchem"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-try_pubchem}{}}}
 \subsection{Method \code{try_pubchem()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$try_pubchem(query, from = "name")}\if{html}{\out{</div>}}
@@ -118,8 +118,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_pubchem"></a>}}
-\if{latex}{\out{\hypertarget{method-get_pubchem}{}}}
+\if{html}{\out{<a id="method-chent-get_pubchem"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-get_pubchem}{}}}
 \subsection{Method \code{get_pubchem()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$get_pubchem(pubchem_cid)}\if{html}{\out{</div>}}
@@ -127,8 +127,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_rdkit"></a>}}
-\if{latex}{\out{\hypertarget{method-get_rdkit}{}}}
+\if{html}{\out{<a id="method-chent-get_rdkit"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-get_rdkit}{}}}
 \subsection{Method \code{get_rdkit()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$get_rdkit(template = NULL)}\if{html}{\out{</div>}}
@@ -136,8 +136,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_chyaml"></a>}}
-\if{latex}{\out{\hypertarget{method-get_chyaml}{}}}
+\if{html}{\out{<a id="method-chent-get_chyaml"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-get_chyaml}{}}}
 \subsection{Method \code{get_chyaml()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$get_chyaml(
@@ -148,8 +148,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add_p0"></a>}}
-\if{latex}{\out{\hypertarget{method-add_p0}{}}}
+\if{html}{\out{<a id="method-chent-add_p0"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-add_p0}{}}}
 \subsection{Method \code{add_p0()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_p0(p0, T = NA, source = NA, page = NA, remark = "")}\if{html}{\out{</div>}}
@@ -157,8 +157,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add_cwsat"></a>}}
-\if{latex}{\out{\hypertarget{method-add_cwsat}{}}}
+\if{html}{\out{<a id="method-chent-add_cwsat"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-add_cwsat}{}}}
 \subsection{Method \code{add_cwsat()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_cwsat(cwsat, T = NA, pH = NA, source = NA, page = NA, remark = "")}\if{html}{\out{</div>}}
@@ -166,8 +166,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add_PUF"></a>}}
-\if{latex}{\out{\hypertarget{method-add_PUF}{}}}
+\if{html}{\out{<a id="method-chent-add_PUF"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-add_PUF}{}}}
 \subsection{Method \code{add_PUF()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_PUF(
@@ -180,8 +180,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add_TP"></a>}}
-\if{latex}{\out{\hypertarget{method-add_TP}{}}}
+\if{html}{\out{<a id="method-chent-add_TP"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-add_TP}{}}}
 \subsection{Method \code{add_TP()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_TP(x, smiles = NULL, pubchem = FALSE)}\if{html}{\out{</div>}}
@@ -189,8 +189,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add_transformation"></a>}}
-\if{latex}{\out{\hypertarget{method-add_transformation}{}}}
+\if{html}{\out{<a id="method-chent-add_transformation"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-add_transformation}{}}}
 \subsection{Method \code{add_transformation()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_transformation(
@@ -205,8 +205,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add_soil_degradation"></a>}}
-\if{latex}{\out{\hypertarget{method-add_soil_degradation}{}}}
+\if{html}{\out{<a id="method-chent-add_soil_degradation"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-add_soil_degradation}{}}}
 \subsection{Method \code{add_soil_degradation()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_soil_degradation(
@@ -233,8 +233,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add_soil_ff"></a>}}
-\if{latex}{\out{\hypertarget{method-add_soil_ff}{}}}
+\if{html}{\out{<a id="method-chent-add_soil_ff"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-add_soil_ff}{}}}
 \subsection{Method \code{add_soil_ff()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_soil_ff(target, soils, ff = 1, remark = "", source, page = NA)}\if{html}{\out{</div>}}
@@ -242,8 +242,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add_soil_sorption"></a>}}
-\if{latex}{\out{\hypertarget{method-add_soil_sorption}{}}}
+\if{html}{\out{<a id="method-chent-add_soil_sorption"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-add_soil_sorption}{}}}
 \subsection{Method \code{add_soil_sorption()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_soil_sorption(
@@ -266,8 +266,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-pdf"></a>}}
-\if{latex}{\out{\hypertarget{method-pdf}{}}}
+\if{html}{\out{<a id="method-chent-pdf"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-pdf}{}}}
 \subsection{Method \code{pdf()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$pdf(
@@ -279,8 +279,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-png"></a>}}
-\if{latex}{\out{\hypertarget{method-png}{}}}
+\if{html}{\out{<a id="method-chent-png"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-png}{}}}
 \subsection{Method \code{png()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$png(
@@ -292,8 +292,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-emf"></a>}}
-\if{latex}{\out{\hypertarget{method-emf}{}}}
+\if{html}{\out{<a id="method-chent-emf"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-emf}{}}}
 \subsection{Method \code{emf()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$emf(file = paste0(self$identifier, ".emf"), dir = "structures/emf")}\if{html}{\out{</div>}}
@@ -301,8 +301,8 @@ if (!is.null(caffeine$Picture)) {
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-chent-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

@@ -27,14 +27,14 @@ An R6 class for holding information about a product with at least one active ing
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{pp$new()}}
-\item \href{#method-print}{\code{pp$print()}}
-\item \href{#method-clone}{\code{pp$clone()}}
+\item \href{#method-pp-new}{\code{pp$new()}}
+\item \href{#method-pp-print}{\code{pp$print()}}
+\item \href{#method-pp-clone}{\code{pp$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-pp-new"></a>}}
+\if{latex}{\out{\hypertarget{method-pp-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{pp$new(
@@ -49,8 +49,8 @@ An R6 class for holding information about a product with at least one active ing
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-pp-print"></a>}}
+\if{latex}{\out{\hypertarget{method-pp-print}{}}}
 \subsection{Method \code{print()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{pp$print()}\if{html}{\out{</div>}}
@@ -58,8 +58,8 @@ An R6 class for holding information about a product with at least one active ing
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-pp-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-pp-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
