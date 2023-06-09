@@ -1,7 +1,7 @@
 # chents
 
-[![Build Status](https://travis-ci.com/jranke/chents.svg?branch=main)](https://travis-ci.com/jranke/chents)
-[![codecov](https://codecov.io/github/jranke/chents/branch/main/graphs/badge.svg)](https://codecov.io/github/jranke/chents) 
+[![Build Status](https://travis-ci.com/jranke/chents.svg?branch=main)](https://app.travis-ci.com/github/jranke/chents)
+[![codecov](https://codecov.io/github/jranke/chents/branch/main/graphs/badge.svg)](https://app.codecov.io/gh/jranke/chents) 
 
 The R package **chents** provides some utilities for working with chemical 
 entities in R.
@@ -18,5 +18,5 @@ package
 ## Examples
 
 Some examples are available from the 
-[reference on jrwb.de](http://pkgdown.jrwb.de/chents/reference).
+[reference on jrwb.de](https://pkgdown.jrwb.de/chents/reference).
 
