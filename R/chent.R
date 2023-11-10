@@ -1,25 +1,8 @@
-# Copyright (C) 2016-2021  Johannes Ranke
-# Contact: jranke@uni-bremen.de
-# This file is part of the R package chents
-
-# This program is free software: you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free Software
-# Foundation, either version 3 of the License, or (at your option) any later
-# version.
-
-# This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-# details.
-
-# You should have received a copy of the GNU General Public License along with
-# this program. If not, see <http://www.gnu.org/licenses/>
-
-#' An R6 class for chemical entities with associated data
+#' @title An R6 class for chemical entities with associated data
 #'
-#' The class is initialised with an identifier. Chemical information is retrieved from
-#' the internet. Additionally, it can be generated using RDKit if RDKit and its
-#' python bindings are installed.
+#' @description The class is initialised with an identifier. Chemical 
+#' information is retrieved from the internet. Additionally, it can be 
+#' generated using RDKit if RDKit and its python bindings are installed.
 #'
 #' @export
 #' @format An \code{\link{R6Class}} generator object
@@ -28,27 +11,8 @@
 #' @importFrom grImport PostScriptTrace readPicture
 #' @importFrom yaml yaml.load_file
 #' @importFrom rsvg rsvg_ps
-#' @field identifier The identifier that was used to initiate the object, with attribute 'source'
-#' @field inchikey InChI Key, with attribute 'source'
-#' @field smiles SMILES code, with attribute 'source'
-#' @field mw Molecular weight, with attribute 'source'
-#' @field pubchem List of information retreived from PubChem
-#' @field rdkit List of information obtained with RDKit
-#' @field mol <rdkit.Chem.rdchem.Mol> object
-#' @field svg SVG code
-#' @field Picture Graph as a \code{\link{picture}} object obtained using grImport
-#' @field Pict_font_size Font size as extracted from the intermediate PostScript file
-#' @field pdf_height Height of the MediaBox in the pdf after cropping
-#' @field p0 Vapour pressure in Pa
-#' @field cwsat Water solubility in mg/L
-#' @field chyaml List of information obtained from a YAML file
-#' @field soil_degradation Dataframe of modelling DT50 values
-#' @field soil_ff Dataframe of formation fractions
-#' @field soil_sorption Dataframe of soil sorption data
-#' @field PUF Plant uptake factor
-#' @keywords data
 #' @examples
-#' oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
+#' oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE)
 #' print(oct)
 #' if (!is.null(oct$Picture)) {
 #'   plot(oct)
@@ -59,30 +23,80 @@
 #' if (!is.null(caffeine$Picture)) {
 #'   plot(caffeine)
 #' }
-
 chent <- R6Class("chent",
-  public <- list(
+  public = list(
+    #' @field identifier (`character(1)`)\cr
+    #' The identifier that was used to initiate the object, with attribute 'source'
     identifier = NULL,
+    
+    #' @field inchikey (`character(1)`)\cr
+    #' InChI Key, with attribute 'source'
     inchikey = NULL,
+    
+    #' @field smiles (`character()`)\cr
+    #' SMILES code(s), with attribute 'source'
     smiles = NULL,
+    
+    #' @field mw (`numeric(1)`)\cr
+    #' Molecular weight, with attribute 'source'
     mw = NULL,
+    
+    #' @field pubchem (`list()`)\cr
+    #' List of information retrieved from PubChem
     pubchem = NULL,
+    
+    #' @field rdkit
+    #' List of information obtained with RDKit
     rdkit = NULL,
+    
+    #' @field mol <rdkit.Chem.rdchem.Mol> object
     mol = NULL,
+    
+    #' @field svg SVG code
     svg = NULL,
+    
+    #' @field Picture Graph as a \code{\link{picture}} object obtained using grImport
     Picture = NULL,
+    
+    #' @field Pict_font_size Font size as extracted from the intermediate PostScript file
     Pict_font_size = NULL,
+    
+    #' @field pdf_height Height of the MediaBox in the pdf after cropping
     pdf_height = NULL,
+    
+    #' @field p0 Vapour pressure in Pa
     p0 = NULL,
+    
+    #' @field cwsat Water solubility in mg/L
     cwsat = NULL,
-    PUF = NULL,
-    chyaml = NULL,
-    initialize = function(identifier, smiles = NULL, smiles_source = 'user',
-                          inchikey = NULL, inchikey_source = 'user',
-                          pubchem = TRUE, pubchem_from = c('name', 'smiles', 'inchikey'),
-                          rdkit = TRUE, template = NULL,
-                          chyaml = TRUE) {
 
+    #' @field PUF Plant uptake factor
+    PUF = NULL,
+    
+    #' @field chyaml List of information obtained from a YAML file
+    chyaml = NULL,
+    
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
+    #' 
+    #' @param identifier Identifier to be stored in the object 
+    #' @param smiles Optional user provided SMILES code
+    #' @param inchikey Optional user provided InChI Key
+    #' @param pubchem Should an attempt be made to retrieve chemical
+    #' information from PubChem via the webchem package?
+    #' @param pubchem_from Possibility to select the argument 
+    #' that is used to query pubchem
+    #' @param rdkit Should an attempt be made to retrieve chemical 
+    #' information from a local rdkit installation via python
+    #' and the reticulate package?
+    #' @param template An optional SMILES code to be used as template for RDKit
+    #' @param chyaml Should we look for a identifier.yaml file in the working
+    #' directory?
+    initialize = function(identifier, smiles = NULL, inchikey = NULL, 
+      pubchem = TRUE, pubchem_from = c('name', 'smiles', 'inchikey'),
+      rdkit = TRUE, template = NULL,
+      chyaml = TRUE) {
+      
       self$identifier <- identifier
       names(self$identifier) <- make.names(identifier)
       pubchem_from = match.arg(pubchem_from)
@@ -120,6 +134,10 @@ chent <- R6Class("chent",
       }
       invisible(self)
     },
+    
+    #' Try to get chemical information from PubChem
+    #' @param query Query string to be passed to [get_cid][webchem::get_cid]
+    #' @param from Passed to [get_cid][webchem::get_cid]
     try_pubchem = function(query, from = 'name') {
       message("PubChem:")
       if (missing(query)) query <- self$identifier
@@ -131,6 +149,9 @@ chent <- R6Class("chent",
         self$get_pubchem(pubchem_result[[1, "cid"]])
       }
     },
+    
+    #' Get chemical information from PubChem for a known PubChem CID
+    #' @param pubchem_cid CID
     get_pubchem = function(pubchem_cid) {
       self$pubchem = as.list(webchem::pc_prop(pubchem_cid, from = "cid",
         properties = c("MolecularFormula", "MolecularWeight",
@@ -170,6 +191,9 @@ chent <- R6Class("chent",
         }
       }
     },
+    
+    #' Get chemical information from RDKit if available
+    #' @param template Optional template specified as a SMILES code
     get_rdkit = function(template = NULL) {
       if(!rdkit_available) {
         stop("RDKit is not available")
@@ -212,11 +236,18 @@ chent <- R6Class("chent",
       self$Picture <- readPicture(xmlfile)
       unlink(c(xmlfile, psfile, svgfile))
     },
+    
+    #' Obtain information from a YAML file
+    #' @param repo Should the file be looked for in the current working 
+    #' directory, a local git repository under `~/git/chyaml`, or from
+    #' the web (not implemented).
     get_chyaml = function(repo = c("wd", "local", "web"),
-                          chyaml = paste0(URLencode(self$identifier), ".yaml")) {
+      chyaml = paste0(URLencode(self$identifier), ".yaml"))
+    {
       repo = match.arg(repo)
-      paths = c(wd = ".",
-                local = file.path("~", "git/chyaml"))
+      paths = c(
+        wd = ".",
+        local = file.path("~", "git/chyaml"))
 
       chyaml_handlers = list(
         expr = function(x) NULL, # To avoid security risks from reading chyaml files
@@ -240,6 +271,13 @@ chent <- R6Class("chent",
         message("web repositories not implemented")
       }
     },
+    
+    #' Add a vapour pressure
+    #' @param p0 The vapour pressure in Pa
+    #' @param T Temperature
+    #' @param source An acronym specifying the source of the information
+    #' @param page The page from which the information was taken
+    #' @param remark A remark
     add_p0 = function(p0, T = NA, source = NA, page = NA, remark = "") {
       self$p0 <- p0
       attr(self$p0, "T") <- T
@@ -247,6 +285,9 @@ chent <- R6Class("chent",
       attr(self$p0, "page") <- page
       attr(self$p0, "remark") <- remark
     },
+    
+    #' Add a water solubility
+    #' @param p0 The water solubility in mg/L
     add_cwsat = function(cwsat, T = NA, pH = NA, source = NA, page = NA, remark = "") {
       self$cwsat <- cwsat
       attr(self$cwsat, "T") <- T
@@ -255,13 +296,23 @@ chent <- R6Class("chent",
       attr(self$cwsat, "page") <- page
       attr(self$cwsat, "remark") <- remark
     },
+    
+    #' Add a plant uptake factor
+    #' @param PUF The plant uptake factor, a number between 0 and 1
     add_PUF = function(PUF = 0, source = "focus_generic_gw_2014", page = 41, remark = "Conservative default value") {
       self$PUF <- PUF
       attr(self$PUF, "source") <- source
       attr(self$PUF, "page") <- page
       attr(self$PUF, "remark") <- remark
     },
+    
+    #' @field TPs List of transformation products as chent objects
     TPs = list(),
+    
+    #' Add a transformation product to the internal list
+    #' @param x A [chent] object, or an identifier to generate a [chent] object
+    #' @param smiles A SMILES code for defining a [chent] object
+    #' @param pubchem Should chemical information be obtained from PubChem?
     add_TP = function(x, smiles = NULL, pubchem = FALSE) {
       if (inherits(x, "chent")) {
         id <- names(x$identifier)
@@ -272,14 +323,19 @@ chent <- R6Class("chent",
       }
       self$TPs[[id]] <- chent
     },
+    
+    #' @field transformations Data frame of observed transformations
     transformations = data.frame(study_type = character(0),
                                  TP_identifier = character(0),
                                  max_occurrence = numeric(0),
                                  source = character(0),
                                  pages = character(0),
                                  stringsAsFactors = FALSE),
+    
+    #' Add a line in the internal dataframe holding observed transformations
     add_transformation = function(study_type, TP_identifier, max_occurrence,
-                                  remark = "", source = NA, pages = NA) {
+      remark = "", source = NA, pages = NA)
+    {
       TP_name = make.names(TP_identifier)
       if (!inherits(self$TPs[[TP_name]], "chent")) {
         stop(paste("Please add the TP", TP_identifier, "first using chent$add_TP()"))
@@ -296,15 +352,20 @@ chent <- R6Class("chent",
                                                pages = pages,
                                                stringsAsFactors = FALSE))
     },
+    
+    #' @field soil_degradation Dataframe of modelling DT50 values
     soil_degradation = NULL,
+    
+    #' Add a line in the internal dataframe holding modelling DT50 values
     add_soil_degradation = function(soils, DT50_mod, DT50_mod_ref,
-                                    type = NA, country = NA,
-                                    pH_orig = NA, pH_medium = NA, pH_H2O = NA,
-                                    perc_OC = NA,
-                                    temperature = NA, moisture = NA,
-                                    category = "lab", formulation = NA,
-                                    model = NA, chi2 = NA,
-                                    remark = "", source, page = NA) {
+      type = NA, country = NA,
+      pH_orig = NA, pH_medium = NA, pH_H2O = NA,
+      perc_OC = NA,
+      temperature = NA, moisture = NA,
+      category = "lab", formulation = NA,
+      model = NA, chi2 = NA,
+      remark = "", source, page = NA)
+    {
       new_soil_degradation = data.frame(
         soil = soils,
         DT50_mod = DT50_mod,
@@ -331,9 +392,13 @@ chent <- R6Class("chent",
         self$soil_degradation <- rbind(self$soil_degradation, new_soil_degradation)
       }
     },
+    
+    #' @field soil_ff Dataframe of formation fractions
     soil_ff = NULL,
+    
     add_soil_ff = function(target, soils, ff = 1, remark = "", source, page = NA) {
       new_soil_ff = data.frame(
+        target = target,
         target = target,
         soil = soils,
         ff = ff,
@@ -347,7 +412,10 @@ chent <- R6Class("chent",
         self$soil_ff <- rbind(self$soil_ff, new_soil_ff)
       }
     },
+    
+    #' @field soil_sorption Dataframe of soil sorption data
     soil_sorption = NULL,
+    
     add_soil_sorption = function(soils, Kf, Kfoc, N,
                                  type = NA,
                                  pH_orig = NA, pH_medium = NA,
@@ -372,8 +440,9 @@ chent <- R6Class("chent",
         self$soil_sorption <- rbind(self$soil_sorption, new_soil_sorption)
       }
     },
-    pdf = function(file = paste0(self$identifier, ".pdf"), dir = "structures/pdf",
-                   template = NULL) {
+    
+    pdf = function(file = paste0(self$identifier, ".pdf"),
+        dir = "structures/pdf", template = NULL) {
       if (!dir.exists(dir)) {
         message("Directory '", dir, "' does not exist")
         message("Trying to create directory '", dir, "'")
@@ -493,7 +562,6 @@ plot.chent = function(x, ...) {
 #' @format An \code{\link{R6Class}} generator object
 #' @field iso ISO common name according to ISO 1750 as retreived from pesticidecompendium.bcpc.org
 #' @field bcpc List of information retrieved from pesticidecompendium.bcpc.org
-#' @keywords data
 #' @examples
 #' # On Travis, we get a certificate validation error,
 #' # likely because the system (xenial) is so old,
@@ -507,15 +575,14 @@ plot.chent = function(x, ...) {
 #' }
 #'
 #' }
-
 pai <- R6Class("pai",
   inherit = chent,
   public <- list(
     iso = NULL,
     bcpc = NULL,
     initialize = function(iso, identifier = iso,
-                          smiles = NULL, smiles_source = 'user',
-                          inchikey = NULL, inchikey_source = 'user',
+                          smiles = NULL,
+                          inchikey = NULL,
                           bcpc = TRUE,
                           pubchem = TRUE, pubchem_from = 'auto',
                           rdkit = TRUE, template = NULL,
@@ -564,7 +631,7 @@ pai <- R6Class("pai",
       }
 
       super$initialize(identifier = identifier,
-                       smiles = smiles, smiles_source = smiles_source,
+                       smiles = smiles, 
                        inchikey = self$inchikey,
                        pubchem = pubchem, pubchem_from = pubchem_from,
                        rdkit = rdkit, template = template, chyaml = chyaml)

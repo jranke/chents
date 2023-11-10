@@ -27,11 +27,9 @@ pd: roxygen
 	@echo "DONE."
 
 $(TGZ): $(pkgfiles)
-	sed -i -e "s/Date:.*/Date: $(DATE)/" DESCRIPTION
 	@echo "Roxygenizing package..."
 	"$(R_HOME)/bin/Rscript" -e 'library(devtools); document()'
 	@echo "Building package..."
-	git log --no-merges -M --date=iso > ChangeLog
 	"$(R_HOME)/bin/R" CMD build .
 	@echo "DONE."
 

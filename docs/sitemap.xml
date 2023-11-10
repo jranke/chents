@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>/404.html</loc>
+  </url>
+  <url>
+    <loc>/authors.html</loc>
+  </url>
+  <url>
+    <loc>/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/chent.html</loc>
+  </url>
+  <url>
+    <loc>/reference/draw_svg.chent.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pai.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plot.chent.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pp.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.chent.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.pai.html</loc>
+  </url>
+</urlset>

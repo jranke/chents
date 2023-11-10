@@ -25,7 +25,6 @@ if (!is.null(atr$Picture)) {
 
 }
 }
-\keyword{data}
 \section{Super class}{
 \code{\link[chents:chent]{chents::chent}} -> \code{pai}
 }
@@ -75,9 +74,7 @@ if (!is.null(atr$Picture)) {
   iso,
   identifier = iso,
   smiles = NULL,
-  smiles_source = "user",
   inchikey = NULL,
-  inchikey_source = "user",
   bcpc = TRUE,
   pubchem = TRUE,
   pubchem_from = "auto",

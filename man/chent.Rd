@@ -7,12 +7,12 @@
 An \code{\link{R6Class}} generator object
 }
 \description{
-The class is initialised with an identifier. Chemical information is retrieved from
-the internet. Additionally, it can be generated using RDKit if RDKit and its
-python bindings are installed.
+The class is initialised with an identifier. Chemical
+information is retrieved from the internet. Additionally, it can be
+generated using RDKit if RDKit and its python bindings are installed.
 }
 \examples{
-oct <- chent$new("1-octanol", smiles = "CCCCCCCCO")
+oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE)
 print(oct)
 if (!is.null(oct$Picture)) {
   plot(oct)
@@ -24,19 +24,23 @@ if (!is.null(caffeine$Picture)) {
   plot(caffeine)
 }
 }
-\keyword{data}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{identifier}}{The identifier that was used to initiate the object, with attribute 'source'}
+\item{\code{identifier}}{(\code{character(1)})\cr
+The identifier that was used to initiate the object, with attribute 'source'}
 
-\item{\code{inchikey}}{InChI Key, with attribute 'source'}
+\item{\code{inchikey}}{(\code{character(1)})\cr
+InChI Key, with attribute 'source'}
 
-\item{\code{smiles}}{SMILES code, with attribute 'source'}
+\item{\code{smiles}}{(\code{character()})\cr
+SMILES code(s), with attribute 'source'}
 
-\item{\code{mw}}{Molecular weight, with attribute 'source'}
+\item{\code{mw}}{(\code{numeric(1)})\cr
+Molecular weight, with attribute 'source'}
 
-\item{\code{pubchem}}{List of information retreived from PubChem}
+\item{\code{pubchem}}{(\code{list()})\cr
+List of information retrieved from PubChem}
 
 \item{\code{rdkit}}{List of information obtained with RDKit}
 
@@ -54,15 +58,22 @@ if (!is.null(caffeine$Picture)) {
 
 \item{\code{cwsat}}{Water solubility in mg/L}
 
+\item{\code{PUF}}{Plant uptake factor}
+
 \item{\code{chyaml}}{List of information obtained from a YAML file}
 
-\item{\code{soil_degradation}}{Dataframe of modelling DT50 values}
+\item{\code{TPs}}{List of transformation products as chent objects
+Add a transformation product to the internal list}
+
+\item{\code{transformations}}{Data frame of observed transformations
+Add a line in the internal dataframe holding observed transformations}
+
+\item{\code{soil_degradation}}{Dataframe of modelling DT50 values
+Add a line in the internal dataframe holding modelling DT50 values}
 
 \item{\code{soil_ff}}{Dataframe of formation fractions}
 
 \item{\code{soil_sorption}}{Dataframe of soil sorption data}
-
-\item{\code{PUF}}{Plant uptake factor}
 }
 \if{html}{\out{</div>}}
 }
@@ -92,13 +103,12 @@ if (!is.null(caffeine$Picture)) {
 \if{html}{\out{<a id="method-chent-new"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-new}{}}}
 \subsection{Method \code{new()}}{
+Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$new(
   identifier,
   smiles = NULL,
-  smiles_source = "user",
   inchikey = NULL,
-  inchikey_source = "user",
   pubchem = TRUE,
   pubchem_from = c("name", "smiles", "inchikey"),
   rdkit = TRUE,
@@ -107,6 +117,33 @@ if (!is.null(caffeine$Picture)) {
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{identifier}}{Identifier to be stored in the object}
+
+\item{\code{smiles}}{Optional user provided SMILES code}
+
+\item{\code{inchikey}}{Optional user provided InChI Key}
+
+\item{\code{pubchem}}{Should an attempt be made to retrieve chemical
+information from PubChem via the webchem package?}
+
+\item{\code{pubchem_from}}{Possibility to select the argument
+that is used to query pubchem}
+
+\item{\code{rdkit}}{Should an attempt be made to retrieve chemical
+information from a local rdkit installation via python
+and the reticulate package?}
+
+\item{\code{template}}{An optional SMILES code to be used as template for RDKit}
+
+\item{\code{chyaml}}{Should we look for a identifier.yaml file in the working
+directory?
+Try to get chemical information from PubChem}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-try_pubchem"></a>}}
@@ -116,6 +153,16 @@ if (!is.null(caffeine$Picture)) {
 \if{html}{\out{<div class="r">}}\preformatted{chent$try_pubchem(query, from = "name")}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{query}}{Query string to be passed to \link[webchem:get_cid]{get_cid}}
+
+\item{\code{from}}{Passed to \link[webchem:get_cid]{get_cid}
+Get chemical information from PubChem for a known PubChem CID}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-get_pubchem"></a>}}
@@ -125,6 +172,14 @@ if (!is.null(caffeine$Picture)) {
 \if{html}{\out{<div class="r">}}\preformatted{chent$get_pubchem(pubchem_cid)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pubchem_cid}}{CID
+Get chemical information from RDKit if available}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-get_rdkit"></a>}}
@@ -134,6 +189,14 @@ if (!is.null(caffeine$Picture)) {
 \if{html}{\out{<div class="r">}}\preformatted{chent$get_rdkit(template = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{template}}{Optional template specified as a SMILES code
+Obtain information from a YAML file}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-get_chyaml"></a>}}
@@ -146,6 +209,16 @@ if (!is.null(caffeine$Picture)) {
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{repo}}{Should the file be looked for in the current working
+directory, a local git repository under \verb{~/git/chyaml}, or from
+the web (not implemented).
+Add a vapour pressure}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_p0"></a>}}
@@ -155,6 +228,22 @@ if (!is.null(caffeine$Picture)) {
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_p0(p0, T = NA, source = NA, page = NA, remark = "")}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{p0}}{The vapour pressure in Pa}
+
+\item{\code{T}}{Temperature}
+
+\item{\code{source}}{An acronym specifying the source of the information}
+
+\item{\code{page}}{The page from which the information was taken}
+
+\item{\code{remark}}{A remark
+Add a water solubility}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_cwsat"></a>}}
@@ -164,6 +253,14 @@ if (!is.null(caffeine$Picture)) {
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_cwsat(cwsat, T = NA, pH = NA, source = NA, page = NA, remark = "")}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{p0}}{The water solubility in mg/L
+Add a plant uptake factor}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_PUF"></a>}}
@@ -178,6 +275,13 @@ if (!is.null(caffeine$Picture)) {
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{PUF}}{The plant uptake factor, a number between 0 and 1}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_TP"></a>}}
@@ -187,6 +291,17 @@ if (!is.null(caffeine$Picture)) {
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_TP(x, smiles = NULL, pubchem = FALSE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{x}}{A \link{chent} object, or an identifier to generate a \link{chent} object}
+
+\item{\code{smiles}}{A SMILES code for defining a \link{chent} object}
+
+\item{\code{pubchem}}{Should chemical information be obtained from PubChem?}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_transformation"></a>}}
