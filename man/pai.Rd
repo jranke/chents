@@ -8,6 +8,11 @@
 An \code{\link{R6Class}} generator object
 }
 \description{
+An R6 class for pesticidal active ingredients and associated data
+
+An R6 class for pesticidal active ingredients and associated data
+}
+\details{
 The class is initialised with an identifier which is generally an ISO common name.
 Additional chemical information is retrieved from the internet if available.
 }
@@ -31,9 +36,11 @@ if (!is.null(atr$Picture)) {
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{iso}}{ISO common name according to ISO 1750 as retreived from pesticidecompendium.bcpc.org}
+\item{\code{iso}}{ISO common name of the active ingredient according to ISO 1750}
 
-\item{\code{bcpc}}{List of information retrieved from pesticidecompendium.bcpc.org}
+\item{\code{bcpc}}{Information retrieved from the BCPC compendium available online
+at <pesticidecompendium.bcpc.org>
+Creates a new instance of this \link[R6:R6Class]{R6} class.}
 }
 \if{html}{\out{</div>}}
 }
@@ -69,6 +76,11 @@ if (!is.null(atr$Picture)) {
 \if{html}{\out{<a id="method-pai-new"></a>}}
 \if{latex}{\out{\hypertarget{method-pai-new}{}}}
 \subsection{Method \code{new()}}{
+This class is derived from \link{chent}. It makes it easy
+to create a \link{chent} from the ISO common name of a pesticide active
+ingredient, and additionally stores the ISO name as well as
+the complete result of querying the BCPC compendium using
+\link[webchem:bcpc_query]{bcpc_query}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{pai$new(
   iso,
@@ -84,6 +96,16 @@ if (!is.null(atr$Picture)) {
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{iso}}{The ISO common name to be used in the query of the
+BCPC compendium}
+
+\item{\code{identifier}}{Alternative identifier used for querying pubchem}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pai-clone"></a>}}

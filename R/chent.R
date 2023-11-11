@@ -23,6 +23,7 @@
 #' if (!is.null(caffeine$Picture)) {
 #'   plot(caffeine)
 #' }
+
 chent <- R6Class("chent",
   public = list(
     #' @field identifier (`character(1)`)\cr
@@ -241,6 +242,7 @@ chent <- R6Class("chent",
     #' @param repo Should the file be looked for in the current working 
     #' directory, a local git repository under `~/git/chyaml`, or from
     #' the web (not implemented).
+    #' @param chyaml The filename to be looked for
     get_chyaml = function(repo = c("wd", "local", "web"),
       chyaml = paste0(URLencode(self$identifier), ".yaml"))
     {
@@ -287,8 +289,15 @@ chent <- R6Class("chent",
     },
     
     #' Add a water solubility
-    #' @param p0 The water solubility in mg/L
-    add_cwsat = function(cwsat, T = NA, pH = NA, source = NA, page = NA, remark = "") {
+    #' @param cwsat The water solubility in mg/L
+    #' @param T Temperature
+    #' @param pH The pH value
+    #' @param source An acronym specifying the source of the information
+    #' @param page The page from which the information was taken
+    #' @param remark A remark
+    add_cwsat = function(cwsat, T = NA, pH = NA,
+      source = NA, page = NA, remark = "")
+    {
       self$cwsat <- cwsat
       attr(self$cwsat, "T") <- T
       attr(self$cwsat, "pH") <- pH
@@ -299,7 +308,13 @@ chent <- R6Class("chent",
     
     #' Add a plant uptake factor
     #' @param PUF The plant uptake factor, a number between 0 and 1
-    add_PUF = function(PUF = 0, source = "focus_generic_gw_2014", page = 41, remark = "Conservative default value") {
+    #' @param source An acronym specifying the source of the information
+    #' @param page The page from which the information was taken
+    #' @param remark A remark
+    add_PUF = function(PUF = 0,
+      source = "focus_generic_gw_2014", page = 41,
+      remark = "Conservative default value")
+    {
       self$PUF <- PUF
       attr(self$PUF, "source") <- source
       attr(self$PUF, "page") <- page
@@ -326,13 +341,22 @@ chent <- R6Class("chent",
     
     #' @field transformations Data frame of observed transformations
     transformations = data.frame(study_type = character(0),
-                                 TP_identifier = character(0),
-                                 max_occurrence = numeric(0),
-                                 source = character(0),
-                                 pages = character(0),
-                                 stringsAsFactors = FALSE),
+      TP_identifier = character(0),
+      max_occurrence = numeric(0),
+      source = character(0),
+      page = character(0),
+      stringsAsFactors = FALSE),
     
     #' Add a line in the internal dataframe holding observed transformations
+    #' @param study_type A characterisation of the study type
+    #' @param TP_identifier An identifier of one of the transformation products
+    #' in `self$TPs`
+    #' @param max_occurrence The maximum observed occurrence of the 
+    #' transformation product, expressed as a fraction of the amount that would
+    #' result from stochiometric transformation
+    #' @param source An acronym specifying the source of the information
+    #' @param pages The page from which the information was taken
+    #' @param remark A remark
     add_transformation = function(study_type, TP_identifier, max_occurrence,
       remark = "", source = NA, pages = NA)
     {
@@ -344,19 +368,40 @@ chent <- R6Class("chent",
       if (is.numeric(pages)) pages <- paste(pages, collapse = ", ")
       cn <- colnames(self$transformations)
       self$transformations <- rbind(self$transformations,
-                                    data.frame(study_type = study_type,
-                                               TP_identifier = TP_identifier,
-                                               max_occurrence = max_occurrence,
-                                               remark = remark,
-                                               source = source,
-                                               pages = pages,
-                                               stringsAsFactors = FALSE))
+        data.frame(study_type = study_type,
+          TP_identifier = TP_identifier,
+          max_occurrence = max_occurrence,
+          remark = remark,
+          source = source,
+          page = page,
+          stringsAsFactors = FALSE))
     },
     
     #' @field soil_degradation Dataframe of modelling DT50 values
     soil_degradation = NULL,
     
     #' Add a line in the internal dataframe holding modelling DT50 values
+    #' @param soils Names of the soils
+    #' @param DT50_mod The modelling DT50 in the sense of regulatory pesticide
+    #' fate modelling
+    #' @param DT50_mod_ref The normalised modelling DT50 in the sense of
+    #' regulatory pesticide fate modelling
+    #' @param type The soil type
+    #' @param country The country (mainly for field studies)
+    #' @param pH_orig The pH stated in the study
+    #' @param pH_medium The medium in which this pH was measured
+    #' @param pH_H2O The pH extrapolated to pure water
+    #' @param perc_OC The percentage of organic carbon in the soil
+    #' @param temperature The temperature during the study in degrees Celsius
+    #' @param moisture The moisture during the study
+    #' @param category Is it a laboratory ('lab') or field study ('field')
+    #' @param formulation Name of the formulation applied, if it was not 
+    #' the technical active ingredient
+    #' @param model The degradation model used for deriving `DT50_mod`
+    #' @param chi2 The relative error as defined in FOCUS kinetics
+    #' @param source An acronym specifying the source of the information
+    #' @param page The page from which the information was taken
+    #' @param remark A remark
     add_soil_degradation = function(soils, DT50_mod, DT50_mod_ref,
       type = NA, country = NA,
       pH_orig = NA, pH_medium = NA, pH_H2O = NA,
@@ -396,7 +441,13 @@ chent <- R6Class("chent",
     #' @field soil_ff Dataframe of formation fractions
     soil_ff = NULL,
     
-    add_soil_ff = function(target, soils, ff = 1, remark = "", source, page = NA) {
+    # Add one or more formation fractions for degradation in soil
+    #' @param target The identifier(s) of the transformation product
+    #' @param soils The soil name(s) in which the transformation was observed
+    #' @param ff The formation fraction(s)
+    add_soil_ff = function(target, soils, ff = 1,
+      remark = "", source, page = NA)
+    {
       new_soil_ff = data.frame(
         target = target,
         target = target,
@@ -416,12 +467,19 @@ chent <- R6Class("chent",
     #' @field soil_sorption Dataframe of soil sorption data
     soil_sorption = NULL,
     
+    #' Add soil sorption data
+    #' @param Kf The sorption constant in L/kg, either linear (then `N` is 1) 
+    #' or according to Freundlich
+    #' @param Kfoc The constant from above, normalised to soil organic carbon
+    #' @param N The Freundlich exponent
+    #' @param perc_clay The percentage of clay in the soil
+    #' @param CEC The cation exchange capacity
     add_soil_sorption = function(soils, Kf, Kfoc, N,
-                                 type = NA,
-                                 pH_orig = NA, pH_medium = NA,
-                                 pH_H2O = NA,
-                                 perc_OC = NA, perc_clay = NA, CEC = NA,
-                                 remark = "", source, page = NA) {
+      type = NA, pH_orig = NA, pH_medium = NA,
+      pH_H2O = NA,
+      perc_OC = NA, perc_clay = NA, CEC = NA,
+      remark = "", source, page = NA)
+    {
       new_soil_sorption = data.frame(
         soils = soils,
         Kf = Kf, Kfoc = Kfoc, N = N,
@@ -441,6 +499,10 @@ chent <- R6Class("chent",
       }
     },
     
+    #' Write a PDF image of the structure
+    #' @param file The file to write to 
+    #' @param dir The directory to write the file to
+    #' @param template A template expressed as SMILES to use in RDKit
     pdf = function(file = paste0(self$identifier, ".pdf"),
         dir = "structures/pdf", template = NULL) {
       if (!dir.exists(dir)) {
@@ -462,8 +524,12 @@ chent <- R6Class("chent",
       m_line <- suppressWarnings(grep("MediaBox", head, value = TRUE))
       self$pdf_height <- as.numeric(gsub("/MediaBox \\[.* (.*)\\]", "\\1", m_line))
     },
-    png = function(file = paste0(self$identifier, ".png"), dir = "structures/png",
-                   antialias = 'gray') {
+    
+    #' Write a PNG image of the structure
+    #' @param antialias Passed to [png][grDevices::png]
+    png = function(file = paste0(self$identifier, ".png"),
+      dir = "structures/png", antialias = 'gray')
+    {
       if (!dir.exists(dir)) {
         message("Directory '", dir, "' does not exist")
         message("Trying to create directory '", dir, "'")
@@ -475,7 +541,12 @@ chent <- R6Class("chent",
       plot(self)
       dev.off()
     },
-    emf = function(file = paste0(self$identifier, ".emf"), dir = "structures/emf") {
+    
+    #' Write an EMF image of the structure using [emf][devEMF::emf]
+    #' @param file The file to write to
+    emf = function(file = paste0(self$identifier, ".emf"),
+      dir = "structures/emf")
+    {
       if (!requireNamespace("devEMF")) {
         stop("You need to have the devEMF package installed for this function")
       }
@@ -521,8 +592,8 @@ print.chent = function(x, ...) {
 #' @param subdir The path to which the file should be written
 #' @export
 draw_svg.chent = function(x, width = 300, height = 150,
-                          filename = paste0(names(x$identifier), ".svg"),
-                          subdir = "svg") {
+   filename = paste0(names(x$identifier), ".svg"),
+   subdir = "svg") {
   if (!rdkit_available) {
     stop("RDkit is not available via reticulate")
   } else {
@@ -560,8 +631,6 @@ plot.chent = function(x, ...) {
 #' @importFrom R6 R6Class
 #' @export
 #' @format An \code{\link{R6Class}} generator object
-#' @field iso ISO common name according to ISO 1750 as retreived from pesticidecompendium.bcpc.org
-#' @field bcpc List of information retrieved from pesticidecompendium.bcpc.org
 #' @examples
 #' # On Travis, we get a certificate validation error,
 #' # likely because the system (xenial) is so old,
@@ -575,18 +644,35 @@ plot.chent = function(x, ...) {
 #' }
 #'
 #' }
+
 pai <- R6Class("pai",
   inherit = chent,
-  public <- list(
+  public = list(
+    
+    #' @field iso ISO common name of the active ingredient according to ISO 1750
     iso = NULL,
+    
+    #' @field bcpc Information retrieved from the BCPC compendium available online
+    #' at <pesticidecompendium.bcpc.org>
     bcpc = NULL,
+    
+    #' Creates a new instance of this [R6][R6::R6Class] class.
+    #'
+    #' @description This class is derived from [chent]. It makes it easy
+    #' to create a [chent] from the ISO common name of a pesticide active
+    #' ingredient, and additionally stores the ISO name as well as
+    #' the complete result of querying the BCPC compendium using
+    #' [bcpc_query][webchem::bcpc_query].
+    #' 
+    #' @param iso The ISO common name to be used in the query of the 
+    #' BCPC compendium
+    #'
+    #' @param identifier Alternative identifier used for querying pubchem
     initialize = function(iso, identifier = iso,
-                          smiles = NULL,
-                          inchikey = NULL,
-                          bcpc = TRUE,
-                          pubchem = TRUE, pubchem_from = 'auto',
-                          rdkit = TRUE, template = NULL,
-                          chyaml = TRUE)
+      smiles = NULL, inchikey = NULL, bcpc = TRUE,
+      pubchem = TRUE, pubchem_from = 'auto',
+      rdkit = TRUE, template = NULL,
+      chyaml = TRUE)
     {
 
       if (!is.null(inchikey)) {
@@ -631,10 +717,9 @@ pai <- R6Class("pai",
       }
 
       super$initialize(identifier = identifier,
-                       smiles = smiles, 
-                       inchikey = self$inchikey,
-                       pubchem = pubchem, pubchem_from = pubchem_from,
-                       rdkit = rdkit, template = template, chyaml = chyaml)
+        smiles = smiles, inchikey = self$inchikey,
+        pubchem = pubchem, pubchem_from = pubchem_from,
+        rdkit = rdkit, template = template, chyaml = chyaml)
 
       invisible(self)
     }
@@ -659,30 +744,47 @@ print.pai = function(x, ...) {
   }
 }
 
-#' R6 class for holding a product with at least one active ingredient
+#' @title R6 class for a plant protection product with at least one active ingredient
 #'
-#' An R6 class for holding information about a product with at least one active ingredient
+#' @description Contains basic information about the active ingredients in the
+#' product
 #'
 #' @docType class
 #' @importFrom R6 R6Class
 #' @export
 #' @format An \code{\link{R6Class}} generator object.
-#' @field name The name of the product
-#' @field ais A list of active ingredients
-#' @field concentrations The concentration of the ais
-#' @field concentration_units Defaults to g/L
-#' @keywords data
 
-pp <- R6Class("pp",
-  public <- list(
+ppp <- R6Class("ppp",
+  public = list(
+    
+    #' @field name The name of the product
     name = NULL,
+    
+    #' @field ais A list of active ingredients
     ais = list(),
+    
+    #' @field concentrations The concentration of the ais
     concentrations = NULL,
+    
+    #' @field concentration_units Defaults to g/L
     concentration_units = NULL,
+    
+    #' @field density The density of the product
     density = NULL,
+    
+    #' @field density_units Defaults to g/L
     density_units = "g/L",
+    
+    #' Creates a new instance of this [R6][R6::R6Class] class.
+    #' 
+    #' @field ... Identifiers of the active ingredients
+    #' @field concentrations Concentrations of the active ingredients
+    #' @field concentration_units Defaults to g/L
+    #' @field density The density
+    #' @field density_units Defaults to g/L
     initialize = function(name, ..., concentrations, concentration_units = "g/L",
-                          density = 1000, density_units = "g/L") {
+      density = 1000, density_units = "g/L")
+    {
       self$name <- name
       self$ais <- list(...)
       self$concentrations <- concentrations
@@ -691,6 +793,8 @@ pp <- R6Class("pp",
       names(self$concentrations) <- names(self$ais)
       self$concentration_units <- concentration_units
     },
+    
+    #' Printing method
     print = function() {
       cat("<pp> named", self$name, "\n")
     }

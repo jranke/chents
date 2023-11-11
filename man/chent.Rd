@@ -73,7 +73,8 @@ Add a line in the internal dataframe holding modelling DT50 values}
 
 \item{\code{soil_ff}}{Dataframe of formation fractions}
 
-\item{\code{soil_sorption}}{Dataframe of soil sorption data}
+\item{\code{soil_sorption}}{Dataframe of soil sorption data
+Add soil sorption data}
 }
 \if{html}{\out{</div>}}
 }
@@ -214,7 +215,9 @@ Obtain information from a YAML file}
 \describe{
 \item{\code{repo}}{Should the file be looked for in the current working
 directory, a local git repository under \verb{~/git/chyaml}, or from
-the web (not implemented).
+the web (not implemented).}
+
+\item{\code{chyaml}}{The filename to be looked for
 Add a vapour pressure}
 }
 \if{html}{\out{</div>}}
@@ -256,7 +259,17 @@ Add a water solubility}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{p0}}{The water solubility in mg/L
+\item{\code{cwsat}}{The water solubility in mg/L}
+
+\item{\code{T}}{Temperature}
+
+\item{\code{pH}}{The pH value}
+
+\item{\code{source}}{An acronym specifying the source of the information}
+
+\item{\code{page}}{The page from which the information was taken}
+
+\item{\code{remark}}{A remark
 Add a plant uptake factor}
 }
 \if{html}{\out{</div>}}
@@ -279,6 +292,12 @@ Add a plant uptake factor}
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{PUF}}{The plant uptake factor, a number between 0 and 1}
+
+\item{\code{source}}{An acronym specifying the source of the information}
+
+\item{\code{page}}{The page from which the information was taken}
+
+\item{\code{remark}}{A remark}
 }
 \if{html}{\out{</div>}}
 }
@@ -318,6 +337,26 @@ Add a plant uptake factor}
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{study_type}}{A characterisation of the study type}
+
+\item{\code{TP_identifier}}{An identifier of one of the transformation products
+in \code{self$TPs}}
+
+\item{\code{max_occurrence}}{The maximum observed occurrence of the
+transformation product, expressed as a fraction of the amount that would
+result from stochiometric transformation}
+
+\item{\code{remark}}{A remark}
+
+\item{\code{source}}{An acronym specifying the source of the information}
+
+\item{\code{pages}}{The page from which the information was taken}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_soil_degradation"></a>}}
@@ -346,6 +385,50 @@ Add a plant uptake factor}
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{soils}}{Names of the soils}
+
+\item{\code{DT50_mod}}{The modelling DT50 in the sense of regulatory pesticide
+fate modelling}
+
+\item{\code{DT50_mod_ref}}{The normalised modelling DT50 in the sense of
+regulatory pesticide fate modelling}
+
+\item{\code{type}}{The soil type}
+
+\item{\code{country}}{The country (mainly for field studies)}
+
+\item{\code{pH_orig}}{The pH stated in the study}
+
+\item{\code{pH_medium}}{The medium in which this pH was measured}
+
+\item{\code{pH_H2O}}{The pH extrapolated to pure water}
+
+\item{\code{perc_OC}}{The percentage of organic carbon in the soil}
+
+\item{\code{temperature}}{The temperature during the study in degrees Celsius}
+
+\item{\code{moisture}}{The moisture during the study}
+
+\item{\code{category}}{Is it a laboratory ('lab') or field study ('field')}
+
+\item{\code{formulation}}{Name of the formulation applied, if it was not
+the technical active ingredient}
+
+\item{\code{model}}{The degradation model used for deriving \code{DT50_mod}}
+
+\item{\code{chi2}}{The relative error as defined in FOCUS kinetics}
+
+\item{\code{remark}}{A remark}
+
+\item{\code{source}}{An acronym specifying the source of the information}
+
+\item{\code{page}}{The page from which the information was taken}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_soil_ff"></a>}}
@@ -355,6 +438,17 @@ Add a plant uptake factor}
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_soil_ff(target, soils, ff = 1, remark = "", source, page = NA)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{target}}{The identifier(s) of the transformation product}
+
+\item{\code{soils}}{The soil name(s) in which the transformation was observed}
+
+\item{\code{ff}}{The formation fraction(s)}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_soil_sorption"></a>}}
@@ -379,6 +473,23 @@ Add a plant uptake factor}
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{Kf}}{The sorption constant in L/kg, either linear (then \code{N} is 1)
+or according to Freundlich}
+
+\item{\code{Kfoc}}{The constant from above, normalised to soil organic carbon}
+
+\item{\code{N}}{The Freundlich exponent}
+
+\item{\code{perc_clay}}{The percentage of clay in the soil}
+
+\item{\code{CEC}}{The cation exchange capacity
+Write a PDF image of the structure}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-pdf"></a>}}
@@ -392,6 +503,18 @@ Add a plant uptake factor}
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{file}}{The file to write to}
+
+\item{\code{dir}}{The directory to write the file to}
+
+\item{\code{template}}{A template expressed as SMILES to use in RDKit
+Write a PNG image of the structure}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-png"></a>}}
@@ -405,6 +528,14 @@ Add a plant uptake factor}
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{antialias}}{Passed to \link[grDevices:png]{png}
+Write an EMF image of the structure using \link[devEMF:emf]{emf}}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-emf"></a>}}
@@ -414,6 +545,13 @@ Add a plant uptake factor}
 \if{html}{\out{<div class="r">}}\preformatted{chent$emf(file = paste0(self$identifier, ".emf"), dir = "structures/emf")}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{file}}{The file to write to}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-clone"></a>}}
