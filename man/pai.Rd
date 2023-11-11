@@ -8,13 +8,9 @@
 An \code{\link{R6Class}} generator object
 }
 \description{
-An R6 class for pesticidal active ingredients and associated data
-
-An R6 class for pesticidal active ingredients and associated data
-}
-\details{
-The class is initialised with an identifier which is generally an ISO common name.
-Additional chemical information is retrieved from the internet if available.
+The class is initialised with an identifier which is generally
+an ISO common name.  Additional chemical information is retrieved from the
+internet if available.
 }
 \examples{
 # On Travis, we get a certificate validation error,

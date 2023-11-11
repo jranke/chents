@@ -622,10 +622,11 @@ plot.chent = function(x, ...) {
   grid.picture(x$Picture)
 }
 
-#' An R6 class for pesticidal active ingredients and associated data
+#' @title An R6 class for pesticidal active ingredients and associated data
 #'
-#' The class is initialised with an identifier which is generally an ISO common name.
-#' Additional chemical information is retrieved from the internet if available.
+#' @description The class is initialised with an identifier which is generally
+#' an ISO common name.  Additional chemical information is retrieved from the
+#' internet if available.
 #'
 #' @docType class
 #' @importFrom R6 R6Class
