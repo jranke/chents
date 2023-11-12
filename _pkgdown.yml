@@ -1,6 +1,7 @@
 title: chents
 
 template:
+  bootstrap: 5
   bootswatch: spacelab
 
 reference:
