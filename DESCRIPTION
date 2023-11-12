@@ -26,6 +26,6 @@ License: GPL
 LazyLoad: yes
 LazyData: yes
 Encoding: UTF-8
-URL: https://github.com/jranke/chents
+URL: https://pkgdown.jrwb.de/chents, https://github.com/jranke/chents
 Roxygen: list(markdown = TRUE, r6 = TRUE)
 RoxygenNote: 7.2.3
