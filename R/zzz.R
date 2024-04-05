@@ -1,6 +1,8 @@
 .onLoad = function(libname, pkgname) {
   rdkit_available <- FALSE
-  rdkit_module <- try(reticulate::import("rdkit"), silent = TRUE)
+  rdkit_module <- try(
+    reticulate::import("rdkit", delay_load = TRUE), 
+    silent = TRUE)
   if (!inherits(rdkit_module, "try-error")) {
     rdkit_available <- TRUE
   }
