@@ -1,11 +1,9 @@
 .onLoad = function(libname, pkgname) {
-  rdkit_available <- FALSE
+  conf <- reticulate::py_discover_config("rdkit")
+  rdkit_available <- conf$available
   rdkit_module <- try(
-    reticulate::import("rdkit", delay_load = TRUE), 
+    reticulate::import("rdkit"), 
     silent = TRUE)
-  if (!inherits(rdkit_module, "try-error")) {
-    rdkit_available <- TRUE
-  }
   assign('rdkit_available', rdkit_available, envir = topenv())
   assign('rdkit_module', rdkit_module, envir = topenv())
 }

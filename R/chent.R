@@ -24,7 +24,6 @@
 #' if (!is.null(caffeine$Picture)) {
 #'   plot(caffeine)
 #' }
-
 chent <- R6Class("chent",
   public = list(
     #' @field identifier (`character(1)`)\cr
