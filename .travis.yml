@@ -10,12 +10,14 @@ jobs:
 env:
   global:
     - USE_BSPM="true"
+    - RETICULATE_AUTOCONFIGURE="false"
 
 before_install:
   - curl -OLs https://eddelbuettel.github.io/r-ci/run.sh && chmod 0755 run.sh
   - ./run.sh bootstrap
 
 install:
+  - ./run.sh install_aptget python3-rdkit
   - ./run.sh install_all
 
 script:
