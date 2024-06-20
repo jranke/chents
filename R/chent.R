@@ -699,9 +699,9 @@ pai <- R6Class("pai",
           attr(self$iso, "source") <- "bcpc"
           attr(self$iso, "status") <- self$bcpc$status
           bcpc_ik = self$bcpc$inchikey
-          if (length(bcpc_ik) == 1 && nchar(bcpc_ik) == 27 && !is.na(bcpc_ik)) {
+          if (length(bcpc_ik) == 1 && !is.na(bcpc_ik)) {
             if (is.null(self$inchikey)) {
-              self$inchikey = self$bcpc$inchikey
+              self$inchikey = substr(self$bcpc$inchikey, 1, 27)
               attr(self$inchikey, "source") <- "bcpc"
             } else {
               if (bcpc_ik == self$inchikey) {
