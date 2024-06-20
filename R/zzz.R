@@ -1,6 +1,6 @@
 .onLoad = function(libname, pkgname) {
   conf <- reticulate::py_discover_config("rdkit")
-  rdkit_available <- conf$available
+  rdkit_available <- reticulate::py_module_available("rdkit")
   rdkit_module <- try(
     reticulate::import("rdkit"), 
     silent = TRUE)

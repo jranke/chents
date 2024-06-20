@@ -118,9 +118,14 @@ chent <- R6Class("chent",
           if (is.null(self$smiles)) {
             message("RDKit would need a SMILES code")
           } else {
+            available_smiles <- names(self$smiles)
+            smiles_preference <- c("user", "PubChem_Isomeric", "PubChem_Canonical")
+            smiles_preferred_i <- min(match(available_smiles, smiles_preference))
+            smiles_preferred <- smiles_preference[smiles_preferred_i]
+
             message("Trying to get chemical information from RDKit using ",
-                    names(self$smiles)[1], " SMILES\n",
-                    self$smiles[1])
+                    smiles_preferred, " SMILES\n",
+                    self$smiles[smiles_preferred])
             self$get_rdkit(template = template)
             self$mw <- self$rdkit$mw
             attr(self$mw, "source") <- "rdkit"
@@ -196,7 +201,7 @@ chent <- R6Class("chent",
     #' Get chemical information from RDKit if available
     #' @param template Optional template specified as a SMILES code
     get_rdkit = function(template = NULL) {
-      if(!rdkit_available) {
+      if (!rdkit_available) {
         stop("RDKit is not available")
       }
       self$rdkit <- list()
