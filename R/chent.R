@@ -138,6 +138,21 @@ chent <- R6Class("chent",
       if (chyaml) {
         self$get_chyaml()
       }
+
+      # Define main identifiers as NA if still not available
+      if (is.null(self$smiles)) {
+        self$smiles <- NA
+        attr(self$smiles, "source") <- "user"
+      }
+      if (is.null(self$inchikey)) {
+        self$inchikey<- NA
+        attr(self$inchikey, "source") <- "user"
+      }
+      if (is.null(self$mw)) {
+        self$mw<- NA
+        attr(self$mw, "source") <- "user"
+      }
+
       invisible(self)
     },
 

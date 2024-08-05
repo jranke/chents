@@ -1,39 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/404.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/reference/chent.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/reference/draw_svg.chent.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/reference/pai.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/reference/plot.chent.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/reference/pp.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/reference/ppp.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/reference/print.chent.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgdown.jrwb.de/chents/reference/print.pai.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://pkgdown.jrwb.de/chents/404.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/authors.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/index.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/news/index.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/reference/chent.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/reference/draw_svg.chent.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/reference/index.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/reference/pai.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/reference/plot.chent.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/reference/pp.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/reference/ppp.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/reference/print.chent.html</loc></url>
+<url><loc>https://pkgdown.jrwb.de/chents/reference/print.pai.html</loc></url>
 </urlset>
+

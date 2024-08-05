@@ -1,9 +1,8 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-06-20T12:55Z
+last_built: 2024-08-05T15:03Z
 urls:
   reference: https://pkgdown.jrwb.de/chents/reference
   article: https://pkgdown.jrwb.de/chents/articles
-
