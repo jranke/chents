@@ -195,19 +195,25 @@ chent <- R6Class("chent",
         self$inchikey <- self$pubchem$InChIKey
         attr(self$inchikey, "source") <- "pubchem"
       } else {
-        if (length(self$inchikey) > 1) {
-          message("InChIKey ", self$inchikey, " retreived from ",
-                  attr(self$inchikey, "source"),
-                  " has length > 1, using PubChem InChIKey")
+        if (is.na(self$inchikey)) {
+          warning("Overwriting uninitialized InChIKey")
           self$inchikey <- self$pubchem$InChIKey
           attr(self$inchikey, "source") <- "pubchem"
         } else {
-          if (self$pubchem$InChIKey != self$inchikey) {
-            message("InChiKey ", self$pubchem$InChIKey, " from PubChem record does not match\n",
-                    "InChiKey ", self$inchikey, " retreived from ",
-                    attr(self$inchikey, "source"))
+          if (length(self$inchikey) > 1) {
+            message("InChIKey ", self$inchikey, " retreived from ",
+                    attr(self$inchikey, "source"),
+                    " has length > 1, using PubChem InChIKey")
+            self$inchikey <- self$pubchem$InChIKey
+            attr(self$inchikey, "source") <- "pubchem"
           } else {
-            attr(self$inchikey, "source") <- c(attr(self$inchikey, "source"), "pubchem")
+            if (self$pubchem$InChIKey != self$inchikey) {
+              message("InChiKey ", self$pubchem$InChIKey, " from PubChem record does not match\n",
+                      "InChiKey ", self$inchikey, " retreived from ",
+                      attr(self$inchikey, "source"))
+            } else {
+              attr(self$inchikey, "source") <- c(attr(self$inchikey, "source"), "pubchem")
+            }
           }
         }
       }

@@ -15,7 +15,7 @@ test_that("We can generate a chent object from SMILES using RDKit", {
 })
 
 test_that("We can add information retrieved from PubChem via webchem", {
-  oct$try_pubchem()
+  expect_warning(oct$try_pubchem(), "Overwriting uninitialized InChIKey")
   expect_equivalent(round(oct$mw, 2), 130.23)
   ik = "KBPLFHHGFOOTCA-UHFFFAOYSA-N"
   attr(ik, "source") <- "pubchem"
