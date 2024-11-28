@@ -31,7 +31,7 @@ pd: roxy
 build: roxy $(TGZ)
 
 test: build
-	"$(RBIN)/Rscript" -e 'library(devtools); devtools::test()' 2>&1 | tee test.log
+	"$(RBIN)/Rscript" -e 'library(devtools); devtools::test()' 2>&1 | tee log/test.log
 	sed -i -e "s/\r.*\r//" test.log
 
 quickcheck: build
