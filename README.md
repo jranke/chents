@@ -51,5 +51,10 @@ Sys.setenv(RETICULATE_PYTHON="/usr/bin/python3")
 ## Examples
 
 Some examples are available from the 
-[reference on jrwb.de](https://pkgdown.jrwb.de/chents/reference). 
+[reference on jrwb.de](https://pkgdown.jrwb.de/chents/reference). For example,
+in the [example code section of the chent object docs](https://pkgdown.jrwb.de/chents/reference/chent.html#ref-examples)
+you can see how to generate an R object for caffeine, show some of the information
+retrieved from PubChem and plot it by virtue of RDKit.
+
+
 

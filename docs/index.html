@@ -49,7 +49,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="chents">chents<a class="anchor" aria-label="anchor" href="#chents"></a>
 </h1></div>
-<p><a href="https://app.travis-ci.com/jranke/chents" class="external-link"><img src="https://app.travis-ci.com/jranke/chents.svg?token=Sq9VuYWyRz2FbBLxu6DK&amp;branch=main" alt="Build Status"></a> <a href="https://app.codecov.io/gh/jranke/chents" class="external-link"><img src="https://codecov.io/github/jranke/chents/branch/main/graphs/badge.svg" alt="codecov"></a></p>
+<p><a href="https://pkgdown.jrwb.de/chents/"><img src="https://img.shields.io/badge/docs-jrwb.de-blue.svg" alt="Online documentation"></a> <a href="https://jranke.r-universe.dev/chents" class="external-link"><img src="https://jranke.r-universe.dev/badges/chents" alt="R-Universe status"></a> <a href="https://app.travis-ci.com/jranke/chents" class="external-link"><img src="https://app.travis-ci.com/jranke/chents.svg?token=Sq9VuYWyRz2FbBLxu6DK&amp;branch=main" alt="Build Status"></a> <a href="https://app.codecov.io/gh/jranke/chents" class="external-link"><img src="https://codecov.io/github/jranke/chents/branch/main/graphs/badge.svg" alt="codecov"></a></p>
 <p>The R package <strong>chents</strong> provides some utilities for working with chemical entities in R.</p>
 <div class="section level2">
 <h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
@@ -61,9 +61,25 @@
 </ul>
 </div>
 <div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can conveniently install chents from the repository kindly made available by the R-Universe project:</p>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"chents"</span>,</span>
+<span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://jranke.r-universe.dev"</span>, <span class="st">"https://cran.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<p>In order to profit from the chemoinformatics, you need to install RDKit and its python bindings. On a Debian type Linux distribution, just use</p>
+<pre><code>sudo apt install python3-rdkit</code></pre>
+<p>If you use this package on Windows or MacOS, I would be happy to include installation instructions here if you share them with me, e.g. via a Pull Request.</p>
+</div>
+<div class="section level2">
+<h2 id="configuration-of-the-python-version-to-use">Configuration of the Python version to use<a class="anchor" aria-label="anchor" href="#configuration-of-the-python-version-to-use"></a>
+</h2>
+<p>On Debian type Linux distributions, you can use the following line in your global or project specific <code>.Rprofile</code> file to tell the <code>reticulate</code> package to use the system Python version that will find the RDKit installed in the system location.</p>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>RETICULATE_PYTHON<span class="op">=</span><span class="st">"/usr/bin/python3"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>Some examples are available from the <a href="https://pkgdown.jrwb.de/chents/reference">reference on jrwb.de</a>.</p>
+<p>Some examples are available from the <a href="https://pkgdown.jrwb.de/chents/reference">reference on jrwb.de</a>. For example, in the <a href="https://pkgdown.jrwb.de/chents/reference/chent.html#ref-examples">example code section of the chent object docs</a> you can see how to generate an R object for caffeine, show some of the information retrieved from PubChem and plot it by virtue of RDKit.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

@@ -40,14 +40,13 @@
 #' @param file The file to write to
 #' @param dir The directory to write the file to
 #' @examples
-#' oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE)
-#' print(oct)
-#'
 #' caffeine <- chent$new("caffeine")
 #' print(caffeine)
 #' if (!is.null(caffeine$Picture)) {
 #'   plot(caffeine)
 #' }
+#' oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE)
+#' print(oct)
 chent <- R6Class("chent",
   public = list(
     #' @field identifier (`character(1)`)\cr

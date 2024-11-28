@@ -12,17 +12,13 @@ information is retrieved from the internet. Additionally, it can be
 generated using RDKit if RDKit and its python bindings are installed.
 }
 \examples{
-oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE)
-print(oct)
-if (!is.null(oct$Picture)) {
-  plot(oct)
-}
-
 caffeine <- chent$new("caffeine")
 print(caffeine)
 if (!is.null(caffeine$Picture)) {
   plot(caffeine)
 }
+oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE)
+print(oct)
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
