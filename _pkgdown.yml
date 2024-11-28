@@ -10,9 +10,10 @@ reference:
   - title: R6 Class definitions and methods
     contents:
       - chent
+      - pai
+      - ppp
       - draw_svg.chent
       - plot.chent
       - print.chent
-      - pai
       - print.pai
-      - ppp
+      - print.ppp
