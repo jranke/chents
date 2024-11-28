@@ -42,9 +42,6 @@
 #' @examples
 #' oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE)
 #' print(oct)
-#' if (!is.null(oct$Picture)) {
-#'   plot(oct)
-#' }
 #'
 #' caffeine <- chent$new("caffeine")
 #' print(caffeine)

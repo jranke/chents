@@ -17,3 +17,6 @@ reference:
       - print.chent
       - print.pai
       - print.ppp
+
+news:
+  cran_dates: false
