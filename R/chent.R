@@ -12,6 +12,33 @@
 #' @importFrom grImport PostScriptTrace readPicture
 #' @importFrom yaml yaml.load_file
 #' @importFrom rsvg rsvg_ps
+#' @param identifier Identifier to be stored in the object
+#' @param smiles Optional user provided SMILES code
+#' @param inchikey Optional user provided InChI Key
+#' @param pubchem Should an attempt be made to retrieve chemical
+#' information from PubChem via the webchem package?
+#' @param pubchem_from Possibility to select the argument
+#' that is used to query pubchem
+#' @param rdkit Should an attempt be made to retrieve chemical
+#' information from a local rdkit installation via python
+#' and the reticulate package?
+#' @param template An optional SMILES code to be used as template for RDKit
+#' @param chyaml Should we look for a identifier.yaml file in the working
+#' directory?
+#' @param T Temperature
+#' @param pH pH value
+#' @param source An acronym specifying the source of the information
+#' @param page The page from which the information was taken
+#' @param soils Names of the soils
+#' @param type The soil type
+#' @param pH_orig The pH stated in the study
+#' @param pH_medium The medium in which this pH was measured
+#' @param pH_H2O The pH extrapolated to pure water
+#' @param perc_OC The percentage of organic carbon in the soil
+#' @param pages The pages from which the information was taken
+#' @param remark A remark
+#' @param file The file to write to
+#' @param dir The directory to write the file to
 #' @examples
 #' oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE)
 #' print(oct)
@@ -80,23 +107,10 @@ chent <- R6Class("chent",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #'
-    #' @param identifier Identifier to be stored in the object
-    #' @param smiles Optional user provided SMILES code
-    #' @param inchikey Optional user provided InChI Key
-    #' @param pubchem Should an attempt be made to retrieve chemical
-    #' information from PubChem via the webchem package?
-    #' @param pubchem_from Possibility to select the argument
-    #' that is used to query pubchem
-    #' @param rdkit Should an attempt be made to retrieve chemical
-    #' information from a local rdkit installation via python
-    #' and the reticulate package?
-    #' @param template An optional SMILES code to be used as template for RDKit
-    #' @param chyaml Should we look for a identifier.yaml file in the working
-    #' directory?
     initialize = function(identifier, smiles = NULL, inchikey = NULL,
       pubchem = TRUE, pubchem_from = c('name', 'smiles', 'inchikey'),
       rdkit = TRUE, template = NULL,
-      chyaml = TRUE) {
+      chyaml = FALSE) {
 
       self$identifier <- identifier
       names(self$identifier) <- make.names(identifier)
@@ -219,8 +233,8 @@ chent <- R6Class("chent",
       }
     },
 
+    #' @description
     #' Get chemical information from RDKit if available
-    #' @param template Optional template specified as a SMILES code
     get_rdkit = function(template = NULL) {
       if (!rdkit_available) {
         stop("RDKit is not available")
@@ -302,10 +316,6 @@ chent <- R6Class("chent",
 
     #' Add a vapour pressure
     #' @param p0 The vapour pressure in Pa
-    #' @param T Temperature
-    #' @param source An acronym specifying the source of the information
-    #' @param page The page from which the information was taken
-    #' @param remark A remark
     add_p0 = function(p0, T = NA, source = NA, page = NA, remark = "") {
       self$p0 <- p0
       attr(self$p0, "T") <- T
@@ -316,11 +326,6 @@ chent <- R6Class("chent",
 
     #' Add a water solubility
     #' @param cwsat The water solubility in mg/L
-    #' @param T Temperature
-    #' @param pH The pH value
-    #' @param source An acronym specifying the source of the information
-    #' @param page The page from which the information was taken
-    #' @param remark A remark
     add_cwsat = function(cwsat, T = NA, pH = NA,
       source = NA, page = NA, remark = "")
     {
@@ -334,9 +339,6 @@ chent <- R6Class("chent",
 
     #' Add a plant uptake factor
     #' @param PUF The plant uptake factor, a number between 0 and 1
-    #' @param source An acronym specifying the source of the information
-    #' @param page The page from which the information was taken
-    #' @param remark A remark
     add_PUF = function(PUF = 0,
       source = "focus_generic_gw_2014", page = 41,
       remark = "Conservative default value")
@@ -352,7 +354,6 @@ chent <- R6Class("chent",
 
     #' Add a transformation product to the internal list
     #' @param x A [chent] object, or an identifier to generate a [chent] object
-    #' @param smiles A SMILES code for defining a [chent] object
     #' @param pubchem Should chemical information be obtained from PubChem?
     add_TP = function(x, smiles = NULL, pubchem = FALSE) {
       if (inherits(x, "chent")) {
@@ -360,7 +361,7 @@ chent <- R6Class("chent",
         chent <- x
       } else {
         id <- make.names(x)
-        chent <- chent$new(x, smiles, pubchem = pubchem)
+        chent <- chent$new(x, smiles = smiles, pubchem = pubchem)
       }
       self$TPs[[id]] <- chent
     },
@@ -380,9 +381,6 @@ chent <- R6Class("chent",
     #' @param max_occurrence The maximum observed occurrence of the
     #' transformation product, expressed as a fraction of the amount that would
     #' result from stochiometric transformation
-    #' @param source An acronym specifying the source of the information
-    #' @param pages The page from which the information was taken
-    #' @param remark A remark
     add_transformation = function(study_type, TP_identifier, max_occurrence,
       remark = "", source = NA, pages = NA)
     {
@@ -407,17 +405,11 @@ chent <- R6Class("chent",
     soil_degradation = NULL,
 
     #' Add a line in the internal dataframe holding modelling DT50 values
-    #' @param soils Names of the soils
     #' @param DT50_mod The modelling DT50 in the sense of regulatory pesticide
     #' fate modelling
     #' @param DT50_mod_ref The normalised modelling DT50 in the sense of
     #' regulatory pesticide fate modelling
-    #' @param type The soil type
     #' @param country The country (mainly for field studies)
-    #' @param pH_orig The pH stated in the study
-    #' @param pH_medium The medium in which this pH was measured
-    #' @param pH_H2O The pH extrapolated to pure water
-    #' @param perc_OC The percentage of organic carbon in the soil
     #' @param temperature The temperature during the study in degrees Celsius
     #' @param moisture The moisture during the study
     #' @param category Is it a laboratory ('lab') or field study ('field')
@@ -425,9 +417,6 @@ chent <- R6Class("chent",
     #' the technical active ingredient
     #' @param model The degradation model used for deriving `DT50_mod`
     #' @param chi2 The relative error as defined in FOCUS kinetics
-    #' @param source An acronym specifying the source of the information
-    #' @param page The page from which the information was taken
-    #' @param remark A remark
     add_soil_degradation = function(soils, DT50_mod, DT50_mod_ref,
       type = NA, country = NA,
       pH_orig = NA, pH_medium = NA, pH_H2O = NA,
@@ -500,7 +489,8 @@ chent <- R6Class("chent",
     #' @param N The Freundlich exponent
     #' @param perc_clay The percentage of clay in the soil
     #' @param CEC The cation exchange capacity
-    add_soil_sorption = function(soils, Kf, Kfoc, N,
+    add_soil_sorption = function(soils, 
+      Kf, Kfoc, N,
       type = NA, pH_orig = NA, pH_medium = NA,
       pH_H2O = NA,
       perc_OC = NA, perc_clay = NA, CEC = NA,
@@ -525,10 +515,8 @@ chent <- R6Class("chent",
       }
     },
 
+    #' @description
     #' Write a PDF image of the structure
-    #' @param file The file to write to
-    #' @param dir The directory to write the file to
-    #' @param template A template expressed as SMILES to use in RDKit
     pdf = function(file = paste0(self$identifier, ".pdf"),
         dir = "structures/pdf", template = NULL) {
       if (!dir.exists(dir)) {
@@ -568,8 +556,8 @@ chent <- R6Class("chent",
       dev.off()
     },
 
+    #' @description
     #' Write an EMF image of the structure using [emf][devEMF::emf]
-    #' @param file The file to write to
     emf = function(file = paste0(self$identifier, ".emf"),
       dir = "structures/emf")
     {
@@ -650,12 +638,12 @@ plot.chent = function(x, ...) {
 
 #' @title An R6 class for pesticidal active ingredients and associated data
 #'
-#' @description The class is initialised with an identifier which is generally
-#' an ISO common name.  Additional chemical information is retrieved from the
-#' internet if available.
+#' @description This class is derived from [chent]. It makes it easy
+#' to create a [chent] from the ISO common name of a pesticide active
+#' ingredient, and additionally stores the ISO name as well as
+#' the complete result of querying the BCPC compendium using
+#' [bcpc_query][webchem::bcpc_query].
 #'
-#' @docType class
-#' @importFrom R6 R6Class
 #' @export
 #' @format An \code{\link{R6Class}} generator object
 #' @examples
@@ -671,7 +659,6 @@ plot.chent = function(x, ...) {
 #' }
 #'
 #' }
-
 pai <- R6Class("pai",
   inherit = chent,
   public = list(
@@ -683,23 +670,27 @@ pai <- R6Class("pai",
     #' at <pesticidecompendium.bcpc.org>
     bcpc = NULL,
 
-    #' Creates a new instance of this [R6][R6::R6Class] class.
-    #'
-    #' @description This class is derived from [chent]. It makes it easy
-    #' to create a [chent] from the ISO common name of a pesticide active
-    #' ingredient, and additionally stores the ISO name as well as
-    #' the complete result of querying the BCPC compendium using
-    #' [bcpc_query][webchem::bcpc_query].
-    #'
     #' @param iso The ISO common name to be used in the query of the
     #' BCPC compendium
     #'
     #' @param identifier Alternative identifier used for querying pubchem
+    #' @param smiles Optional user provided SMILES code
+    #' @param inchikey Optional user provided InChI Key
+    #' @param bcpc Should the BCPC compendium be queried?
+    #' @param pubchem Should an attempt be made to retrieve chemical
+    #' information from PubChem via the webchem package?
+    #' @param pubchem_from Possibility to select the argument
+    #' that is used to query pubchem
+    #' @param rdkit Should an attempt be made to retrieve chemical
+    #' information from a local rdkit installation via python
+    #' and the reticulate package?
+    #' @param template An optional SMILES code to be used as template for RDKit
+    #' @param chyaml Should we look for a identifier.yaml file in the working
     initialize = function(iso, identifier = iso,
       smiles = NULL, inchikey = NULL, bcpc = TRUE,
       pubchem = TRUE, pubchem_from = 'auto',
       rdkit = TRUE, template = NULL,
-      chyaml = TRUE)
+      chyaml = FALSE)
     {
 
       if (!is.null(inchikey)) {
@@ -776,11 +767,8 @@ print.pai = function(x, ...) {
 #' @description Contains basic information about the active ingredients in the
 #' product
 #'
-#' @docType class
-#' @importFrom R6 R6Class
 #' @export
 #' @format An \code{\link{R6Class}} generator object.
-
 ppp <- R6Class("ppp",
   public = list(
 
@@ -803,12 +791,12 @@ ppp <- R6Class("ppp",
     density_units = "g/L",
 
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    #'
-    #' @field ... Identifiers of the active ingredients
-    #' @field concentrations Concentrations of the active ingredients
-    #' @field concentration_units Defaults to g/L
-    #' @field density The density
-    #' @field density_units Defaults to g/L
+    #' @param name The name of the product
+    #' @param ... Identifiers of the active ingredients
+    #' @param concentrations Concentrations of the active ingredients
+    #' @param concentration_units Defaults to g/L
+    #' @param density The density
+    #' @param density_units Defaults to g/L
     initialize = function(name, ..., concentrations, concentration_units = "g/L",
       density = 1000, density_units = "g/L")
     {
@@ -819,13 +807,16 @@ ppp <- R6Class("ppp",
       self$density_units <- density_units
       names(self$concentrations) <- names(self$ais)
       self$concentration_units <- concentration_units
-    },
-
-    #' Printing method
-    print = function() {
-      cat("<pp> named", self$name, "\n")
     }
   )
 )
 
+#' Printing method for ppp objects (plant protection products)
+#'
+#' @param x The chent object to be printed
+#' @param ... Further arguments for compatibility with the S3 method
+#' @export
+print.ppp = function(x, ...) {
+  cat("<pp> named", x$name, "\n")
+}
 # vim: set ts=2 sw=2 expandtab:

@@ -3,6 +3,7 @@
 S3method(plot,chent)
 S3method(print,chent)
 S3method(print,pai)
+S3method(print,ppp)
 export(chent)
 export(draw_svg.chent)
 export(pai)

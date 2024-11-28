@@ -105,6 +105,8 @@ Add soil sorption data}
 \if{latex}{\out{\hypertarget{method-chent-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
+
+Try to get chemical information from PubChem
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$new(
   identifier,
@@ -114,7 +116,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   pubchem_from = c("name", "smiles", "inchikey"),
   rdkit = TRUE,
   template = NULL,
-  chyaml = TRUE
+  chyaml = FALSE
 )}\if{html}{\out{</div>}}
 }
 
@@ -140,8 +142,7 @@ and the reticulate package?}
 \item{\code{template}}{An optional SMILES code to be used as template for RDKit}
 
 \item{\code{chyaml}}{Should we look for a identifier.yaml file in the working
-directory?
-Try to get chemical information from PubChem}
+directory?}
 }
 \if{html}{\out{</div>}}
 }
@@ -176,8 +177,7 @@ Get chemical information from PubChem for a known PubChem CID}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{pubchem_cid}}{CID
-Get chemical information from RDKit if available}
+\item{\code{pubchem_cid}}{CID}
 }
 \if{html}{\out{</div>}}
 }
@@ -186,6 +186,8 @@ Get chemical information from RDKit if available}
 \if{html}{\out{<a id="method-chent-get_rdkit"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-get_rdkit}{}}}
 \subsection{Method \code{get_rdkit()}}{
+Get chemical information from RDKit if available
+Obtain information from a YAML file
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$get_rdkit(template = NULL)}\if{html}{\out{</div>}}
 }
@@ -193,8 +195,7 @@ Get chemical information from RDKit if available}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{template}}{Optional template specified as a SMILES code
-Obtain information from a YAML file}
+\item{\code{template}}{An optional SMILES code to be used as template for RDKit}
 }
 \if{html}{\out{</div>}}
 }
@@ -234,7 +235,8 @@ Add a vapour pressure}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{p0}}{The vapour pressure in Pa}
+\item{\code{p0}}{The vapour pressure in Pa
+Add a water solubility}
 
 \item{\code{T}}{Temperature}
 
@@ -242,8 +244,7 @@ Add a vapour pressure}
 
 \item{\code{page}}{The page from which the information was taken}
 
-\item{\code{remark}}{A remark
-Add a water solubility}
+\item{\code{remark}}{A remark}
 }
 \if{html}{\out{</div>}}
 }
@@ -259,18 +260,18 @@ Add a water solubility}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{cwsat}}{The water solubility in mg/L}
+\item{\code{cwsat}}{The water solubility in mg/L
+Add a plant uptake factor}
 
 \item{\code{T}}{Temperature}
 
-\item{\code{pH}}{The pH value}
+\item{\code{pH}}{pH value}
 
 \item{\code{source}}{An acronym specifying the source of the information}
 
 \item{\code{page}}{The page from which the information was taken}
 
-\item{\code{remark}}{A remark
-Add a plant uptake factor}
+\item{\code{remark}}{A remark}
 }
 \if{html}{\out{</div>}}
 }
@@ -315,7 +316,7 @@ Add a plant uptake factor}
 \describe{
 \item{\code{x}}{A \link{chent} object, or an identifier to generate a \link{chent} object}
 
-\item{\code{smiles}}{A SMILES code for defining a \link{chent} object}
+\item{\code{smiles}}{Optional user provided SMILES code}
 
 \item{\code{pubchem}}{Should chemical information be obtained from PubChem?}
 }
@@ -353,7 +354,7 @@ result from stochiometric transformation}
 
 \item{\code{source}}{An acronym specifying the source of the information}
 
-\item{\code{pages}}{The page from which the information was taken}
+\item{\code{pages}}{The pages from which the information was taken}
 }
 \if{html}{\out{</div>}}
 }
@@ -446,6 +447,12 @@ the technical active ingredient}
 \item{\code{soils}}{The soil name(s) in which the transformation was observed}
 
 \item{\code{ff}}{The formation fraction(s)}
+
+\item{\code{remark}}{A remark}
+
+\item{\code{source}}{An acronym specifying the source of the information}
+
+\item{\code{page}}{The page from which the information was taken}
 }
 \if{html}{\out{</div>}}
 }
@@ -476,6 +483,8 @@ the technical active ingredient}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{soils}}{Names of the soils}
+
 \item{\code{Kf}}{The sorption constant in L/kg, either linear (then \code{N} is 1)
 or according to Freundlich}
 
@@ -483,10 +492,25 @@ or according to Freundlich}
 
 \item{\code{N}}{The Freundlich exponent}
 
+\item{\code{type}}{The soil type}
+
+\item{\code{pH_orig}}{The pH stated in the study}
+
+\item{\code{pH_medium}}{The medium in which this pH was measured}
+
+\item{\code{pH_H2O}}{The pH extrapolated to pure water}
+
+\item{\code{perc_OC}}{The percentage of organic carbon in the soil}
+
 \item{\code{perc_clay}}{The percentage of clay in the soil}
 
-\item{\code{CEC}}{The cation exchange capacity
-Write a PDF image of the structure}
+\item{\code{CEC}}{The cation exchange capacity}
+
+\item{\code{remark}}{A remark}
+
+\item{\code{source}}{An acronym specifying the source of the information}
+
+\item{\code{page}}{The page from which the information was taken}
 }
 \if{html}{\out{</div>}}
 }
@@ -495,6 +519,8 @@ Write a PDF image of the structure}
 \if{html}{\out{<a id="method-chent-pdf"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-pdf}{}}}
 \subsection{Method \code{pdf()}}{
+Write a PDF image of the structure
+Write a PNG image of the structure
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$pdf(
   file = paste0(self$identifier, ".pdf"),
@@ -510,8 +536,7 @@ Write a PDF image of the structure}
 
 \item{\code{dir}}{The directory to write the file to}
 
-\item{\code{template}}{A template expressed as SMILES to use in RDKit
-Write a PNG image of the structure}
+\item{\code{template}}{An optional SMILES code to be used as template for RDKit}
 }
 \if{html}{\out{</div>}}
 }
@@ -531,8 +556,11 @@ Write a PNG image of the structure}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{antialias}}{Passed to \link[grDevices:png]{png}
-Write an EMF image of the structure using \link[devEMF:emf]{emf}}
+\item{\code{file}}{The file to write to}
+
+\item{\code{dir}}{The directory to write the file to}
+
+\item{\code{antialias}}{Passed to \link[grDevices:png]{png}}
 }
 \if{html}{\out{</div>}}
 }
@@ -541,6 +569,7 @@ Write an EMF image of the structure using \link[devEMF:emf]{emf}}
 \if{html}{\out{<a id="method-chent-emf"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-emf}{}}}
 \subsection{Method \code{emf()}}{
+Write an EMF image of the structure using \link[devEMF:emf]{emf}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$emf(file = paste0(self$identifier, ".emf"), dir = "structures/emf")}\if{html}{\out{</div>}}
 }
@@ -549,6 +578,8 @@ Write an EMF image of the structure using \link[devEMF:emf]{emf}}
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{file}}{The file to write to}
+
+\item{\code{dir}}{The directory to write the file to}
 }
 \if{html}{\out{</div>}}
 }

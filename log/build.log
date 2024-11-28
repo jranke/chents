@@ -1,0 +1,8 @@
+* checking for file ‘./DESCRIPTION’ ... OK
+* preparing ‘chents’:
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+Omitted ‘LazyData’ from DESCRIPTION
+* building ‘chents_0.3.7.tar.gz’
+

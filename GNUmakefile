@@ -3,74 +3,45 @@ PKGNAME := $(shell sed -n "s/Package: *\([^ ]*\)/\1/p" DESCRIPTION)
 PKGVERS := $(shell sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION)
 TGZ     := $(PKGNAME)_$(PKGVERS).tar.gz
 WINBIN  := $(PKGNAME)_$(PKGVERS).zip
-R_HOME  ?= $(shell R RHOME)
-DATE    := $(shell date +%Y-%m-%d)
+RBIN ?= $(shell dirname "`which R`")
 
 all: install
 
 pkgfiles = DESCRIPTION \
-	README.html \
+	.Rbuildignore \
+	DESCRIPTION \
+	NAMESPACE \
+	NEWS.md \
+	README.md \
 	R/* \
 	inst/examples/*.R \
 	_pkgdown.yml \
 	tests/testthat.R \
 	tests/testthat/*
 
-roxygen: 
-	@echo "Roxygenizing package..."
-	"$(R_HOME)/bin/Rscript" -e 'library(devtools); document()'
-	@echo "DONE."
-
-pd: roxygen
-	@echo "Building static documentation..."
-	"$(R_HOME)/bin/Rscript" -e 'pkgdown::build_site()'
-	@echo "DONE."
+roxy:
+	$(RBIN)/Rscript -e "roxygen2::roxygenize(roclets = c('rd', 'collate', 'namespace'))"
 
 $(TGZ): $(pkgfiles)
-	@echo "Roxygenizing package..."
-	"$(R_HOME)/bin/Rscript" -e 'library(devtools); document()'
-	@echo "Building package..."
-	"$(R_HOME)/bin/R" CMD build .
-	@echo "DONE."
+	"$(RBIN)/R" CMD build . 2>&1 | tee log/build.log
 
-README.html: README.md
-	"$(R_HOME)/bin/Rscript" -e "rmarkdown::render('README.md', output_format = 'html_document')"
+pd: roxy
+	"$(RBIN)/Rscript" -e 'pkgdown::build_site()'
 
-build: $(TGZ)
-
-$(WINBIN): build
-	@echo "Building windows binary package..."
-	"$(R_HOME)/bin/R" CMD INSTALL $(TGZ) --build
-	@echo "DONE."
-
-winbin: $(WINBIN)
+build: roxy $(TGZ)
 
 test: build
-	@echo "Running testthat tests..."
-	"$(R_HOME)/bin/Rscript" -e 'library(devtools); devtools::test()' 2>&1 | tee test.log
+	"$(RBIN)/Rscript" -e 'library(devtools); devtools::test()' 2>&1 | tee test.log
 	sed -i -e "s/\r.*\r//" test.log
-	@echo "DONE."
 
 quickcheck: build
-	@echo "Running check..."
-	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(R_HOME)/bin/R" CMD check $(TGZ) --no-tests
-	@echo "DONE."
+	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(RBIN)/R" CMD check $(TGZ) --no-tests
 
-check: build
-	@echo "Running CRAN check..."
-	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(R_HOME)/bin/R" CMD check --as-cran $(TGZ) --no-tests
-	@echo "DONE."
+check: roxy build
+	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(RBIN)/R" CMD check --as-cran --no-tests $(TGZ) 2>&1 | tee log/check.log
 
 install: build
-	@echo "Installing package..."
 	"$(R_HOME)/bin/R" CMD INSTALL --no-multiarch $(TGZ)
-	@echo "DONE."
-
-drat: build
-	"$(R_HOME)/bin/Rscript" -e "drat::insertPackage('$(TGZ)', commit = TRUE)"
-
-dratwin: winbin
-	"$(R_HOME)/bin/Rscript" -e "drat::insertPackage('$(WINBIN)', 'e:/git/drat/', commit = TRUE)"
 
 winbuilder: build
 	date
@@ -78,3 +49,5 @@ winbuilder: build
 	curl -T $(TGZ) ftp://anonymous@win-builder.r-project.org/R-release/
 	@echo "Uploading to R-devel on win-builder"
 	curl -T $(TGZ) ftp://anonymous@win-builder.r-project.org/R-devel/
+
+.PHONEY: roxy pd test quickcheck check install winbuilder
