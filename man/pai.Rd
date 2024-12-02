@@ -72,6 +72,7 @@ at <pesticidecompendium.bcpc.org>}
 \if{html}{\out{<a id="method-pai-new"></a>}}
 \if{latex}{\out{\hypertarget{method-pai-new}{}}}
 \subsection{Method \code{new()}}{
+Create a new pai object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{pai$new(
   iso,

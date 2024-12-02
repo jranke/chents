@@ -23,8 +23,7 @@ product
 
 \item{\code{density}}{The density of the product}
 
-\item{\code{density_units}}{Defaults to g/L
-Creates a new instance of this \link[R6:R6Class]{R6} class.}
+\item{\code{density_units}}{Defaults to g/L}
 }
 \if{html}{\out{</div>}}
 }
@@ -39,6 +38,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.}
 \if{html}{\out{<a id="method-ppp-new"></a>}}
 \if{latex}{\out{\hypertarget{method-ppp-new}{}}}
 \subsection{Method \code{new()}}{
+Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ppp$new(
   name,

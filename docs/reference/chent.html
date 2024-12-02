@@ -116,18 +116,15 @@ List of information retrieved from PubChem</p></dd>
 
 
 <dt><code>TPs</code></dt>
-<dd><p>List of transformation products as chent objects
-Add a transformation product to the internal list</p></dd>
+<dd><p>List of transformation products as chent objects</p></dd>
 
 
 <dt><code>transformations</code></dt>
-<dd><p>Data frame of observed transformations
-Add a line in the internal dataframe holding observed transformations</p></dd>
+<dd><p>Data frame of observed transformations</p></dd>
 
 
 <dt><code>soil_degradation</code></dt>
-<dd><p>Dataframe of modelling DT50 values
-Add a line in the internal dataframe holding modelling DT50 values</p></dd>
+<dd><p>Dataframe of modelling DT50 values</p></dd>
 
 
 <dt><code>soil_ff</code></dt>
@@ -135,8 +132,7 @@ Add a line in the internal dataframe holding modelling DT50 values</p></dd>
 
 
 <dt><code>soil_sorption</code></dt>
-<dd><p>Dataframe of soil sorption data
-Add soil sorption data</p></dd>
+<dd><p>Dataframe of soil sorption data</p></dd>
 
 
 </dl><p></p></div>
@@ -166,8 +162,7 @@ Add soil sorption data</p></dd>
 <li><p><a href="#method-chent-clone"><code>chent$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-chent-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
-<p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p>
-<p>Try to get chemical information from PubChem</p><div class="section">
+<p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/chent.html">chent</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  <span class="va">identifier</span>,</span>
@@ -225,8 +220,7 @@ directory?</p></dd>
 
 </div><p></p><hr><a id="method-chent-try_pubchem"></a><div class="section">
 <h3 id="method-try-pubchem-">Method <code>try_pubchem()</code><a class="anchor" aria-label="anchor" href="#method-try-pubchem-"></a></h3>
-
-<div class="section">
+<p>Try to get chemical information from PubChem</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">try_pubchem</span><span class="op">(</span><span class="va">query</span>, from <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -238,8 +232,7 @@ directory?</p></dd>
 
 
 <dt><code>from</code></dt>
-<dd><p>Passed to <a href="https://docs.ropensci.org/webchem/reference/get_cid.html" class="external-link">get_cid</a>
-Get chemical information from PubChem for a known PubChem CID</p></dd>
+<dd><p>Passed to <a href="https://docs.ropensci.org/webchem/reference/get_cid.html" class="external-link">get_cid</a></p></dd>
 
 
 </dl><p></p></div>
@@ -247,8 +240,7 @@ Get chemical information from PubChem for a known PubChem CID</p></dd>
 
 </div><p></p><hr><a id="method-chent-get_pubchem"></a><div class="section">
 <h3 id="method-get-pubchem-">Method <code>get_pubchem()</code><a class="anchor" aria-label="anchor" href="#method-get-pubchem-"></a></h3>
-
-<div class="section">
+<p>Get chemical information from PubChem for a known PubChem CID</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">get_pubchem</span><span class="op">(</span><span class="va">pubchem_cid</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -264,8 +256,7 @@ Get chemical information from PubChem for a known PubChem CID</p></dd>
 
 </div><p></p><hr><a id="method-chent-get_rdkit"></a><div class="section">
 <h3 id="method-get-rdkit-">Method <code>get_rdkit()</code><a class="anchor" aria-label="anchor" href="#method-get-rdkit-"></a></h3>
-<p>Get chemical information from RDKit if available
-Obtain information from a YAML file</p><div class="section">
+<p>Get chemical information from RDKit if available</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">get_rdkit</span><span class="op">(</span>template <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -281,8 +272,7 @@ Obtain information from a YAML file</p><div class="section">
 
 </div><p></p><hr><a id="method-chent-get_chyaml"></a><div class="section">
 <h3 id="method-get-chyaml-">Method <code>get_chyaml()</code><a class="anchor" aria-label="anchor" href="#method-get-chyaml-"></a></h3>
-
-<div class="section">
+<p>Obtain information from a YAML file</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">get_chyaml</span><span class="op">(</span></span>
 <span>  repo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wd"</span>, <span class="st">"local"</span>, <span class="st">"web"</span><span class="op">)</span>,</span>
@@ -299,8 +289,7 @@ the web (not implemented).</p></dd>
 
 
 <dt><code>chyaml</code></dt>
-<dd><p>The filename to be looked for
-Add a vapour pressure</p></dd>
+<dd><p>The filename to be looked for</p></dd>
 
 
 </dl><p></p></div>
@@ -308,8 +297,7 @@ Add a vapour pressure</p></dd>
 
 </div><p></p><hr><a id="method-chent-add_p0"></a><div class="section">
 <h3 id="method-add-p-">Method <code>add_p0()</code><a class="anchor" aria-label="anchor" href="#method-add-p-"></a></h3>
-
-<div class="section">
+<p>Add a vapour pressure</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_p0</span><span class="op">(</span><span class="va">p0</span>, T <span class="op">=</span> <span class="cn">NA</span>, source <span class="op">=</span> <span class="cn">NA</span>, page <span class="op">=</span> <span class="cn">NA</span>, remark <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -317,8 +305,7 @@ Add a vapour pressure</p></dd>
 <div class="section">
 <h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>p0</code></dt>
-<dd><p>The vapour pressure in Pa
-Add a water solubility</p></dd>
+<dd><p>The vapour pressure in Pa</p></dd>
 
 
 <dt><code>T</code></dt>
@@ -342,8 +329,7 @@ Add a water solubility</p></dd>
 
 </div><p></p><hr><a id="method-chent-add_cwsat"></a><div class="section">
 <h3 id="method-add-cwsat-">Method <code>add_cwsat()</code><a class="anchor" aria-label="anchor" href="#method-add-cwsat-"></a></h3>
-
-<div class="section">
+<p>Add a water solubility</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_cwsat</span><span class="op">(</span><span class="va">cwsat</span>, T <span class="op">=</span> <span class="cn">NA</span>, pH <span class="op">=</span> <span class="cn">NA</span>, source <span class="op">=</span> <span class="cn">NA</span>, page <span class="op">=</span> <span class="cn">NA</span>, remark <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -351,8 +337,7 @@ Add a water solubility</p></dd>
 <div class="section">
 <h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>cwsat</code></dt>
-<dd><p>The water solubility in mg/L
-Add a plant uptake factor</p></dd>
+<dd><p>The water solubility in mg/L</p></dd>
 
 
 <dt><code>T</code></dt>
@@ -380,8 +365,7 @@ Add a plant uptake factor</p></dd>
 
 </div><p></p><hr><a id="method-chent-add_PUF"></a><div class="section">
 <h3 id="method-add-puf-">Method <code>add_PUF()</code><a class="anchor" aria-label="anchor" href="#method-add-puf-"></a></h3>
-
-<div class="section">
+<p>Add a plant uptake factor</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_PUF</span><span class="op">(</span></span>
 <span>  PUF <span class="op">=</span> <span class="fl">0</span>,</span>
@@ -414,8 +398,7 @@ Add a plant uptake factor</p></dd>
 
 </div><p></p><hr><a id="method-chent-add_TP"></a><div class="section">
 <h3 id="method-add-tp-">Method <code>add_TP()</code><a class="anchor" aria-label="anchor" href="#method-add-tp-"></a></h3>
-
-<div class="section">
+<p>Add a transformation product to the internal list</p><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_TP</span><span class="op">(</span><span class="va">x</span>, smiles <span class="op">=</span> <span class="cn">NULL</span>, pubchem <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -439,8 +422,7 @@ Add a plant uptake factor</p></dd>
 
 </div><p></p><hr><a id="method-chent-add_transformation"></a><div class="section">
 <h3 id="method-add-transformation-">Method <code>add_transformation()</code><a class="anchor" aria-label="anchor" href="#method-add-transformation-"></a></h3>
-
-<div class="section">
+<p>Add a line in the internal dataframe holding observed transformations</p><div class="section">
 <h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_transformation</span><span class="op">(</span></span>
 <span>  <span class="va">study_type</span>,</span>
@@ -486,8 +468,7 @@ result from stochiometric transformation</p></dd>
 
 </div><p></p><hr><a id="method-chent-add_soil_degradation"></a><div class="section">
 <h3 id="method-add-soil-degradation-">Method <code>add_soil_degradation()</code><a class="anchor" aria-label="anchor" href="#method-add-soil-degradation-"></a></h3>
-
-<div class="section">
+<p>Add a line in the internal dataframe holding modelling DT50 values</p><div class="section">
 <h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_soil_degradation</span><span class="op">(</span></span>
 <span>  <span class="va">soils</span>,</span>
@@ -593,8 +574,7 @@ the technical active ingredient</p></dd>
 
 </div><p></p><hr><a id="method-chent-add_soil_ff"></a><div class="section">
 <h3 id="method-add-soil-ff-">Method <code>add_soil_ff()</code><a class="anchor" aria-label="anchor" href="#method-add-soil-ff-"></a></h3>
-
-<div class="section">
+<p>Add one or more formation fractions for degradation in soil</p><div class="section">
 <h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_soil_ff</span><span class="op">(</span><span class="va">target</span>, <span class="va">soils</span>, ff <span class="op">=</span> <span class="fl">1</span>, remark <span class="op">=</span> <span class="st">""</span>, <span class="va">source</span>, page <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -630,8 +610,7 @@ the technical active ingredient</p></dd>
 
 </div><p></p><hr><a id="method-chent-add_soil_sorption"></a><div class="section">
 <h3 id="method-add-soil-sorption-">Method <code>add_soil_sorption()</code><a class="anchor" aria-label="anchor" href="#method-add-soil-sorption-"></a></h3>
-
-<div class="section">
+<p>Add soil sorption data</p><div class="section">
 <h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_soil_sorption</span><span class="op">(</span></span>
 <span>  <span class="va">soils</span>,</span>
@@ -715,8 +694,7 @@ or according to Freundlich</p></dd>
 
 </div><p></p><hr><a id="method-chent-pdf"></a><div class="section">
 <h3 id="method-pdf-">Method <code><a href="https://rdrr.io/r/grDevices/pdf.html" class="external-link">pdf()</a></code><a class="anchor" aria-label="anchor" href="#method-pdf-"></a></h3>
-<p>Write a PDF image of the structure
-Write a PNG image of the structure</p><div class="section">
+<p>Write a PDF image of the structure</p><div class="section">
 <h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">pdf</span><span class="op">(</span></span>
 <span>  file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">identifier</span>, <span class="st">".pdf"</span><span class="op">)</span>,</span>
@@ -744,8 +722,7 @@ Write a PNG image of the structure</p><div class="section">
 
 </div><p></p><hr><a id="method-chent-png"></a><div class="section">
 <h3 id="method-png-">Method <code><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png()</a></code><a class="anchor" aria-label="anchor" href="#method-png-"></a></h3>
-
-<div class="section">
+<p>Write a PNG image of the structure</p><div class="section">
 <h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">png</span><span class="op">(</span></span>
 <span>  file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">identifier</span>, <span class="st">".png"</span><span class="op">)</span>,</span>

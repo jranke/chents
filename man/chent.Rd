@@ -58,19 +58,15 @@ List of information retrieved from PubChem}
 
 \item{\code{chyaml}}{List of information obtained from a YAML file}
 
-\item{\code{TPs}}{List of transformation products as chent objects
-Add a transformation product to the internal list}
+\item{\code{TPs}}{List of transformation products as chent objects}
 
-\item{\code{transformations}}{Data frame of observed transformations
-Add a line in the internal dataframe holding observed transformations}
+\item{\code{transformations}}{Data frame of observed transformations}
 
-\item{\code{soil_degradation}}{Dataframe of modelling DT50 values
-Add a line in the internal dataframe holding modelling DT50 values}
+\item{\code{soil_degradation}}{Dataframe of modelling DT50 values}
 
 \item{\code{soil_ff}}{Dataframe of formation fractions}
 
-\item{\code{soil_sorption}}{Dataframe of soil sorption data
-Add soil sorption data}
+\item{\code{soil_sorption}}{Dataframe of soil sorption data}
 }
 \if{html}{\out{</div>}}
 }
@@ -101,8 +97,6 @@ Add soil sorption data}
 \if{latex}{\out{\hypertarget{method-chent-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
-
-Try to get chemical information from PubChem
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$new(
   identifier,
@@ -147,6 +141,7 @@ directory?}
 \if{html}{\out{<a id="method-chent-try_pubchem"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-try_pubchem}{}}}
 \subsection{Method \code{try_pubchem()}}{
+Try to get chemical information from PubChem
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$try_pubchem(query, from = "name")}\if{html}{\out{</div>}}
 }
@@ -156,8 +151,7 @@ directory?}
 \describe{
 \item{\code{query}}{Query string to be passed to \link[webchem:get_cid]{get_cid}}
 
-\item{\code{from}}{Passed to \link[webchem:get_cid]{get_cid}
-Get chemical information from PubChem for a known PubChem CID}
+\item{\code{from}}{Passed to \link[webchem:get_cid]{get_cid}}
 }
 \if{html}{\out{</div>}}
 }
@@ -166,6 +160,7 @@ Get chemical information from PubChem for a known PubChem CID}
 \if{html}{\out{<a id="method-chent-get_pubchem"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-get_pubchem}{}}}
 \subsection{Method \code{get_pubchem()}}{
+Get chemical information from PubChem for a known PubChem CID
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$get_pubchem(pubchem_cid)}\if{html}{\out{</div>}}
 }
@@ -183,7 +178,6 @@ Get chemical information from PubChem for a known PubChem CID}
 \if{latex}{\out{\hypertarget{method-chent-get_rdkit}{}}}
 \subsection{Method \code{get_rdkit()}}{
 Get chemical information from RDKit if available
-Obtain information from a YAML file
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$get_rdkit(template = NULL)}\if{html}{\out{</div>}}
 }
@@ -200,6 +194,7 @@ Obtain information from a YAML file
 \if{html}{\out{<a id="method-chent-get_chyaml"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-get_chyaml}{}}}
 \subsection{Method \code{get_chyaml()}}{
+Obtain information from a YAML file
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$get_chyaml(
   repo = c("wd", "local", "web"),
@@ -214,8 +209,7 @@ Obtain information from a YAML file
 directory, a local git repository under \verb{~/git/chyaml}, or from
 the web (not implemented).}
 
-\item{\code{chyaml}}{The filename to be looked for
-Add a vapour pressure}
+\item{\code{chyaml}}{The filename to be looked for}
 }
 \if{html}{\out{</div>}}
 }
@@ -224,6 +218,7 @@ Add a vapour pressure}
 \if{html}{\out{<a id="method-chent-add_p0"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_p0}{}}}
 \subsection{Method \code{add_p0()}}{
+Add a vapour pressure
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_p0(p0, T = NA, source = NA, page = NA, remark = "")}\if{html}{\out{</div>}}
 }
@@ -231,8 +226,7 @@ Add a vapour pressure}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{p0}}{The vapour pressure in Pa
-Add a water solubility}
+\item{\code{p0}}{The vapour pressure in Pa}
 
 \item{\code{T}}{Temperature}
 
@@ -249,6 +243,7 @@ Add a water solubility}
 \if{html}{\out{<a id="method-chent-add_cwsat"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_cwsat}{}}}
 \subsection{Method \code{add_cwsat()}}{
+Add a water solubility
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_cwsat(cwsat, T = NA, pH = NA, source = NA, page = NA, remark = "")}\if{html}{\out{</div>}}
 }
@@ -256,8 +251,7 @@ Add a water solubility}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{cwsat}}{The water solubility in mg/L
-Add a plant uptake factor}
+\item{\code{cwsat}}{The water solubility in mg/L}
 
 \item{\code{T}}{Temperature}
 
@@ -276,6 +270,7 @@ Add a plant uptake factor}
 \if{html}{\out{<a id="method-chent-add_PUF"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_PUF}{}}}
 \subsection{Method \code{add_PUF()}}{
+Add a plant uptake factor
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_PUF(
   PUF = 0,
@@ -303,6 +298,7 @@ Add a plant uptake factor}
 \if{html}{\out{<a id="method-chent-add_TP"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_TP}{}}}
 \subsection{Method \code{add_TP()}}{
+Add a transformation product to the internal list
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_TP(x, smiles = NULL, pubchem = FALSE)}\if{html}{\out{</div>}}
 }
@@ -323,6 +319,7 @@ Add a plant uptake factor}
 \if{html}{\out{<a id="method-chent-add_transformation"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_transformation}{}}}
 \subsection{Method \code{add_transformation()}}{
+Add a line in the internal dataframe holding observed transformations
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_transformation(
   study_type,
@@ -359,6 +356,7 @@ result from stochiometric transformation}
 \if{html}{\out{<a id="method-chent-add_soil_degradation"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_soil_degradation}{}}}
 \subsection{Method \code{add_soil_degradation()}}{
+Add a line in the internal dataframe holding modelling DT50 values
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_soil_degradation(
   soils,
@@ -431,6 +429,7 @@ the technical active ingredient}
 \if{html}{\out{<a id="method-chent-add_soil_ff"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_soil_ff}{}}}
 \subsection{Method \code{add_soil_ff()}}{
+Add one or more formation fractions for degradation in soil
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_soil_ff(target, soils, ff = 1, remark = "", source, page = NA)}\if{html}{\out{</div>}}
 }
@@ -457,6 +456,7 @@ the technical active ingredient}
 \if{html}{\out{<a id="method-chent-add_soil_sorption"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_soil_sorption}{}}}
 \subsection{Method \code{add_soil_sorption()}}{
+Add soil sorption data
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$add_soil_sorption(
   soils,
@@ -516,7 +516,6 @@ or according to Freundlich}
 \if{latex}{\out{\hypertarget{method-chent-pdf}{}}}
 \subsection{Method \code{pdf()}}{
 Write a PDF image of the structure
-Write a PNG image of the structure
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$pdf(
   file = paste0(self$identifier, ".pdf"),
@@ -541,6 +540,7 @@ Write a PNG image of the structure
 \if{html}{\out{<a id="method-chent-png"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-png}{}}}
 \subsection{Method \code{png()}}{
+Write a PNG image of the structure
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{chent$png(
   file = paste0(self$identifier, ".png"),

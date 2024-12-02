@@ -102,7 +102,6 @@ chent <- R6Class("chent",
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
-    #'
     initialize = function(identifier, smiles = NULL, inchikey = NULL,
       pubchem = TRUE, pubchem_from = c('name', 'smiles', 'inchikey'),
       rdkit = TRUE, template = NULL,
@@ -166,6 +165,7 @@ chent <- R6Class("chent",
       invisible(self)
     },
 
+    #' @description
     #' Try to get chemical information from PubChem
     #' @param query Query string to be passed to [get_cid][webchem::get_cid]
     #' @param from Passed to [get_cid][webchem::get_cid]
@@ -181,6 +181,7 @@ chent <- R6Class("chent",
       }
     },
 
+    #' @description
     #' Get chemical information from PubChem for a known PubChem CID
     #' @param pubchem_cid CID
     get_pubchem = function(pubchem_cid) {
@@ -274,6 +275,7 @@ chent <- R6Class("chent",
       unlink(c(xmlfile, psfile, svgfile))
     },
 
+    #' @description
     #' Obtain information from a YAML file
     #' @param repo Should the file be looked for in the current working
     #' directory, a local git repository under `~/git/chyaml`, or from
@@ -310,6 +312,7 @@ chent <- R6Class("chent",
       }
     },
 
+    #' @description
     #' Add a vapour pressure
     #' @param p0 The vapour pressure in Pa
     add_p0 = function(p0, T = NA, source = NA, page = NA, remark = "") {
@@ -320,6 +323,7 @@ chent <- R6Class("chent",
       attr(self$p0, "remark") <- remark
     },
 
+    #' @description
     #' Add a water solubility
     #' @param cwsat The water solubility in mg/L
     add_cwsat = function(cwsat, T = NA, pH = NA,
@@ -333,6 +337,7 @@ chent <- R6Class("chent",
       attr(self$cwsat, "remark") <- remark
     },
 
+    #' @description
     #' Add a plant uptake factor
     #' @param PUF The plant uptake factor, a number between 0 and 1
     add_PUF = function(PUF = 0,
@@ -348,6 +353,7 @@ chent <- R6Class("chent",
     #' @field TPs List of transformation products as chent objects
     TPs = list(),
 
+    #' @description
     #' Add a transformation product to the internal list
     #' @param x A [chent] object, or an identifier to generate a [chent] object
     #' @param pubchem Should chemical information be obtained from PubChem?
@@ -370,6 +376,7 @@ chent <- R6Class("chent",
       page = character(0),
       stringsAsFactors = FALSE),
 
+    #' @description
     #' Add a line in the internal dataframe holding observed transformations
     #' @param study_type A characterisation of the study type
     #' @param TP_identifier An identifier of one of the transformation products
@@ -400,6 +407,7 @@ chent <- R6Class("chent",
     #' @field soil_degradation Dataframe of modelling DT50 values
     soil_degradation = NULL,
 
+    #' @description
     #' Add a line in the internal dataframe holding modelling DT50 values
     #' @param DT50_mod The modelling DT50 in the sense of regulatory pesticide
     #' fate modelling
@@ -452,7 +460,8 @@ chent <- R6Class("chent",
     #' @field soil_ff Dataframe of formation fractions
     soil_ff = NULL,
 
-    # Add one or more formation fractions for degradation in soil
+    #' @description
+    #' Add one or more formation fractions for degradation in soil
     #' @param target The identifier(s) of the transformation product
     #' @param soils The soil name(s) in which the transformation was observed
     #' @param ff The formation fraction(s)
@@ -478,6 +487,7 @@ chent <- R6Class("chent",
     #' @field soil_sorption Dataframe of soil sorption data
     soil_sorption = NULL,
 
+    #' @description
     #' Add soil sorption data
     #' @param Kf The sorption constant in L/kg, either linear (then `N` is 1)
     #' or according to Freundlich
@@ -535,6 +545,7 @@ chent <- R6Class("chent",
       self$pdf_height <- as.numeric(gsub("/MediaBox \\[.* (.*)\\]", "\\1", m_line))
     },
 
+    #' @description
     #' Write a PNG image of the structure
     #' @param antialias Passed to [png][grDevices::png]
     png = function(file = paste0(self$identifier, ".png"),
@@ -666,9 +677,10 @@ pai <- R6Class("pai",
     #' at <pesticidecompendium.bcpc.org>
     bcpc = NULL,
 
+    #' @description
+    #' Create a new pai object
     #' @param iso The ISO common name to be used in the query of the
     #' BCPC compendium
-    #'
     #' @param identifier Alternative identifier used for querying pubchem
     #' @param smiles Optional user provided SMILES code
     #' @param inchikey Optional user provided InChI Key
@@ -786,6 +798,7 @@ ppp <- R6Class("ppp",
     #' @field density_units Defaults to g/L
     density_units = "g/L",
 
+    #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #' @param name The name of the product
     #' @param ... Identifiers of the active ingredients
