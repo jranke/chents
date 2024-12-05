@@ -41,7 +41,7 @@ check: roxy build
 	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(RBIN)/R" CMD check --as-cran --no-tests $(TGZ) 2>&1 | tee log/check.log
 
 install: build
-	"$(R_HOME)/bin/R" CMD INSTALL --no-multiarch $(TGZ)
+	"$(RBIN)/R" CMD INSTALL --no-multiarch $(TGZ)
 
 winbuilder: build
 	date
