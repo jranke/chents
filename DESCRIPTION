@@ -19,7 +19,7 @@ Imports:
     reticulate
 Suggests:
     knitr,
-    testthat,
+    testthat (>= 3.0.0),
     covr,
     devEMF
 License: GPL
@@ -29,3 +29,4 @@ Encoding: UTF-8
 URL: https://pkgdown.jrwb.de/chents, https://github.com/jranke/chents
 Roxygen: list(markdown = TRUE, r6 = TRUE)
 RoxygenNote: 7.3.3
+Config/testthat/edition: 3
