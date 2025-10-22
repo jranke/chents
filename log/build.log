@@ -3,6 +3,7 @@
 * checking DESCRIPTION meta-information ... OK
 * checking for LF line-endings in source and make files and shell scripts
 * checking for empty or unneeded directories
+Removed empty directory ‘chents/tests/testthat/_snaps’
 Omitted ‘LazyData’ from DESCRIPTION
-* building ‘chents_0.3.7.tar.gz’
+* building ‘chents_0.4.0.tar.gz’
 

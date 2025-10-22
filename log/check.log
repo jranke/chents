@@ -1,18 +1,17 @@
 * using log directory ‘/home/agsad.admin.ch/f80868656/projects/chents/chents.Rcheck’
-* using R version 4.4.1 (2024-06-14)
+* using R version 4.5.1 (2025-06-13)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.5 LTS
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using options ‘--no-tests --as-cran’
 * checking for file ‘chents/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘chents’ version ‘0.3.7’
+* this is package ‘chents’ version ‘0.4.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
-Maintainer: ‘Johannes Ranke <johannes.ranke@jrwb.de>’
+* checking CRAN incoming feasibility ... OK
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -27,8 +26,7 @@ Maintainer: ‘Johannes Ranke <johannes.ranke@jrwb.de>’
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking DESCRIPTION meta-information ... OK
-* checking top-level files ... NOTE
-Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ being installed.
+* checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
@@ -46,7 +44,7 @@ Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ be
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... OK
+* checking R code for possible problems ... [48s/10s] OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -56,17 +54,19 @@ Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ be
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking examples ... [8s/14s] OK
+* checking examples ... [9s/15s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
-Skipping checking HTML validation: no command 'tidy' found
+Skipping checking HTML validation: no command 'tidy' found.
+Please obtain a recent version of HTML Tidy by downloading a binary
+release or compiling the source code from <https://www.html-tidy.org/>.
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 2 NOTEs
+Status: 1 NOTE
 See
   ‘/home/agsad.admin.ch/f80868656/projects/chents/chents.Rcheck/00check.log’
 for details.

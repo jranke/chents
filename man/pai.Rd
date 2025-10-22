@@ -4,7 +4,7 @@
 \alias{pai}
 \title{An R6 class for pesticidal active ingredients and associated data}
 \format{
-An \code{\link{R6Class}} generator object
+An \link[R6:R6Class]{R6::R6Class} generator object
 }
 \description{
 This class is derived from \link{chent}. It makes it easy

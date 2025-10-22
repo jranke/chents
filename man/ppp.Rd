@@ -4,7 +4,7 @@
 \alias{ppp}
 \title{R6 class for a plant protection product with at least one active ingredient}
 \format{
-An \code{\link{R6Class}} generator object.
+An \link[R6:R6Class]{R6::R6Class} generator object.
 }
 \description{
 Contains basic information about the active ingredients in the

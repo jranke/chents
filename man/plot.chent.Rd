@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{The chent object to be plotted}
 
-\item{...}{Further arguments passed to \code{\link{grid.picture}}}
+\item{...}{Further arguments passed to \link[grImport:grid.picture]{grImport::grid.picture}}
 }
 \description{
 Plot method for chent objects

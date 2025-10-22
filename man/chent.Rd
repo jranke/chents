@@ -4,7 +4,7 @@
 \alias{chent}
 \title{An R6 class for chemical entities with associated data}
 \format{
-An \code{\link{R6Class}} generator object
+An \link[R6:R6Class]{R6::R6Class} generator object
 }
 \description{
 The class is initialised with an identifier. Chemical
@@ -44,7 +44,7 @@ List of information retrieved from PubChem}
 
 \item{\code{svg}}{SVG code}
 
-\item{\code{Picture}}{Graph as a \code{\link{picture}} object obtained using grImport}
+\item{\code{Picture}}{Graph as a \link[grImport:Picture-class]{grImport::Picture} object obtained using the grImport package}
 
 \item{\code{Pict_font_size}}{Font size as extracted from the intermediate PostScript file}
 

@@ -5,7 +5,7 @@
 #' generated using RDKit if RDKit and its python bindings are installed.
 #'
 #' @export
-#' @format An \code{\link{R6Class}} generator object
+#' @format An [R6Class] generator object
 #' @importFrom R6 R6Class
 #' @importFrom utils URLencode
 #' @importFrom webchem get_cid cid_compinfo
@@ -79,7 +79,7 @@ chent <- R6Class("chent",
     #' @field svg SVG code
     svg = NULL,
 
-    #' @field Picture Graph as a \code{\link{picture}} object obtained using grImport
+    #' @field Picture Graph as a [grImport::Picture-class] object obtained using the grImport package
     Picture = NULL,
 
     #' @field Pict_font_size Font size as extracted from the intermediate PostScript file
@@ -123,22 +123,8 @@ chent <- R6Class("chent",
       }
 
       if (rdkit) {
-        if(rdkit_available) {
-          if (is.null(self$smiles)) {
-            message("RDKit would need a SMILES code")
-          } else {
-            available_smiles <- names(self$smiles)
-            smiles_preference <- c("user", "PubChem_Isomeric", "PubChem_Canonical")
-            smiles_preferred_i <- min(match(available_smiles, smiles_preference))
-            smiles_preferred <- smiles_preference[smiles_preferred_i]
-
-            message("Trying to get chemical information from RDKit using ",
-                    smiles_preferred, " SMILES\n",
-                    self$smiles[smiles_preferred])
-            self$get_rdkit(template = template)
-            self$mw <- self$rdkit$mw
-            attr(self$mw, "source") <- "rdkit"
-          }
+        if (rdkit_available) {
+          self$get_rdkit(template = template)
         } else {
           message("RDKit is not available")
         }
@@ -154,11 +140,11 @@ chent <- R6Class("chent",
         attr(self$smiles, "source") <- "user"
       }
       if (is.null(self$inchikey)) {
-        self$inchikey<- NA
+        self$inchikey <- NA
         attr(self$inchikey, "source") <- "user"
       }
       if (is.null(self$mw)) {
-        self$mw<- NA
+        self$mw <- NA
         attr(self$mw, "source") <- "user"
       }
 
@@ -187,16 +173,16 @@ chent <- R6Class("chent",
     get_pubchem = function(pubchem_cid) {
       self$pubchem = as.list(webchem::pc_prop(pubchem_cid, from = "cid",
         properties = c("MolecularFormula", "MolecularWeight",
-                       "CanonicalSMILES", "IsomericSMILES",
+                       "ConnectivitySMILES", "SMILES",
                        "InChI", "InChIKey", "IUPACName",
                        "XLogP", "TPSA", "Complexity", "Charge",
                        "HBondDonorCount", "HBondAcceptorCount")))
-      self$pubchem$synonyms = webchem::pc_synonyms(pubchem_cid, from ="cid")[[1]]
+      self$pubchem$synonyms = webchem::pc_synonyms(pubchem_cid, from = "cid")[[1]]
 
-      self$smiles["PubChem_Canonical"] <- self$pubchem$CanonicalSMILES
+      self$smiles["PubChem"] <- self$pubchem$SMILES
 
-      if (self$pubchem$IsomericSMILES != self$pubchem$CanonicalSMILES) {
-          self$smiles["PubChem_Isomeric"] <- self$pubchem$IsomericSMILES
+      if (self$pubchem$SMILES != self$pubchem$ConnectivitySMILES) {
+        self$smiles["PubChem_Connectivity"] <- self$pubchem$ConnectivitySMILES
       }
 
       self$mw = as.numeric(self$pubchem$MolecularWeight)
@@ -233,17 +219,29 @@ chent <- R6Class("chent",
     #' @description
     #' Get chemical information from RDKit if available
     get_rdkit = function(template = NULL) {
-      if (!rdkit_available) {
-        stop("RDKit is not available")
-      }
+      
+      if (!rdkit_available) stop("RDKit is not available")
+      if (is.null(self$smiles)) stop("RDKit would need a SMILES code")
+      
+      available_smiles <- names(self$smiles)
+      smiles_preference <- c("user", "PubChem", "PubChem_Connectivity")
+      smiles_preferred_i <- min(match(available_smiles, smiles_preference))
+      smiles_preferred <- smiles_preference[smiles_preferred_i]
+
+      message("Trying to get chemical information from RDKit using ",
+              smiles_preferred, " SMILES\n",
+              self$smiles[smiles_preferred])
       self$rdkit <- list()
       self$mol <- rdkit_module$Chem$MolFromSmiles(self$smiles[1])
       self$rdkit$mw <- rdkit_module$Chem$Descriptors$MolWt(self$mol)
-      if (!is.null(self$mw)) {
+      if (!is.na(self$mw)) {
         if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {
           message("RDKit mw is ", self$rdkit$mw)
           message("mw is ", self$mw)
         }
+      } else {
+        self$mw <- self$rdkit$mw
+        attr(self$mw, "source") <- "rdkit"
       }
 
       # Create an SVG representation
@@ -630,7 +628,7 @@ draw_svg.chent = function(x, width = 300, height = 150,
 #'
 #' @importFrom grImport grid.picture
 #' @param x The chent object to be plotted
-#' @param ... Further arguments passed to \code{\link{grid.picture}}
+#' @param ... Further arguments passed to [grImport::grid.picture]
 #' @export
 #' @examples
 #' caffeine <- chent$new("caffeine")
@@ -652,7 +650,7 @@ plot.chent = function(x, ...) {
 #' [bcpc_query][webchem::bcpc_query].
 #'
 #' @export
-#' @format An \code{\link{R6Class}} generator object
+#' @format An [R6::R6Class] generator object
 #' @examples
 #' # On Travis, we get a certificate validation error,
 #' # likely because the system (xenial) is so old,
@@ -776,7 +774,7 @@ print.pai = function(x, ...) {
 #' product
 #'
 #' @export
-#' @format An \code{\link{R6Class}} generator object.
+#' @format An [R6::R6Class] generator object.
 ppp <- R6Class("ppp",
   public = list(
 
