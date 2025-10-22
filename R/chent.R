@@ -155,13 +155,13 @@ chent <- R6Class("chent",
     #' Try to get chemical information from PubChem
     #' @param query Query string to be passed to [get_cid][webchem::get_cid]
     #' @param from Passed to [get_cid][webchem::get_cid]
-    try_pubchem = function(query, from = 'name') {
-      message("PubChem:")
+    try_pubchem = function(query = self$identifier, from = 'name') {
+      message("Querying PubChem for ", from , " ", query, " ...")
       if (missing(query)) query <- self$identifier
       pubchem_result = webchem::get_cid(query, from = from, match = "first")
 
       if (is.na(pubchem_result[[1, "cid"]])) {
-        message("Query ", query, " did not give results at PubChem")
+        message("Querying for ", query, " as ", from, " did not give results at PubChem")
       } else {
         self$get_pubchem(pubchem_result[[1, "cid"]])
       }
@@ -228,16 +228,15 @@ chent <- R6Class("chent",
       smiles_preferred_i <- min(match(available_smiles, smiles_preference))
       smiles_preferred <- smiles_preference[smiles_preferred_i]
 
-      message("Trying to get chemical information from RDKit using ",
+      message("Get chemical information from RDKit using ",
               smiles_preferred, " SMILES\n",
               self$smiles[smiles_preferred])
       self$rdkit <- list()
       self$mol <- rdkit_module$Chem$MolFromSmiles(self$smiles[1])
       self$rdkit$mw <- rdkit_module$Chem$Descriptors$MolWt(self$mol)
-      if (!is.na(self$mw)) {
+      if (!is.null(self$mw) && !is.na(self$mw)) {
         if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {
-          message("RDKit mw is ", self$rdkit$mw)
-          message("mw is ", self$mw)
+          warning("RDKit mw is ", self$rdkit$mw, " while mw is ", self$mw)
         }
       } else {
         self$mw <- self$rdkit$mw
@@ -705,7 +704,7 @@ pai <- R6Class("pai",
       }
 
       if (!missing(iso) & bcpc) {
-        message("BCPC:")
+        message("Querying BCPC for ", identifier, " ...")
         bcpc_result = webchem::bcpc_query(identifier, from = "name")
 
         # Use first element of list, as we passed a query of length one

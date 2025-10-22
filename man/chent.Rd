@@ -143,7 +143,7 @@ directory?}
 \subsection{Method \code{try_pubchem()}}{
 Try to get chemical information from PubChem
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$try_pubchem(query, from = "name")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{chent$try_pubchem(query = self$identifier, from = "name")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

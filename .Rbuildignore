@@ -1,7 +1,9 @@
 ^chents_.*.tar.gz$
+^docs$
 ^GNUmakefile$
 ^log
-^docs$
+^README.html$
+^README.rmd$
 ^_pkgdown\.yml$
 ^\.travis\.yml$
 ^.*\.Rproj$

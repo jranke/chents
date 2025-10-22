@@ -7,6 +7,9 @@ RBIN ?= $(shell dirname "`which R`")
 
 all: install
 
+README.md: README.rmd
+	Rscript -e "rmarkdown::render('README.rmd', output_format = 'github_document', output_options = list(html_preview = FALSE))"
+
 pkgfiles = DESCRIPTION \
 	.Rbuildignore \
 	DESCRIPTION \
@@ -26,7 +29,10 @@ $(TGZ): $(pkgfiles)
 	"$(RBIN)/R" CMD build . 2>&1 | tee log/build.log
 
 pd: roxy
-	"$(RBIN)/Rscript" -e 'pkgdown::build_site()'
+	"$(RBIN)/Rscript" -e "pkgdown::build_site(run_dont_run = TRUE, lazy = TRUE)"
+
+pd_all: roxy
+	"$(RBIN)/Rscript" -e "pkgdown::build_site(run_dont_run = TRUE)"
 
 build: roxy $(TGZ)
 
@@ -50,4 +56,7 @@ winbuilder: build
 	@echo "Uploading to R-devel on win-builder"
 	curl -T $(TGZ) ftp://anonymous@win-builder.r-project.org/R-devel/
 
-.PHONEY: roxy pd test quickcheck check install winbuilder
+coverage:
+	"$(RBIN)/Rscript" -e "covr::report(file = 'docs/coverage/coverage.html')"
+
+.PHONEY: roxy pd test quickcheck check install winbuilder coverage
