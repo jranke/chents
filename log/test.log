@@ -8,10 +8,19 @@ The following object is masked from ‘package:devtools’:
     test_file
 
 ✔ | F W  S  OK | Context
-✔ |          8 | Generation of chent objects [4.4s]
-✔ |          7 | Generation of pai objects [5.9s]
+
+⠏ |          0 | chent                                                          
+⠏ |          0 | Generation of chent objects                                    
+⠸ |          4 | Generation of chent objects                                    
+⠼ |          5 | Generation of chent objects                                    
+✔ |          8 | Generation of chent objects [6.2s]
+
+⠏ |          0 | pai                                                            
+⠏ |          0 | Generation of pai objects                                      
+⠋ |          1 | Generation of pai objects                                      
+✔ |          7 | Generation of pai objects [6.2s]
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 10.2 s
+Duration: 12.5 s
 
 [ FAIL 0 | WARN 0 | SKIP 0 | PASS 15 ]
