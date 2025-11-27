@@ -11,8 +11,7 @@
       "CCCCCCCCO" "CCCCCCCCO" 
       Molecular weight $mw: 130.2 
       PubChem synonyms (up to 10):
-       [1] "1-octanol"             "Octan-1-ol"            "111-87-5"             
-       [4] "N-octanol"             "Octyl alcohol"         "caprylic alcohol"     
-       [7] "n-Octyl alcohol"       "Heptyl carbinol"       "1-Hydroxyoctane"      
-      [10] "Primary octyl alcohol"
+       [1] "1-octanol"        "Octan-1-ol"       "N-octanol"        "111-87-5"        
+       [5] "Octyl alcohol"    "caprylic alcohol" "n-Octyl alcohol"  "Heptyl carbinol" 
+       [9] "1-Hydroxyoctane"  "Octilin"         
 
