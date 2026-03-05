@@ -14,17 +14,10 @@ the complete result of querying the BCPC compendium using
 \link[webchem:bcpc_query]{bcpc_query}.
 }
 \examples{
-# On Travis, we get a certificate validation error,
-# likely because the system (xenial) is so old,
-# therefore don't run this example on Travis
-if (Sys.getenv("TRAVIS") == "") {
-
 atr <- pai$new("atrazine")
 print(atr)
 if (!is.null(atr$Picture)) {
   plot(atr)
-}
-
 }
 }
 \section{Super class}{

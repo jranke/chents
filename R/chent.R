@@ -651,17 +651,10 @@ plot.chent = function(x, ...) {
 #' @export
 #' @format An [R6::R6Class] generator object
 #' @examples
-#' # On Travis, we get a certificate validation error,
-#' # likely because the system (xenial) is so old,
-#' # therefore don't run this example on Travis
-#' if (Sys.getenv("TRAVIS") == "") {
-#'
 #' atr <- pai$new("atrazine")
 #' print(atr)
 #' if (!is.null(atr$Picture)) {
 #'   plot(atr)
-#' }
-#'
 #' }
 pai <- R6Class("pai",
   inherit = chent,
@@ -755,7 +748,11 @@ pai <- R6Class("pai",
 #' @param ... Further arguments for compatibility with the S3 method
 #' @export
 print.pai = function(x, ...) {
-  cat("<pai> with ISO common name $iso", x$iso, "\n")
+  if (is.null(x$iso)) {
+    cat("<pai> without ISO common name\n")
+  } else {
+    cat("<pai> with ISO common name $iso", x$iso, "\n")
+  }
   print.chent(x)
   if (length(x$TPs) > 0) {
     cat("\nTransformation products:\n")
