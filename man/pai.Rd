@@ -19,6 +19,9 @@ print(atr)
 if (!is.null(atr$Picture)) {
   plot(atr)
 }
+# We can also define pais that are not found on the BCPC site
+decanol <- pai$new("1-Decanol")
+print(decanol)
 }
 \section{Super class}{
 \code{\link[chents:chent]{chents::chent}} -> \code{pai}

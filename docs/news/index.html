@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">chents</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,10 @@
       <small>Source: <a href="https://github.com/jranke/chents/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.1" id="version-041">version 0.4.1<a class="anchor" aria-label="anchor" href="#version-041"></a></h2>
+<ul><li>R/chent.R: Improve print method for <code>pai</code> objects.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.0" id="version-040">version 0.4.0<a class="anchor" aria-label="anchor" href="#version-040"></a></h2>
 <ul><li>R/chent.R: PubChem has changed the names of the SMILES codes they provide. The former isomeric smiles that was incorporated in our chent objects as “Pubchem_Isomeric” is now simply calles SMILES, and is incorporated in our objects as “PubChem”. The SMILES code formerly given as “canonical” is now termed “connectivity SMILES” because it does not contain isotopic or stereochemical specifications. In the chents object, it is now available under the name “PubChem_Connectivity”. This is a breaking change, so objects generated with versions &lt; 0.4.0 may produce errors when used with current versions.</li>

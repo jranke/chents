@@ -15,7 +15,7 @@ bcpc_query."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">chents</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -184,23 +184,12 @@ and the reticulate package?</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># On Travis, we get a certificate validation error,</span></span></span>
-<span class="r-in"><span><span class="co"># likely because the system (xenial) is so old,</span></span></span>
-<span class="r-in"><span><span class="co"># therefore don't run this example on Travis</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"TRAVIS"</span><span class="op">)</span> <span class="op">==</span> <span class="st">""</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">atr</span> <span class="op">&lt;-</span> <span class="va">pai</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"atrazine"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">atr</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">atr</span><span class="op">$</span><span class="va">Picture</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">atr</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> BCPC:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> PubChem:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Trying to get chemical information from RDKit using PubChem SMILES</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">atr</span> <span class="op">&lt;-</span> <span class="va">pai</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"atrazine"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Querying BCPC for atrazine ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Querying PubChem for inchikey MXWJVTOOROXGIU-UHFFFAOYSA-N ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Get chemical information from RDKit using PubChem SMILES</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> CCNC1=NC(=NC(=N1)Cl)NC(C)C</span>
-<span class="r-plt img"><img src="pai-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">atr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;pai&gt; with ISO common name $iso atrazine </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;chent&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Identifier $identifier atrazine </span>
@@ -210,8 +199,32 @@ and the reticulate package?</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "CCNC1=NC(=NC(=N1)Cl)NC(C)C" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Molecular weight $mw: 215.7 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> PubChem synonyms (up to 10):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "atrazine"     "1912-24-9"    "Gesaprim"     "Atranex"      "Oleogesaprim"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Atazinax"     "Atrasine"     "Chromozin"    "Gesoprim"     "Hungazin"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "atrazine"     "1912-24-9"    "Gesaprim"     "Aatrex"       "Atranex"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Atrazin"      "Oleogesaprim" "Atazinax"     "Atrasine"     "Chromozin"   </span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">atr</span><span class="op">$</span><span class="va">Picture</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">atr</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-plt img"><img src="pai-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co"># We can also define pais that are not found on the BCPC site</span></span></span>
+<span class="r-in"><span><span class="va">decanol</span> <span class="op">&lt;-</span> <span class="va">pai</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"1-Decanol"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Querying BCPC for 1-Decanol ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Common name 1-Decanol is not known at the BCPC compendium, trying PubChem</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Querying PubChem for name 1-Decanol ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Get chemical information from RDKit using PubChem SMILES</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> CCCCCCCCCCO</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">decanol</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;pai&gt; without ISO common name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;chent&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Identifier $identifier 1-Decanol </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> InChI Key $inchikey MWKFXSUHUHTGQN-UHFFFAOYSA-N </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SMILES string $smiles:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       PubChem </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "CCCCCCCCCCO" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Molecular weight $mw: 158.3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PubChem synonyms (up to 10):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "1-DECANOL"       "Decan-1-ol"      "Decyl alcohol"   "112-30-1"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "n-Decyl alcohol" "n-Decanol"       "Capric alcohol"  "Nonylcarbinol"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "Antak"           "Royaltac"       </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

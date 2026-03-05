@@ -222,7 +222,7 @@ directory?</p></dd>
 <h3 id="method-try-pubchem-">Method <code>try_pubchem()</code><a class="anchor" aria-label="anchor" href="#method-try-pubchem-"></a></h3>
 <p>Try to get chemical information from PubChem</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">try_pubchem</span><span class="op">(</span><span class="va">query</span>, from <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">try_pubchem</span><span class="op">(</span>query <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">identifier</span>, from <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -791,8 +791,8 @@ or according to Freundlich</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">caffeine</span> <span class="op">&lt;-</span> <span class="va">chent</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"caffeine"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> PubChem:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Trying to get chemical information from RDKit using PubChem SMILES</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Querying PubChem for name caffeine ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Get chemical information from RDKit using PubChem SMILES</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> CN1C=NC2=C1C(=O)N(C(=O)N2C)C</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">caffeine</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;chent&gt;</span>
@@ -813,11 +813,16 @@ or according to Freundlich</p></dd>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-plt img"><img src="chent-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="va">oct</span> <span class="op">&lt;-</span> <span class="va">chent</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"1-octanol"</span>, smiles <span class="op">=</span> <span class="st">"CCCCCCCCO"</span>, pubchem <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Trying to get chemical information from RDKit using user SMILES</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Get chemical information from RDKit using user SMILES</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> CCCCCCCCO</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (!is.na(self$mw)) {    if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {        message("RDKit mw is ", self$rdkit$mw)        message("mw is ", self$mw)    }} else {    self$mw &lt;- self$rdkit$mw    attr(self$mw, "source") &lt;- "rdkit"}:</span> argument is of length zero</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">oct</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'oct' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;chent&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Identifier $identifier 1-octanol </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> InChI Key $inchikey NA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SMILES string $smiles:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        user </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "CCCCCCCCO" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Molecular weight $mw: 130.2 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

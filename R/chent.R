@@ -656,6 +656,9 @@ plot.chent = function(x, ...) {
 #' if (!is.null(atr$Picture)) {
 #'   plot(atr)
 #' }
+#' # We can also define pais that are not found on the BCPC site
+#' decanol <- pai$new("1-Decanol")
+#' print(decanol)
 pai <- R6Class("pai",
   inherit = chent,
   public = list(
