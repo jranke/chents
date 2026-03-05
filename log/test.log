@@ -7,18 +7,29 @@ The following object is masked from ‘package:devtools’:
 
     test_file
 
+Error in curl::curl_fetch_memory(url, handle = handle): Could not resolve hostname [pesticidecompendium.bcpc.org]:
+Could not resolve host: pesticidecompendium.bcpc.org
+Request failed [ERROR]. Retrying in 1.5 seconds...
+Error in curl::curl_fetch_memory(url, handle = handle): Could not resolve hostname [pesticidecompendium.bcpc.org]:
+Could not resolve host: pesticidecompendium.bcpc.org
+Request failed [ERROR]. Retrying in 1.5 seconds...
+Error in curl::curl_fetch_memory(url, handle = handle) : 
+  Could not resolve hostname [pesticidecompendium.bcpc.org]:
+Could not resolve host: pesticidecompendium.bcpc.org
 ✔ | F W  S  OK | Context
 
 ⠏ |          0 | chent                                                          
 ⠸ |          4 | chent                                                          
-⠧ |          8 | chent                                                          
-✔ |         10 | chent [4.4s]
+✔ |      1   4 | chent [9.8s]
 
 ⠏ |          0 | pai                                                            
-⠋ |          1 | pai                                                            
-✔ |          9 | pai [6.1s]
+✔ |      1   0 | pai
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 10.6 s
+Duration: 9.8 s
 
-[ FAIL 0 | WARN 0 | SKIP 0 | PASS 19 ]
+── Skipped tests (2) ───────────────────────────────────────────────────────────
+• bcpc_up & pc_up is not TRUE (1): 'test_pai.R:3:3'
+• pc_up is not TRUE (1): 'test_chent.R:20:3'
+
+[ FAIL 0 | WARN 0 | SKIP 2 | PASS 4 ]

@@ -219,10 +219,10 @@ chent <- R6Class("chent",
     #' @description
     #' Get chemical information from RDKit if available
     get_rdkit = function(template = NULL) {
-      
+
       if (!rdkit_available) stop("RDKit is not available")
       if (is.null(self$smiles)) stop("RDKit would need a SMILES code")
-      
+
       available_smiles <- names(self$smiles)
       smiles_preference <- c("user", "PubChem", "PubChem_Connectivity")
       smiles_preferred_i <- min(match(available_smiles, smiles_preference))
@@ -492,7 +492,7 @@ chent <- R6Class("chent",
     #' @param N The Freundlich exponent
     #' @param perc_clay The percentage of clay in the soil
     #' @param CEC The cation exchange capacity
-    add_soil_sorption = function(soils, 
+    add_soil_sorption = function(soils,
       Kf, Kfoc, N,
       type = NA, pH_orig = NA, pH_medium = NA,
       pH_H2O = NA,
