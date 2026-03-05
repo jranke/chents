@@ -1,15 +1,15 @@
-* using log directory ‘/home/agsad.admin.ch/f80868656/projects/chents/chents.Rcheck’
-* using R version 4.5.1 (2025-06-13)
+* using log directory ‘/home/jranke/git/chents/chents.Rcheck’
+* using R version 4.5.2 (2025-10-31)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
-    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.3 LTS
+    gcc (Debian 14.2.0-19) 14.2.0
+    GNU Fortran (Debian 14.2.0-19) 14.2.0
+* running under: Debian GNU/Linux 13 (trixie)
 * using session charset: UTF-8
 * using options ‘--no-tests --as-cran’
 * checking for file ‘chents/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘chents’ version ‘0.4.0’
+* this is package ‘chents’ version ‘0.4.1’
 * package encoding: UTF-8
 * checking CRAN incoming feasibility ... OK
 * checking package namespace information ... OK
@@ -24,7 +24,8 @@
 * checking whether package ‘chents’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
-* checking for future file timestamps ... OK
+* checking for future file timestamps ... NOTE
+unable to verify current time
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -44,7 +45,7 @@
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [38s/11s] OK
+* checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -54,20 +55,21 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking examples ... [7s/15s] OK
+* checking examples ... [3s/21s] NOTE
+Examples with CPU (user + system) or elapsed time > 5s
+            user system elapsed
+pai        0.353  0.073   8.080
+plot.chent 0.155  0.021   6.368
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking PDF version of manual ... OK
-* checking HTML version of manual ... NOTE
-Skipping checking HTML validation: no command 'tidy' found.
-Please obtain a recent version of HTML Tidy by downloading a binary
-release or compiling the source code from <https://www.html-tidy.org/>.
+* checking HTML version of manual ... OK
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 1 NOTE
+Status: 2 NOTEs
 See
-  ‘/home/agsad.admin.ch/f80868656/projects/chents/chents.Rcheck/00check.log’
+  ‘/home/jranke/git/chents/chents.Rcheck/00check.log’
 for details.
 
