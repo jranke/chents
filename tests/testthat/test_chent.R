@@ -17,6 +17,10 @@ test_that("We can initialise an object and add information", {
   oct$get_rdkit() |> 
     expect_message("Get chemical information from RDKit using user SMILES")
 
+  # Check availability of BCPC and PubChem immediately before use
+  bcpc_up <- webchem::ping_service("bcpc")
+  pc_up <- webchem::ping_service("pc")
+
   skip_if_not(pc_up)
   expect_snapshot(print(oct))
 })

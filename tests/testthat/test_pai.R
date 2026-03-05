@@ -1,6 +1,11 @@
 test_that("a pai object is correctly generated", {
 
+  # Check availability of BCPC and PubChem immediately before use
+  bcpc_up <- webchem::ping_service("bcpc")
+  pc_up <- webchem::ping_service("pc")
+
   skip_if_not(bcpc_up & pc_up)
+
   {glyphosate <- pai$new("glyphosate", rdkit = FALSE)} |>
     expect_message("Querying BCPC for glyphosate") |>
     expect_message("Querying PubChem for inchikey ")
