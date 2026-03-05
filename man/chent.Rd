@@ -12,6 +12,8 @@ information is retrieved from the internet. Additionally, it can be
 generated using RDKit if RDKit and its python bindings are installed.
 }
 \examples{
+# Don't run examples per default, as PubChem may be unavailable
+\dontrun{
 caffeine <- chent$new("caffeine")
 print(caffeine)
 if (!is.null(caffeine$Picture)) {
@@ -19,6 +21,7 @@ if (!is.null(caffeine$Picture)) {
 }
 oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE)
 print(oct)
+}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}

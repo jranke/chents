@@ -15,9 +15,12 @@
 Plot method for chent objects
 }
 \examples{
+# Don't run examples per default, as PubChem may be unavailable
+\dontrun{
 caffeine <- chent$new("caffeine")
 print(caffeine)
 if (!is.null(caffeine$Picture)) {
   plot(caffeine)
+}
 }
 }

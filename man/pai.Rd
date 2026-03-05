@@ -14,6 +14,8 @@ the complete result of querying the BCPC compendium using
 \link[webchem:bcpc_query]{bcpc_query}.
 }
 \examples{
+# Don't run examples per default, as PubChem may be unavailable
+\dontrun{
 atr <- pai$new("atrazine")
 print(atr)
 if (!is.null(atr$Picture)) {
@@ -22,6 +24,7 @@ if (!is.null(atr$Picture)) {
 # We can also define pais that are not found on the BCPC site
 decanol <- pai$new("1-Decanol")
 print(decanol)
+}
 }
 \section{Super class}{
 \code{\link[chents:chent]{chents::chent}} -> \code{pai}

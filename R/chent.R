@@ -40,6 +40,8 @@
 #' @param file The file to write to
 #' @param dir The directory to write the file to
 #' @examples
+#' # Don't run examples per default, as PubChem may be unavailable
+#' \dontrun{
 #' caffeine <- chent$new("caffeine")
 #' print(caffeine)
 #' if (!is.null(caffeine$Picture)) {
@@ -47,6 +49,7 @@
 #' }
 #' oct <- chent$new("1-octanol", smiles = "CCCCCCCCO", pubchem = FALSE)
 #' print(oct)
+#' }
 chent <- R6Class("chent",
   public = list(
     #' @field identifier (`character(1)`)\cr
@@ -630,10 +633,13 @@ draw_svg.chent = function(x, width = 300, height = 150,
 #' @param ... Further arguments passed to [grImport::grid.picture]
 #' @export
 #' @examples
+#' # Don't run examples per default, as PubChem may be unavailable
+#' \dontrun{
 #' caffeine <- chent$new("caffeine")
 #' print(caffeine)
 #' if (!is.null(caffeine$Picture)) {
 #'   plot(caffeine)
+#' }
 #' }
 plot.chent = function(x, ...) {
   if (is.null(x$Picture)) stop("No Picture object in chent, was RDKit available during creation?")
@@ -651,6 +657,8 @@ plot.chent = function(x, ...) {
 #' @export
 #' @format An [R6::R6Class] generator object
 #' @examples
+#' # Don't run examples per default, as PubChem may be unavailable
+#' \dontrun{
 #' atr <- pai$new("atrazine")
 #' print(atr)
 #' if (!is.null(atr$Picture)) {
@@ -659,6 +667,7 @@ plot.chent = function(x, ...) {
 #' # We can also define pais that are not found on the BCPC site
 #' decanol <- pai$new("1-Decanol")
 #' print(decanol)
+#' }
 pai <- R6Class("pai",
   inherit = chent,
   public = list(
