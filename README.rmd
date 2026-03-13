@@ -119,7 +119,7 @@ print(but)
 ```
 
 You can create a derived, independent object using the `clone()` method
-that will not be affectd by operations on the original object:
+that will not be affected by operations on the original object:
 
 ```{r}
 but_new <- chent$new("Butane", smiles = "CCCC", pubchem = FALSE)
