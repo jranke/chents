@@ -7,8 +7,11 @@ status](https://jranke.r-universe.dev/badges/chents)](https://jranke.r-universe.
 [![Code
 coverage](https://img.shields.io/badge/coverage-jrwb.de-blue.svg)](https://pkgdown.jrwb.de/chents/coverage/coverage.html)
 
-The R package **chents** provides some utilities for working with
-chemical entities in R.
+When working with data on chemical substances, we often need a reliable
+link between the data and the chemical identity of the substances. The R
+package **chents** provides a way to define and check the identity of
+chemically defined substances (“chemical entities”) and to collect
+related information.
 
 When first defining a chemical entity, some chemical information is
 retrieved from the [PubChem](https://pubchem.ncbi.nlm.nih.gov/) website
@@ -17,8 +20,8 @@ using the [webchem](https://docs.ropensci.org/webchem/) package.
 ``` r
 library(chents)
 caffeine <- chent$new("caffeine")
-#> Querying PubChem ...
-#> Trying to get chemical information from RDKit using PubChem SMILES
+#> Querying PubChem for name caffeine ...
+#> Get chemical information from RDKit using PubChem SMILES
 #> CN1C=NC2=C1C(=O)N(C(=O)N2C)C
 ```
 
@@ -44,7 +47,7 @@ print(caffeine)
 #>  [3] "Guaranine"               "1,3,7-Trimethylxanthine"
 #>  [5] "Methyltheobromine"       "Theine"                 
 #>  [7] "Thein"                   "Cafeina"                
-#>  [9] "Koffein"                 "Mateina"
+#>  [9] "Caffein"                 "Cafipel"
 ```
 
 There is a very simple plotting method for the chemical structure.
@@ -55,11 +58,6 @@ plot(caffeine)
 
 ![](reference/figures/README-unnamed-chunk-4-1.png)
 
-Additional information can be (but is rarely ever) read from a local
-.yaml file. This information can be leveraged e.g. by the
-[PEC_soil](https://pkgdown.jrwb.de/pfm/reference/PEC_soil.html) function
-of the ‘pfm’ package.
-
 If you have a so-called ISO common name of a pesticide active
 ingredient, you can use the ‘pai’ class derived from the ‘chent’ class,
 which starts with querying the [BCPC
@@ -68,22 +66,30 @@ compendium](http://www.bcpcpesticidecompendium.org/) first.
 ``` r
 lambda <- pai$new("lambda-cyhalothrin")
 #> Querying BCPC for lambda-cyhalothrin ...
-#> Querying PubChem ...
-#> Trying to get chemical information from RDKit using PubChem SMILES
+#> Querying PubChem for name lambda-cyhalothrin ...
+#> Get chemical information from RDKit using PubChem SMILES
 #> CC1([C@@H]([C@@H]1C(=O)O[C@@H](C#N)C2=CC(=CC=C2)OC3=CC=CC=C3)/C=C(/C(F)(F)F)\Cl)C
-#> RDKit mw is 449.856
-#> mw is 449.8
+#> Warning in self$get_rdkit(template = template): RDKit mw is 449.856 while mw is
+#> 449.8
 plot(lambda)
 ```
 
 ![](reference/figures/README-unnamed-chunk-5-1.png)
+
+Additional information can be read from a local .yaml file. This
+information can be leveraged e.g. by the
+[PEC_soil](https://pkgdown.jrwb.de/pfm/reference/PEC_soil.html) function
+of the ‘pfm’ package. However, this functionality is to be superseded by
+a dedicated package, defining data for the environmental risk assessment
+on chemicals, in particular on active ingredients of plant protection
+products.
 
 ## Installation
 
 You can conveniently install chents from the repository kindly made
 available by the R-Universe project:
 
-``` R
+``` r
 install.packages("chents",
   repos = c("https://jranke.r-universe.dev", "https://cran.r-project.org"))
 ```
@@ -91,7 +97,7 @@ install.packages("chents",
 In order to profit from the chemoinformatics, you need to install RDKit
 and its python bindings. On a Debian type Linux distribution, just use
 
-``` R
+``` sh
 sudo apt install python3-rdkit
 ```
 
@@ -106,6 +112,6 @@ your global or project specific `.Rprofile` file to tell the
 `reticulate` package to use the system Python version that will find the
 RDKit installed in the system location.
 
-``` R
+``` r
 Sys.setenv(RETICULATE_PYTHON="/usr/bin/python3")
 ```

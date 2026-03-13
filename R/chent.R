@@ -235,7 +235,7 @@ chent <- R6Class("chent",
               smiles_preferred, " SMILES\n",
               self$smiles[smiles_preferred])
       self$rdkit <- list()
-      self$mol <- rdkit_module$Chem$MolFromSmiles(self$smiles[1])
+      self$mol <- rdkit_module$Chem$MolFromSmiles(self$smiles[smiles_preferred])
       self$rdkit$mw <- rdkit_module$Chem$Descriptors$MolWt(self$mol)
       if (!is.null(self$mw) && !is.na(self$mw)) {
         if (round(self$rdkit$mw, 1) != round(self$mw, 1)) {
@@ -643,7 +643,7 @@ draw_svg.chent = function(x, width = 300, height = 150,
 #' }
 plot.chent = function(x, ...) {
   if (is.null(x$Picture)) stop("No Picture object in chent, was RDKit available during creation?")
-  grid.picture(x$Picture)
+  grid.picture(x$Picture, ...)
 }
 
 #' @title An R6 class for pesticidal active ingredients and associated data

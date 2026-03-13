@@ -2,7 +2,9 @@
 
 ## version 0.4.1
 
-- R/chent.R: Improve print method for `pai` objects.
+- R/chent.R: Improve print method for `pai` objects
+- plot method for chents: Pass dots argument to `grid.picture()` as
+  documented.
 
 ## version 0.4.0
 

@@ -14,8 +14,12 @@ knitr::opts_chunk$set(
 [![R-Universe status](https://jranke.r-universe.dev/badges/chents)](https://jranke.r-universe.dev/chents)
 [![Code coverage](https://img.shields.io/badge/coverage-jrwb.de-blue.svg)](https://pkgdown.jrwb.de/chents/coverage/coverage.html)
 
-The R package **chents** provides some utilities for working with chemical
-entities in R.
+When working with data on chemical substances, we often need a reliable link between
+the data and the chemical identity of the substances. The R package **chents**
+provides a way to define and check the identity of chemically defined substances
+("chemical entities") and to collect related information.
+
+
 
 When first defining a chemical entity, some chemical information
 is retrieved from the [PubChem](https://pubchem.ncbi.nlm.nih.gov/) website using
@@ -39,23 +43,25 @@ print(caffeine)
 
 There is a very simple plotting method for the chemical structure.
 
-```{r fig.width = 2}
+```{r fig.height = 2}
 plot(caffeine)
 ```
-
-Additional information can be (but is rarely ever) read from a local .yaml
-file. This information can be leveraged e.g. by the
-[PEC_soil](https://pkgdown.jrwb.de/pfm/reference/PEC_soil.html) function of the
-'pfm' package.
 
 If you have a so-called ISO common name of a pesticide active ingredient, you
 can use the 'pai' class derived from the 'chent' class, which starts with querying
 the [BCPC compendium](http://www.bcpcpesticidecompendium.org/) first.
 
-```{r fig.width = 2}
-lambda <- pai$new("lambda-cyhalothrin")
-plot(lambda)
+```{r fig.height = 3.5}
+delta <- pai$new("deltamethrin")
+plot(delta)
 ```
+
+Additional information can be read from a local .yaml file. This information
+can be leveraged e.g. by the
+[PEC_soil](https://pkgdown.jrwb.de/pfm/reference/PEC_soil.html) function of the
+'pfm' package. However, this functionality is to be superseded by a dedicated
+package, defining data for the environmental risk assessment on chemicals,
+in particular on active ingredients of plant protection products.
 
 
 ## Installation
@@ -63,7 +69,7 @@ plot(lambda)
 You can conveniently install chents from the repository kindly made available by the
 R-Universe project:
 
-```
+```{r, eval = FALSE}
 install.packages("chents",
   repos = c("https://jranke.r-universe.dev", "https://cran.r-project.org"))
 ```
@@ -71,9 +77,10 @@ install.packages("chents",
 In order to profit from the chemoinformatics, you need to install RDKit and its
 python bindings. On a Debian type Linux distribution, just use
 
-```
+```{sh, eval = FALSE}
 sudo apt install python3-rdkit
 ```
+
 If you use this package on Windows or MacOS, I would be happy to include
 installation instructions here if you share them with me, e.g. via a Pull
 Request.
@@ -85,7 +92,7 @@ global or project specific `.Rprofile` file to tell the `reticulate` package to
 use the system Python version that will find the RDKit installed in the system
 location.
 
-```
+```{r, eval = FALSE}
 Sys.setenv(RETICULATE_PYTHON="/usr/bin/python3")
 ```
 

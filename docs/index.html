@@ -50,13 +50,13 @@
 <div class="page-header"><h1 id="chents">chents<a class="anchor" aria-label="anchor" href="#chents"></a>
 </h1></div>
 <p><a href="https://pkgdown.jrwb.de/chents/"><img src="https://img.shields.io/badge/docs-jrwb.de-blue.svg" alt="Online documentation"></a> <a href="https://jranke.r-universe.dev/chents" class="external-link"><img src="https://jranke.r-universe.dev/badges/chents" alt="R-Universe status"></a> <a href="https://pkgdown.jrwb.de/chents/coverage/coverage.html"><img src="https://img.shields.io/badge/coverage-jrwb.de-blue.svg" alt="Code coverage"></a></p>
-<p>The R package <strong>chents</strong> provides some utilities for working with chemical entities in R.</p>
+<p>When working with data on chemical substances, we often need a reliable link between the data and the chemical identity of the substances. The R package <strong>chents</strong> provides a way to define and check the identity of chemically defined substances (“chemical entities”) and to collect related information.</p>
 <p>When first defining a chemical entity, some chemical information is retrieved from the <a href="https://pubchem.ncbi.nlm.nih.gov/" class="external-link">PubChem</a> website using the <a href="https://docs.ropensci.org/webchem/" class="external-link">webchem</a> package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkgdown.jrwb.de/chents">chents</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkgdown.jrwb.de/chents/">chents</a></span><span class="op">)</span></span>
 <span><span class="va">caffeine</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/chent.html">chent</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"caffeine"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Querying PubChem ...</span></span>
-<span><span class="co">#&gt; Trying to get chemical information from RDKit using PubChem SMILES</span></span>
+<span><span class="co">#&gt; Querying PubChem for name caffeine ...</span></span>
+<span><span class="co">#&gt; Get chemical information from RDKit using PubChem SMILES</span></span>
 <span><span class="co">#&gt; CN1C=NC2=C1C(=O)N(C(=O)N2C)C</span></span></code></pre></div>
 <p>If Python and <a href="https://rdkit.org" class="external-link">RDKit</a> (&gt; 2015.03) are installed and configured for use with the <a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a> package, some additional chemical information including a 2D graph are computed.</p>
 <p>The print method gives an overview of the information that was collected.</p>
@@ -74,38 +74,40 @@
 <span><span class="co">#&gt;  [3] "Guaranine"               "1,3,7-Trimethylxanthine"</span></span>
 <span><span class="co">#&gt;  [5] "Methyltheobromine"       "Theine"                 </span></span>
 <span><span class="co">#&gt;  [7] "Thein"                   "Cafeina"                </span></span>
-<span><span class="co">#&gt;  [9] "Koffein"                 "Mateina"</span></span></code></pre></div>
+<span><span class="co">#&gt;  [9] "Caffein"                 "Cafipel"</span></span></code></pre></div>
 <p>There is a very simple plotting method for the chemical structure.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">caffeine</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png"><!-- --></p>
-<p>Additional information can be (but is rarely ever) read from a local .yaml file. This information can be leveraged e.g. by the <a href="https://pkgdown.jrwb.de/pfm/reference/PEC_soil.html" class="external-link">PEC_soil</a> function of the ‘pfm’ package.</p>
 <p>If you have a so-called ISO common name of a pesticide active ingredient, you can use the ‘pai’ class derived from the ‘chent’ class, which starts with querying the <a href="http://www.bcpcpesticidecompendium.org/" class="external-link">BCPC compendium</a> first.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/pai.html">pai</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"lambda-cyhalothrin"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Querying BCPC for lambda-cyhalothrin ...</span></span>
-<span><span class="co">#&gt; Querying PubChem ...</span></span>
-<span><span class="co">#&gt; Trying to get chemical information from RDKit using PubChem SMILES</span></span>
+<span><span class="co">#&gt; Querying PubChem for name lambda-cyhalothrin ...</span></span>
+<span><span class="co">#&gt; Get chemical information from RDKit using PubChem SMILES</span></span>
 <span><span class="co">#&gt; CC1([C@@H]([C@@H]1C(=O)O[C@@H](C#N)C2=CC(=CC=C2)OC3=CC=CC=C3)/C=C(/C(F)(F)F)\Cl)C</span></span>
-<span><span class="co">#&gt; RDKit mw is 449.856</span></span>
-<span><span class="co">#&gt; mw is 449.8</span></span>
+<span><span class="co">#&gt; Warning in self$get_rdkit(template = template): RDKit mw is 449.856 while mw is</span></span>
+<span><span class="co">#&gt; 449.8</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png"><!-- --></p>
+<p>Additional information can be read from a local .yaml file. This information can be leveraged e.g. by the <a href="https://pkgdown.jrwb.de/pfm/reference/PEC_soil.html" class="external-link">PEC_soil</a> function of the ‘pfm’ package. However, this functionality is to be superseded by a dedicated package, defining data for the environmental risk assessment on chemicals, in particular on active ingredients of plant protection products.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can conveniently install chents from the repository kindly made available by the R-Universe project:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"chents"</span>,</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">"https://jranke.r-universe.dev"</span>, <span class="st">"https://cran.r-project.org"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"chents"</span>,</span>
+<span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://jranke.r-universe.dev"</span>, <span class="st">"https://cran.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>In order to profit from the chemoinformatics, you need to install RDKit and its python bindings. On a Debian type Linux distribution, just use</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>sudo apt install python3<span class="sc">-</span>rdkit</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-rdkit</span></code></pre></div>
 <p>If you use this package on Windows or MacOS, I would be happy to include installation instructions here if you share them with me, e.g. via a Pull Request.</p>
 </div>
 <div class="section level2">
 <h2 id="configuration-of-the-python-version-to-use">Configuration of the Python version to use<a class="anchor" aria-label="anchor" href="#configuration-of-the-python-version-to-use"></a>
 </h2>
 <p>On Debian type Linux distributions, you can use the following line in your global or project specific <code>.Rprofile</code> file to tell the <code>reticulate</code> package to use the system Python version that will find the RDKit installed in the system location.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON=</span><span class="st">"/usr/bin/python3"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>RETICULATE_PYTHON<span class="op">=</span><span class="st">"/usr/bin/python3"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
