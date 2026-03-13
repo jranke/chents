@@ -2,9 +2,12 @@
 
 ## version 0.4.1
 
-- R/chent.R: Improve print method for `pai` objects
-- plot method for chents: Pass dots argument to `grid.picture()` as
-  documented.
+- Improve print method for `pai` objects
+- `chent` plot method: Pass dots argument to `grid.picture()` as
+  documented
+- `chent` plot method: Use preferred SMILES. If PubChem information was
+  retrieved, this will now be the SMILES including stereochemical
+  information
 
 ## version 0.4.0
 

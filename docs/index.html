@@ -81,14 +81,12 @@
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png"><!-- --></p>
 <p>If you have a so-called ISO common name of a pesticide active ingredient, you can use the ‘pai’ class derived from the ‘chent’ class, which starts with querying the <a href="http://www.bcpcpesticidecompendium.org/" class="external-link">BCPC compendium</a> first.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/pai.html">pai</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"lambda-cyhalothrin"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Querying BCPC for lambda-cyhalothrin ...</span></span>
-<span><span class="co">#&gt; Querying PubChem for name lambda-cyhalothrin ...</span></span>
+<code class="sourceCode R"><span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/pai.html">pai</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"deltamethrin"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Querying BCPC for deltamethrin ...</span></span>
+<span><span class="co">#&gt; Querying PubChem for inchikey OWZREIFADZCYQD-NSHGMRRFSA-N ...</span></span>
 <span><span class="co">#&gt; Get chemical information from RDKit using PubChem SMILES</span></span>
-<span><span class="co">#&gt; CC1([C@@H]([C@@H]1C(=O)O[C@@H](C#N)C2=CC(=CC=C2)OC3=CC=CC=C3)/C=C(/C(F)(F)F)\Cl)C</span></span>
-<span><span class="co">#&gt; Warning in self$get_rdkit(template = template): RDKit mw is 449.856 while mw is</span></span>
-<span><span class="co">#&gt; 449.8</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; CC1([C@H]([C@H]1C(=O)O[C@H](C#N)C2=CC(=CC=C2)OC3=CC=CC=C3)C=C(Br)Br)C</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">delta</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png"><!-- --></p>
 <p>Additional information can be read from a local .yaml file. This information can be leveraged e.g. by the <a href="https://pkgdown.jrwb.de/pfm/reference/PEC_soil.html" class="external-link">PEC_soil</a> function of the ‘pfm’ package. However, this functionality is to be superseded by a dedicated package, defining data for the environmental risk assessment on chemicals, in particular on active ingredients of plant protection products.</p>
 <div class="section level2">

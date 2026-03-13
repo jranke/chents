@@ -64,14 +64,12 @@ which starts with querying the [BCPC
 compendium](http://www.bcpcpesticidecompendium.org/) first.
 
 ``` r
-lambda <- pai$new("lambda-cyhalothrin")
-#> Querying BCPC for lambda-cyhalothrin ...
-#> Querying PubChem for name lambda-cyhalothrin ...
+delta <- pai$new("deltamethrin")
+#> Querying BCPC for deltamethrin ...
+#> Querying PubChem for inchikey OWZREIFADZCYQD-NSHGMRRFSA-N ...
 #> Get chemical information from RDKit using PubChem SMILES
-#> CC1([C@@H]([C@@H]1C(=O)O[C@@H](C#N)C2=CC(=CC=C2)OC3=CC=CC=C3)/C=C(/C(F)(F)F)\Cl)C
-#> Warning in self$get_rdkit(template = template): RDKit mw is 449.856 while mw is
-#> 449.8
-plot(lambda)
+#> CC1([C@H]([C@H]1C(=O)O[C@H](C#N)C2=CC(=CC=C2)OC3=CC=CC=C3)C=C(Br)Br)C
+plot(delta)
 ```
 
 ![](reference/figures/README-unnamed-chunk-5-1.png)
