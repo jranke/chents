@@ -54,8 +54,8 @@
 <p>When first defining a chemical entity, some chemical information is retrieved from the <a href="https://pubchem.ncbi.nlm.nih.gov/" class="external-link">PubChem</a> website using the <a href="https://docs.ropensci.org/webchem/" class="external-link">webchem</a> package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkgdown.jrwb.de/chents/">chents</a></span><span class="op">)</span></span>
-<span><span class="va">caffeine</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/chent.html">chent</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"caffeine"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Querying PubChem for name caffeine ...</span></span>
+<span><span class="va">caffeine</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/chent.html">chent</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"Caffeine"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Querying PubChem for name Caffeine ...</span></span>
 <span><span class="co">#&gt; Get chemical information from RDKit using PubChem SMILES</span></span>
 <span><span class="co">#&gt; CN1C=NC2=C1C(=O)N(C(=O)N2C)C</span></span></code></pre></div>
 <p>If Python and <a href="https://rdkit.org" class="external-link">RDKit</a> (&gt; 2015.03) are installed and configured for use with the <a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a> package, some additional chemical information including a 2D graph are computed.</p>
@@ -63,7 +63,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">caffeine</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;chent&gt;</span></span>
-<span><span class="co">#&gt; Identifier $identifier caffeine </span></span>
+<span><span class="co">#&gt; Identifier $identifier Caffeine </span></span>
 <span><span class="co">#&gt; InChI Key $inchikey RYYVLZVUVIJVGH-UHFFFAOYSA-N </span></span>
 <span><span class="co">#&gt; SMILES string $smiles:</span></span>
 <span><span class="co">#&gt;                        PubChem </span></span>
@@ -81,8 +81,8 @@
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png"><!-- --></p>
 <p>If you have a so-called ISO common name of a pesticide active ingredient, you can use the ‘pai’ class derived from the ‘chent’ class, which starts with querying the <a href="http://www.bcpcpesticidecompendium.org/" class="external-link">BCPC compendium</a> first.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/pai.html">pai</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"deltamethrin"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Querying BCPC for deltamethrin ...</span></span>
+<code class="sourceCode R"><span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/pai.html">pai</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"Deltamethrin"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Querying BCPC for Deltamethrin ...</span></span>
 <span><span class="co">#&gt; Querying PubChem for inchikey OWZREIFADZCYQD-NSHGMRRFSA-N ...</span></span>
 <span><span class="co">#&gt; Get chemical information from RDKit using PubChem SMILES</span></span>
 <span><span class="co">#&gt; CC1([C@H]([C@H]1C(=O)O[C@H](C#N)C2=CC(=CC=C2)OC3=CC=CC=C3)C=C(Br)Br)C</span></span>
@@ -106,6 +106,57 @@
 <p>On Debian type Linux distributions, you can use the following line in your global or project specific <code>.Rprofile</code> file to tell the <code>reticulate</code> package to use the system Python version that will find the RDKit installed in the system location.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>RETICULATE_PYTHON<span class="op">=</span><span class="st">"/usr/bin/python3"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="using-r6-classes">Using R6 classes<a class="anchor" aria-label="anchor" href="#using-r6-classes"></a>
+</h2>
+<p>Note that the <code>chent</code> objects defined by this package are <a href="https://r6.r-lib.org/articles/Introduction.html" class="external-link">R6</a> classes. Therefore, if you think you make a copy by assigning them to a new name, the objects will still be connected, because only the reference is copied. For example, you can create a molecule without retrieving data from PubChem</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">but</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/chent.html">chent</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"Butane"</span>, smiles <span class="op">=</span> <span class="st">"CCCC"</span>, pubchem <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Get chemical information from RDKit using user SMILES</span></span>
+<span><span class="co">#&gt; CCCC</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">but</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;chent&gt;</span></span>
+<span><span class="co">#&gt; Identifier $identifier Butane </span></span>
+<span><span class="co">#&gt; InChI Key $inchikey NA </span></span>
+<span><span class="co">#&gt; SMILES string $smiles:</span></span>
+<span><span class="co">#&gt;   user </span></span>
+<span><span class="co">#&gt; "CCCC" </span></span>
+<span><span class="co">#&gt; Molecular weight $mw: 58.1</span></span></code></pre></div>
+<p>If you then assign a new name and add PubChem information to the object with the new name, the information will also be added to the original <code>chent</code> object:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">but_pubchem</span> <span class="op">&lt;-</span> <span class="va">but</span></span>
+<span><span class="va">but_pubchem</span><span class="op">$</span><span class="fu">try_pubchem</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Querying PubChem for name Butane ...</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">but</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;chent&gt;</span></span>
+<span><span class="co">#&gt; Identifier $identifier Butane </span></span>
+<span><span class="co">#&gt; InChI Key $inchikey IJDNQMDRQITEOD-UHFFFAOYSA-N </span></span>
+<span><span class="co">#&gt; SMILES string $smiles:</span></span>
+<span><span class="co">#&gt;    user PubChem </span></span>
+<span><span class="co">#&gt;  "CCCC"  "CCCC" </span></span>
+<span><span class="co">#&gt; Molecular weight $mw: 58.1 </span></span>
+<span><span class="co">#&gt; PubChem synonyms (up to 10):</span></span>
+<span><span class="co">#&gt;  [1] "BUTANE"              "n-Butane"            "106-97-8"           </span></span>
+<span><span class="co">#&gt;  [4] "Diethyl"             "Methylethylmethane"  "Butanen"            </span></span>
+<span><span class="co">#&gt;  [7] "Butani"              "Butyl hydride"       "HC 600"             </span></span>
+<span><span class="co">#&gt; [10] "A 21 (lowing agent)"</span></span></code></pre></div>
+<p>You can create a derived, independent object using the <code>clone()</code> method that will not be affectd by operations on the original object:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">but_new</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/chent.html">chent</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="st">"Butane"</span>, smiles <span class="op">=</span> <span class="st">"CCCC"</span>, pubchem <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Get chemical information from RDKit using user SMILES</span></span>
+<span><span class="co">#&gt; CCCC</span></span>
+<span><span class="va">but_clone</span> <span class="op">&lt;-</span> <span class="va">but_new</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">but_new</span><span class="op">$</span><span class="fu">try_pubchem</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Querying PubChem for name Butane ...</span></span>
+<span><span class="va">but_clone</span></span>
+<span><span class="co">#&gt; &lt;chent&gt;</span></span>
+<span><span class="co">#&gt; Identifier $identifier Butane </span></span>
+<span><span class="co">#&gt; InChI Key $inchikey NA </span></span>
+<span><span class="co">#&gt; SMILES string $smiles:</span></span>
+<span><span class="co">#&gt;   user </span></span>
+<span><span class="co">#&gt; "CCCC" </span></span>
+<span><span class="co">#&gt; Molecular weight $mw: 58.1</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

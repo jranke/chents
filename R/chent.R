@@ -196,7 +196,6 @@ chent <- R6Class("chent",
         attr(self$inchikey, "source") <- "pubchem"
       } else {
         if (is.na(self$inchikey)) {
-          warning("Overwriting uninitialized InChIKey")
           self$inchikey <- self$pubchem$InChIKey
           attr(self$inchikey, "source") <- "pubchem"
         } else {

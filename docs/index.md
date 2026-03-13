@@ -19,8 +19,8 @@ using the [webchem](https://docs.ropensci.org/webchem/) package.
 
 ``` r
 library(chents)
-caffeine <- chent$new("caffeine")
-#> Querying PubChem for name caffeine ...
+caffeine <- chent$new("Caffeine")
+#> Querying PubChem for name Caffeine ...
 #> Get chemical information from RDKit using PubChem SMILES
 #> CN1C=NC2=C1C(=O)N(C(=O)N2C)C
 ```
@@ -36,7 +36,7 @@ collected.
 ``` r
 print(caffeine)
 #> <chent>
-#> Identifier $identifier caffeine 
+#> Identifier $identifier Caffeine 
 #> InChI Key $inchikey RYYVLZVUVIJVGH-UHFFFAOYSA-N 
 #> SMILES string $smiles:
 #>                        PubChem 
@@ -64,8 +64,8 @@ which starts with querying the [BCPC
 compendium](http://www.bcpcpesticidecompendium.org/) first.
 
 ``` r
-delta <- pai$new("deltamethrin")
-#> Querying BCPC for deltamethrin ...
+delta <- pai$new("Deltamethrin")
+#> Querying BCPC for Deltamethrin ...
 #> Querying PubChem for inchikey OWZREIFADZCYQD-NSHGMRRFSA-N ...
 #> Get chemical information from RDKit using PubChem SMILES
 #> CC1([C@H]([C@H]1C(=O)O[C@H](C#N)C2=CC(=CC=C2)OC3=CC=CC=C3)C=C(Br)Br)C
@@ -112,4 +112,70 @@ RDKit installed in the system location.
 
 ``` r
 Sys.setenv(RETICULATE_PYTHON="/usr/bin/python3")
+```
+
+## Using R6 classes
+
+Note that the `chent` objects defined by this package are
+[R6](https://r6.r-lib.org/articles/Introduction.html) classes.
+Therefore, if you think you make a copy by assigning them to a new name,
+the objects will still be connected, because only the reference is
+copied. For example, you can create a molecule without retrieving data
+from PubChem
+
+``` r
+but <- chent$new("Butane", smiles = "CCCC", pubchem = FALSE)
+#> Get chemical information from RDKit using user SMILES
+#> CCCC
+print(but)
+#> <chent>
+#> Identifier $identifier Butane 
+#> InChI Key $inchikey NA 
+#> SMILES string $smiles:
+#>   user 
+#> "CCCC" 
+#> Molecular weight $mw: 58.1
+```
+
+If you then assign a new name and add PubChem information to the object
+with the new name, the information will also be added to the original
+`chent` object:
+
+``` r
+but_pubchem <- but
+but_pubchem$try_pubchem()
+#> Querying PubChem for name Butane ...
+print(but)
+#> <chent>
+#> Identifier $identifier Butane 
+#> InChI Key $inchikey IJDNQMDRQITEOD-UHFFFAOYSA-N 
+#> SMILES string $smiles:
+#>    user PubChem 
+#>  "CCCC"  "CCCC" 
+#> Molecular weight $mw: 58.1 
+#> PubChem synonyms (up to 10):
+#>  [1] "BUTANE"              "n-Butane"            "106-97-8"           
+#>  [4] "Diethyl"             "Methylethylmethane"  "Butanen"            
+#>  [7] "Butani"              "Butyl hydride"       "HC 600"             
+#> [10] "A 21 (lowing agent)"
+```
+
+You can create a derived, independent object using the `clone()` method
+that will not be affectd by operations on the original object:
+
+``` r
+but_new <- chent$new("Butane", smiles = "CCCC", pubchem = FALSE)
+#> Get chemical information from RDKit using user SMILES
+#> CCCC
+but_clone <- but_new$clone()
+but_new$try_pubchem()
+#> Querying PubChem for name Butane ...
+but_clone
+#> <chent>
+#> Identifier $identifier Butane 
+#> InChI Key $inchikey NA 
+#> SMILES string $smiles:
+#>   user 
+#> "CCCC" 
+#> Molecular weight $mw: 58.1
 ```

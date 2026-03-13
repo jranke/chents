@@ -20,14 +20,13 @@ provides a way to define and check the identity of chemically defined substances
 ("chemical entities") and to collect related information.
 
 
-
 When first defining a chemical entity, some chemical information
 is retrieved from the [PubChem](https://pubchem.ncbi.nlm.nih.gov/) website using
 the [webchem](https://docs.ropensci.org/webchem/) package.
 
 ```{r}
 library(chents)
-caffeine <- chent$new("caffeine")
+caffeine <- chent$new("Caffeine")
 ```
 
 If Python and [RDKit](https://rdkit.org) (> 2015.03) are installed and
@@ -52,7 +51,7 @@ can use the 'pai' class derived from the 'chent' class, which starts with queryi
 the [BCPC compendium](http://www.bcpcpesticidecompendium.org/) first.
 
 ```{r fig.height = 3.5}
-delta <- pai$new("deltamethrin")
+delta <- pai$new("Deltamethrin")
 plot(delta)
 ```
 
@@ -95,4 +94,38 @@ location.
 ```{r, eval = FALSE}
 Sys.setenv(RETICULATE_PYTHON="/usr/bin/python3")
 ```
+
+## Using R6 classes
+
+Note that the `chent` objects defined by this package are [R6](https://r6.r-lib.org/articles/Introduction.html)
+classes. Therefore, if you think you make a copy by assigning them to a new name, the
+objects will still be connected, because only the reference is copied. For
+example,  you can create a molecule without retrieving data from PubChem
+
+```{r}
+but <- chent$new("Butane", smiles = "CCCC", pubchem = FALSE)
+print(but)
+```
+
+If you then assign a new name and add PubChem information to the object with
+the new name, the information will also be added to the original `chent`
+object:
+
+
+```{r}
+but_pubchem <- but
+but_pubchem$try_pubchem()
+print(but)
+```
+
+You can create a derived, independent object using the `clone()` method
+that will not be affectd by operations on the original object:
+
+```{r}
+but_new <- chent$new("Butane", smiles = "CCCC", pubchem = FALSE)
+but_clone <- but_new$clone()
+but_new$try_pubchem()
+but_clone
+```
+
 
