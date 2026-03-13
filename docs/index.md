@@ -9,8 +9,8 @@ coverage](https://img.shields.io/badge/coverage-jrwb.de-blue.svg)](https://pkgdo
 
 When working with data on chemical substances, we often need a reliable
 link between the data and the chemical identity of the substances. The R
-package **chents** provides a way to define and check the identity of
-chemically defined substances (“chemical entities”) and to collect
+package **chents** provides a way to define an R object corresponding to
+a chemically defined substances (“chemical entity”) and to collect
 related information.
 
 When first defining a chemical entity, some chemical information is

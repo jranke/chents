@@ -28,10 +28,10 @@ roxy:
 $(TGZ): $(pkgfiles)
 	"$(RBIN)/R" CMD build . 2>&1 | tee log/build.log
 
-pd: roxy
+pd: README.md roxy
 	"$(RBIN)/Rscript" -e "pkgdown::build_site(run_dont_run = TRUE, lazy = TRUE)"
 
-pd_all: roxy
+pd_all: README.md roxy
 	"$(RBIN)/Rscript" -e "pkgdown::build_site(run_dont_run = TRUE)"
 
 build: roxy $(TGZ)
