@@ -16,8 +16,7 @@ object
 
 ## Super class
 
-[`chents::chent`](https://pkgdown.jrwb.de/chents/reference/chent.md) -\>
-`pai`
+[`chent`](https://pkgdown.jrwb.de/chents/reference/chent.md) -\> `pai`
 
 ## Public fields
 
@@ -34,31 +33,31 @@ object
 
 ### Public methods
 
-- [`pai$new()`](#method-pai-new)
+- [`pai$new()`](#method-pai-initialize)
 
 - [`pai$clone()`](#method-pai-clone)
 
 Inherited methods
 
-- [`chents::chent$add_PUF()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_PUF)
-- [`chents::chent$add_TP()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_TP)
-- [`chents::chent$add_cwsat()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_cwsat)
-- [`chents::chent$add_p0()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_p0)
-- [`chents::chent$add_soil_degradation()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_soil_degradation)
-- [`chents::chent$add_soil_ff()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_soil_ff)
-- [`chents::chent$add_soil_sorption()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_soil_sorption)
-- [`chents::chent$add_transformation()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_transformation)
-- [`chents::chent$emf()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-emf)
-- [`chents::chent$get_chyaml()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-get_chyaml)
-- [`chents::chent$get_pubchem()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-get_pubchem)
-- [`chents::chent$get_rdkit()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-get_rdkit)
-- [`chents::chent$pdf()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-pdf)
-- [`chents::chent$png()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-png)
-- [`chents::chent$try_pubchem()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-try_pubchem)
+- [`chent$add_PUF()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_PUF)
+- [`chent$add_TP()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_TP)
+- [`chent$add_cwsat()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_cwsat)
+- [`chent$add_p0()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_p0)
+- [`chent$add_soil_degradation()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_soil_degradation)
+- [`chent$add_soil_ff()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_soil_ff)
+- [`chent$add_soil_sorption()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_soil_sorption)
+- [`chent$add_transformation()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-add_transformation)
+- [`chent$emf()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-emf)
+- [`chent$get_chyaml()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-get_chyaml)
+- [`chent$get_pubchem()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-get_pubchem)
+- [`chent$get_rdkit()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-get_rdkit)
+- [`chent$pdf()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-pdf)
+- [`chent$png()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-png)
+- [`chent$try_pubchem()`](https://pkgdown.jrwb.de/chents/reference/chent.html#method-try_pubchem)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `pai$new()`
 
 Create a new pai object
 
@@ -123,7 +122,7 @@ Create a new pai object
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `pai$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -180,7 +179,7 @@ print(decanol)
 #> "CCCCCCCCCCO" 
 #> Molecular weight $mw: 158.3 
 #> PubChem synonyms (up to 10):
-#>  [1] "1-DECANOL"       "Decan-1-ol"      "Decyl alcohol"   "112-30-1"       
+#>  [1] "1-DECANOL"       "Decyl alcohol"   "Decan-1-ol"      "112-30-1"       
 #>  [5] "n-Decyl alcohol" "n-Decanol"       "Capric alcohol"  "Nonylcarbinol"  
 #>  [9] "Antak"           "Royaltac"       
 # }

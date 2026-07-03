@@ -4,7 +4,7 @@
 \alias{chent}
 \title{An R6 class for chemical entities with associated data}
 \format{
-An \link[R6:R6Class]{R6::R6Class} generator object
+An \link[R6:R6Class]{R6Class} generator object
 }
 \description{
 The class is initialised with an identifier. Chemical
@@ -24,84 +24,85 @@ print(oct)
 }
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{identifier}}{(\code{character(1)})\cr
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{identifier}}{(\code{character(1)})\cr
 The identifier that was used to initiate the object, with attribute 'source'}
 
-\item{\code{inchikey}}{(\code{character(1)})\cr
+    \item{\code{inchikey}}{(\code{character(1)})\cr
 InChI Key, with attribute 'source'}
 
-\item{\code{smiles}}{(\code{character()})\cr
+    \item{\code{smiles}}{(\code{character()})\cr
 SMILES code(s), with attribute 'source'}
 
-\item{\code{mw}}{(\code{numeric(1)})\cr
+    \item{\code{mw}}{(\code{numeric(1)})\cr
 Molecular weight, with attribute 'source'}
 
-\item{\code{pubchem}}{(\code{list()})\cr
+    \item{\code{pubchem}}{(\code{list()})\cr
 List of information retrieved from PubChem}
 
-\item{\code{rdkit}}{List of information obtained with RDKit}
+    \item{\code{rdkit}}{List of information obtained with RDKit}
 
-\item{\code{mol}}{<rdkit.Chem.rdchem.Mol> object}
+    \item{\code{mol}}{<rdkit.Chem.rdchem.Mol> object}
 
-\item{\code{svg}}{SVG code}
+    \item{\code{svg}}{SVG code}
 
-\item{\code{Picture}}{Graph as a \link[grImport:Picture-class]{grImport::Picture} object obtained using the grImport package}
+    \item{\code{Picture}}{Graph as a \link[grImport:Picture-class]{grImport::Picture} object obtained using the grImport package}
 
-\item{\code{Pict_font_size}}{Font size as extracted from the intermediate PostScript file}
+    \item{\code{Pict_font_size}}{Font size as extracted from the intermediate PostScript file}
 
-\item{\code{pdf_height}}{Height of the MediaBox in the pdf after cropping}
+    \item{\code{pdf_height}}{Height of the MediaBox in the pdf after cropping}
 
-\item{\code{p0}}{Vapour pressure in Pa}
+    \item{\code{p0}}{Vapour pressure in Pa}
 
-\item{\code{cwsat}}{Water solubility in mg/L}
+    \item{\code{cwsat}}{Water solubility in mg/L}
 
-\item{\code{PUF}}{Plant uptake factor}
+    \item{\code{PUF}}{Plant uptake factor}
 
-\item{\code{chyaml}}{List of information obtained from a YAML file}
+    \item{\code{chyaml}}{List of information obtained from a YAML file}
 
-\item{\code{TPs}}{List of transformation products as chent objects}
+    \item{\code{TPs}}{List of transformation products as chent objects}
 
-\item{\code{transformations}}{Data frame of observed transformations}
+    \item{\code{transformations}}{Data frame of observed transformations}
 
-\item{\code{soil_degradation}}{Dataframe of modelling DT50 values}
+    \item{\code{soil_degradation}}{Dataframe of modelling DT50 values}
 
-\item{\code{soil_ff}}{Dataframe of formation fractions}
+    \item{\code{soil_ff}}{Dataframe of formation fractions}
 
-\item{\code{soil_sorption}}{Dataframe of soil sorption data}
-}
-\if{html}{\out{</div>}}
+    \item{\code{soil_sorption}}{Dataframe of soil sorption data}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-chent-new}{\code{chent$new()}}
-\item \href{#method-chent-try_pubchem}{\code{chent$try_pubchem()}}
-\item \href{#method-chent-get_pubchem}{\code{chent$get_pubchem()}}
-\item \href{#method-chent-get_rdkit}{\code{chent$get_rdkit()}}
-\item \href{#method-chent-get_chyaml}{\code{chent$get_chyaml()}}
-\item \href{#method-chent-add_p0}{\code{chent$add_p0()}}
-\item \href{#method-chent-add_cwsat}{\code{chent$add_cwsat()}}
-\item \href{#method-chent-add_PUF}{\code{chent$add_PUF()}}
-\item \href{#method-chent-add_TP}{\code{chent$add_TP()}}
-\item \href{#method-chent-add_transformation}{\code{chent$add_transformation()}}
-\item \href{#method-chent-add_soil_degradation}{\code{chent$add_soil_degradation()}}
-\item \href{#method-chent-add_soil_ff}{\code{chent$add_soil_ff()}}
-\item \href{#method-chent-add_soil_sorption}{\code{chent$add_soil_sorption()}}
-\item \href{#method-chent-pdf}{\code{chent$pdf()}}
-\item \href{#method-chent-png}{\code{chent$png()}}
-\item \href{#method-chent-emf}{\code{chent$emf()}}
-\item \href{#method-chent-clone}{\code{chent$clone()}}
-}
+  \itemize{
+    \item \href{#method-chent-initialize}{\code{chent$new()}}
+    \item \href{#method-chent-try_pubchem}{\code{chent$try_pubchem()}}
+    \item \href{#method-chent-get_pubchem}{\code{chent$get_pubchem()}}
+    \item \href{#method-chent-get_rdkit}{\code{chent$get_rdkit()}}
+    \item \href{#method-chent-get_chyaml}{\code{chent$get_chyaml()}}
+    \item \href{#method-chent-add_p0}{\code{chent$add_p0()}}
+    \item \href{#method-chent-add_cwsat}{\code{chent$add_cwsat()}}
+    \item \href{#method-chent-add_PUF}{\code{chent$add_PUF()}}
+    \item \href{#method-chent-add_TP}{\code{chent$add_TP()}}
+    \item \href{#method-chent-add_transformation}{\code{chent$add_transformation()}}
+    \item \href{#method-chent-add_soil_degradation}{\code{chent$add_soil_degradation()}}
+    \item \href{#method-chent-add_soil_ff}{\code{chent$add_soil_ff()}}
+    \item \href{#method-chent-add_soil_sorption}{\code{chent$add_soil_sorption()}}
+    \item \href{#method-chent-pdf}{\code{chent$pdf()}}
+    \item \href{#method-chent-png}{\code{chent$png()}}
+    \item \href{#method-chent-emf}{\code{chent$emf()}}
+    \item \href{#method-chent-clone}{\code{chent$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-chent-new"></a>}}
-\if{latex}{\out{\hypertarget{method-chent-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$new(
+\if{html}{\out{<a id="method-chent-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-chent-initialize}{}}}
+\subsection{\code{chent$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$new(
   identifier,
   smiles = NULL,
   inchikey = NULL,
@@ -110,258 +111,250 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   rdkit = TRUE,
   template = NULL,
   chyaml = FALSE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{identifier}}{Identifier to be stored in the object}
-
-\item{\code{smiles}}{Optional user provided SMILES code}
-
-\item{\code{inchikey}}{Optional user provided InChI Key}
-
-\item{\code{pubchem}}{Should an attempt be made to retrieve chemical
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{identifier}}{Identifier to be stored in the object}
+      \item{\code{smiles}}{Optional user provided SMILES code}
+      \item{\code{inchikey}}{Optional user provided InChI Key}
+      \item{\code{pubchem}}{Should an attempt be made to retrieve chemical
 information from PubChem via the webchem package?}
-
-\item{\code{pubchem_from}}{Possibility to select the argument
+      \item{\code{pubchem_from}}{Possibility to select the argument
 that is used to query pubchem}
-
-\item{\code{rdkit}}{Should an attempt be made to retrieve chemical
+      \item{\code{rdkit}}{Should an attempt be made to retrieve chemical
 information from a local rdkit installation via python
 and the reticulate package?}
-
-\item{\code{template}}{An optional SMILES code to be used as template for RDKit}
-
-\item{\code{chyaml}}{Should we look for a identifier.yaml file in the working
+      \item{\code{template}}{An optional SMILES code to be used as template for RDKit}
+      \item{\code{chyaml}}{Should we look for a identifier.yaml file in the working
 directory?}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-try_pubchem"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-try_pubchem}{}}}
-\subsection{Method \code{try_pubchem()}}{
-Try to get chemical information from PubChem
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$try_pubchem(query = self$identifier, from = "name")}\if{html}{\out{</div>}}
+\subsection{\code{chent$try_pubchem()}}{
+  Try to get chemical information from PubChem
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$try_pubchem(query = self$identifier, from = "name")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{query}}{Query string to be passed to \link[webchem:get_cid]{get_cid}}
+      \item{\code{from}}{Passed to \link[webchem:get_cid]{get_cid}}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{query}}{Query string to be passed to \link[webchem:get_cid]{get_cid}}
-
-\item{\code{from}}{Passed to \link[webchem:get_cid]{get_cid}}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-get_pubchem"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-get_pubchem}{}}}
-\subsection{Method \code{get_pubchem()}}{
-Get chemical information from PubChem for a known PubChem CID
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$get_pubchem(pubchem_cid)}\if{html}{\out{</div>}}
+\subsection{\code{chent$get_pubchem()}}{
+  Get chemical information from PubChem for a known PubChem CID
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$get_pubchem(pubchem_cid)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{pubchem_cid}}{CID}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{pubchem_cid}}{CID}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-get_rdkit"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-get_rdkit}{}}}
-\subsection{Method \code{get_rdkit()}}{
-Get chemical information from RDKit if available
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$get_rdkit(template = NULL)}\if{html}{\out{</div>}}
+\subsection{\code{chent$get_rdkit()}}{
+  Get chemical information from RDKit if available
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$get_rdkit(template = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{template}}{An optional SMILES code to be used as template for RDKit}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{template}}{An optional SMILES code to be used as template for RDKit}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-get_chyaml"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-get_chyaml}{}}}
-\subsection{Method \code{get_chyaml()}}{
-Obtain information from a YAML file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$get_chyaml(
+\subsection{\code{chent$get_chyaml()}}{
+  Obtain information from a YAML file
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$get_chyaml(
   repo = c("wd", "local", "web"),
   chyaml = paste0(URLencode(self$identifier), ".yaml")
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{repo}}{Should the file be looked for in the current working
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{repo}}{Should the file be looked for in the current working
 directory, a local git repository under \verb{~/git/chyaml}, or from
 the web (not implemented).}
+      \item{\code{chyaml}}{The filename to be looked for}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{chyaml}}{The filename to be looked for}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_p0"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_p0}{}}}
-\subsection{Method \code{add_p0()}}{
-Add a vapour pressure
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$add_p0(p0, T = NA, source = NA, page = NA, remark = "")}\if{html}{\out{</div>}}
+\subsection{\code{chent$add_p0()}}{
+  Add a vapour pressure
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$add_p0(p0, T = NA, source = NA, page = NA, remark = "")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{p0}}{The vapour pressure in Pa}
+      \item{\code{T}}{Temperature}
+      \item{\code{source}}{An acronym specifying the source of the information}
+      \item{\code{page}}{The page from which the information was taken}
+      \item{\code{remark}}{A remark}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{p0}}{The vapour pressure in Pa}
-
-\item{\code{T}}{Temperature}
-
-\item{\code{source}}{An acronym specifying the source of the information}
-
-\item{\code{page}}{The page from which the information was taken}
-
-\item{\code{remark}}{A remark}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_cwsat"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_cwsat}{}}}
-\subsection{Method \code{add_cwsat()}}{
-Add a water solubility
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$add_cwsat(cwsat, T = NA, pH = NA, source = NA, page = NA, remark = "")}\if{html}{\out{</div>}}
+\subsection{\code{chent$add_cwsat()}}{
+  Add a water solubility
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$add_cwsat(cwsat, T = NA, pH = NA, source = NA, page = NA, remark = "")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{cwsat}}{The water solubility in mg/L}
+      \item{\code{T}}{Temperature}
+      \item{\code{pH}}{pH value}
+      \item{\code{source}}{An acronym specifying the source of the information}
+      \item{\code{page}}{The page from which the information was taken}
+      \item{\code{remark}}{A remark}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{cwsat}}{The water solubility in mg/L}
-
-\item{\code{T}}{Temperature}
-
-\item{\code{pH}}{pH value}
-
-\item{\code{source}}{An acronym specifying the source of the information}
-
-\item{\code{page}}{The page from which the information was taken}
-
-\item{\code{remark}}{A remark}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_PUF"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_PUF}{}}}
-\subsection{Method \code{add_PUF()}}{
-Add a plant uptake factor
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$add_PUF(
+\subsection{\code{chent$add_PUF()}}{
+  Add a plant uptake factor
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$add_PUF(
   PUF = 0,
   source = "focus_generic_gw_2014",
   page = 41,
   remark = "Conservative default value"
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{PUF}}{The plant uptake factor, a number between 0 and 1}
+      \item{\code{source}}{An acronym specifying the source of the information}
+      \item{\code{page}}{The page from which the information was taken}
+      \item{\code{remark}}{A remark}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{PUF}}{The plant uptake factor, a number between 0 and 1}
-
-\item{\code{source}}{An acronym specifying the source of the information}
-
-\item{\code{page}}{The page from which the information was taken}
-
-\item{\code{remark}}{A remark}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_TP"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_TP}{}}}
-\subsection{Method \code{add_TP()}}{
-Add a transformation product to the internal list
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$add_TP(x, smiles = NULL, pubchem = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{chent$add_TP()}}{
+  Add a transformation product to the internal list
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$add_TP(x, smiles = NULL, pubchem = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{x}}{A \link{chent} object, or an identifier to generate a \link{chent} object}
+      \item{\code{smiles}}{Optional user provided SMILES code}
+      \item{\code{pubchem}}{Should chemical information be obtained from PubChem?}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{x}}{A \link{chent} object, or an identifier to generate a \link{chent} object}
-
-\item{\code{smiles}}{Optional user provided SMILES code}
-
-\item{\code{pubchem}}{Should chemical information be obtained from PubChem?}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_transformation"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_transformation}{}}}
-\subsection{Method \code{add_transformation()}}{
-Add a line in the internal dataframe holding observed transformations
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$add_transformation(
+\subsection{\code{chent$add_transformation()}}{
+  Add a line in the internal dataframe holding observed transformations
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$add_transformation(
   study_type,
   TP_identifier,
   max_occurrence,
   remark = "",
   source = NA,
   pages = NA
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{study_type}}{A characterisation of the study type}
-
-\item{\code{TP_identifier}}{An identifier of one of the transformation products
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{study_type}}{A characterisation of the study type}
+      \item{\code{TP_identifier}}{An identifier of one of the transformation products
 in \code{self$TPs}}
-
-\item{\code{max_occurrence}}{The maximum observed occurrence of the
+      \item{\code{max_occurrence}}{The maximum observed occurrence of the
 transformation product, expressed as a fraction of the amount that would
 result from stochiometric transformation}
-
-\item{\code{remark}}{A remark}
-
-\item{\code{source}}{An acronym specifying the source of the information}
-
-\item{\code{pages}}{The pages from which the information was taken}
+      \item{\code{remark}}{A remark}
+      \item{\code{source}}{An acronym specifying the source of the information}
+      \item{\code{pages}}{The pages from which the information was taken}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_soil_degradation"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_soil_degradation}{}}}
-\subsection{Method \code{add_soil_degradation()}}{
-Add a line in the internal dataframe holding modelling DT50 values
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$add_soil_degradation(
+\subsection{\code{chent$add_soil_degradation()}}{
+  Add a line in the internal dataframe holding modelling DT50 values
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$add_soil_degradation(
   soils,
   DT50_mod,
   DT50_mod_ref,
@@ -380,88 +373,70 @@ Add a line in the internal dataframe holding modelling DT50 values
   remark = "",
   source,
   page = NA
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{soils}}{Names of the soils}
-
-\item{\code{DT50_mod}}{The modelling DT50 in the sense of regulatory pesticide
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{soils}}{Names of the soils}
+      \item{\code{DT50_mod}}{The modelling DT50 in the sense of regulatory pesticide
 fate modelling}
-
-\item{\code{DT50_mod_ref}}{The normalised modelling DT50 in the sense of
+      \item{\code{DT50_mod_ref}}{The normalised modelling DT50 in the sense of
 regulatory pesticide fate modelling}
-
-\item{\code{type}}{The soil type}
-
-\item{\code{country}}{The country (mainly for field studies)}
-
-\item{\code{pH_orig}}{The pH stated in the study}
-
-\item{\code{pH_medium}}{The medium in which this pH was measured}
-
-\item{\code{pH_H2O}}{The pH extrapolated to pure water}
-
-\item{\code{perc_OC}}{The percentage of organic carbon in the soil}
-
-\item{\code{temperature}}{The temperature during the study in degrees Celsius}
-
-\item{\code{moisture}}{The moisture during the study}
-
-\item{\code{category}}{Is it a laboratory ('lab') or field study ('field')}
-
-\item{\code{formulation}}{Name of the formulation applied, if it was not
+      \item{\code{type}}{The soil type}
+      \item{\code{country}}{The country (mainly for field studies)}
+      \item{\code{pH_orig}}{The pH stated in the study}
+      \item{\code{pH_medium}}{The medium in which this pH was measured}
+      \item{\code{pH_H2O}}{The pH extrapolated to pure water}
+      \item{\code{perc_OC}}{The percentage of organic carbon in the soil}
+      \item{\code{temperature}}{The temperature during the study in degrees Celsius}
+      \item{\code{moisture}}{The moisture during the study}
+      \item{\code{category}}{Is it a laboratory ('lab') or field study ('field')}
+      \item{\code{formulation}}{Name of the formulation applied, if it was not
 the technical active ingredient}
-
-\item{\code{model}}{The degradation model used for deriving \code{DT50_mod}}
-
-\item{\code{chi2}}{The relative error as defined in FOCUS kinetics}
-
-\item{\code{remark}}{A remark}
-
-\item{\code{source}}{An acronym specifying the source of the information}
-
-\item{\code{page}}{The page from which the information was taken}
+      \item{\code{model}}{The degradation model used for deriving \code{DT50_mod}}
+      \item{\code{chi2}}{The relative error as defined in FOCUS kinetics}
+      \item{\code{remark}}{A remark}
+      \item{\code{source}}{An acronym specifying the source of the information}
+      \item{\code{page}}{The page from which the information was taken}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_soil_ff"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_soil_ff}{}}}
-\subsection{Method \code{add_soil_ff()}}{
-Add one or more formation fractions for degradation in soil
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$add_soil_ff(target, soils, ff = 1, remark = "", source, page = NA)}\if{html}{\out{</div>}}
+\subsection{\code{chent$add_soil_ff()}}{
+  Add one or more formation fractions for degradation in soil
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$add_soil_ff(target, soils, ff = 1, remark = "", source, page = NA)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{target}}{The identifier(s) of the transformation product}
+      \item{\code{soils}}{The soil name(s) in which the transformation was observed}
+      \item{\code{ff}}{The formation fraction(s)}
+      \item{\code{remark}}{A remark}
+      \item{\code{source}}{An acronym specifying the source of the information}
+      \item{\code{page}}{The page from which the information was taken}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{target}}{The identifier(s) of the transformation product}
-
-\item{\code{soils}}{The soil name(s) in which the transformation was observed}
-
-\item{\code{ff}}{The formation fraction(s)}
-
-\item{\code{remark}}{A remark}
-
-\item{\code{source}}{An acronym specifying the source of the information}
-
-\item{\code{page}}{The page from which the information was taken}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-add_soil_sorption"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-add_soil_sorption}{}}}
-\subsection{Method \code{add_soil_sorption()}}{
-Add soil sorption data
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$add_soil_sorption(
+\subsection{\code{chent$add_soil_sorption()}}{
+  Add soil sorption data
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$add_soil_sorption(
   soils,
   Kf,
   Kfoc,
@@ -476,128 +451,119 @@ Add soil sorption data
   remark = "",
   source,
   page = NA
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{soils}}{Names of the soils}
-
-\item{\code{Kf}}{The sorption constant in L/kg, either linear (then \code{N} is 1)
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{soils}}{Names of the soils}
+      \item{\code{Kf}}{The sorption constant in L/kg, either linear (then \code{N} is 1)
 or according to Freundlich}
-
-\item{\code{Kfoc}}{The constant from above, normalised to soil organic carbon}
-
-\item{\code{N}}{The Freundlich exponent}
-
-\item{\code{type}}{The soil type}
-
-\item{\code{pH_orig}}{The pH stated in the study}
-
-\item{\code{pH_medium}}{The medium in which this pH was measured}
-
-\item{\code{pH_H2O}}{The pH extrapolated to pure water}
-
-\item{\code{perc_OC}}{The percentage of organic carbon in the soil}
-
-\item{\code{perc_clay}}{The percentage of clay in the soil}
-
-\item{\code{CEC}}{The cation exchange capacity}
-
-\item{\code{remark}}{A remark}
-
-\item{\code{source}}{An acronym specifying the source of the information}
-
-\item{\code{page}}{The page from which the information was taken}
+      \item{\code{Kfoc}}{The constant from above, normalised to soil organic carbon}
+      \item{\code{N}}{The Freundlich exponent}
+      \item{\code{type}}{The soil type}
+      \item{\code{pH_orig}}{The pH stated in the study}
+      \item{\code{pH_medium}}{The medium in which this pH was measured}
+      \item{\code{pH_H2O}}{The pH extrapolated to pure water}
+      \item{\code{perc_OC}}{The percentage of organic carbon in the soil}
+      \item{\code{perc_clay}}{The percentage of clay in the soil}
+      \item{\code{CEC}}{The cation exchange capacity}
+      \item{\code{remark}}{A remark}
+      \item{\code{source}}{An acronym specifying the source of the information}
+      \item{\code{page}}{The page from which the information was taken}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-pdf"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-pdf}{}}}
-\subsection{Method \code{pdf()}}{
-Write a PDF image of the structure
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$pdf(
+\subsection{\code{chent$pdf()}}{
+  Write a PDF image of the structure
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$pdf(
   file = paste0(self$identifier, ".pdf"),
   dir = "structures/pdf",
   template = NULL
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{file}}{The file to write to}
+      \item{\code{dir}}{The directory to write the file to}
+      \item{\code{template}}{An optional SMILES code to be used as template for RDKit}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{file}}{The file to write to}
-
-\item{\code{dir}}{The directory to write the file to}
-
-\item{\code{template}}{An optional SMILES code to be used as template for RDKit}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-png"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-png}{}}}
-\subsection{Method \code{png()}}{
-Write a PNG image of the structure
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$png(
+\subsection{\code{chent$png()}}{
+  Write a PNG image of the structure
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$png(
   file = paste0(self$identifier, ".png"),
   dir = "structures/png",
   antialias = "gray"
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{file}}{The file to write to}
+      \item{\code{dir}}{The directory to write the file to}
+      \item{\code{antialias}}{Passed to \link[grDevices:png]{png}}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{file}}{The file to write to}
-
-\item{\code{dir}}{The directory to write the file to}
-
-\item{\code{antialias}}{Passed to \link[grDevices:png]{png}}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-emf"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-emf}{}}}
-\subsection{Method \code{emf()}}{
-Write an EMF image of the structure using \link[devEMF:emf]{emf}
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$emf(file = paste0(self$identifier, ".emf"), dir = "structures/emf")}\if{html}{\out{</div>}}
+\subsection{\code{chent$emf()}}{
+  Write an EMF image of the structure using \link[devEMF:emf]{emf}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$emf(file = paste0(self$identifier, ".emf"), dir = "structures/emf")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{file}}{The file to write to}
+      \item{\code{dir}}{The directory to write the file to}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{file}}{The file to write to}
-
-\item{\code{dir}}{The directory to write the file to}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chent-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-chent-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{chent$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{chent$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{chent$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

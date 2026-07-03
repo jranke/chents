@@ -27,53 +27,52 @@ print(decanol)
 }
 }
 \section{Super class}{
-\code{\link[chents:chent]{chents::chent}} -> \code{pai}
+\code{\link[chents:chent]{chent}} -> \code{pai}
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{iso}}{ISO common name of the active ingredient according to ISO 1750}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{iso}}{ISO common name of the active ingredient according to ISO 1750}
 
-\item{\code{bcpc}}{Information retrieved from the BCPC compendium available online
+    \item{\code{bcpc}}{Information retrieved from the BCPC compendium available online
 at <pesticidecompendium.bcpc.org>}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-pai-new}{\code{pai$new()}}
-\item \href{#method-pai-clone}{\code{pai$clone()}}
+  \itemize{
+    \item \href{#method-pai-initialize}{\code{pai$new()}}
+    \item \href{#method-pai-clone}{\code{pai$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_PUF"><a href='../../chents/html/chent.html#method-chent-add_PUF'><code>chents::chent$add_PUF()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_TP"><a href='../../chents/html/chent.html#method-chent-add_TP'><code>chents::chent$add_TP()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_cwsat"><a href='../../chents/html/chent.html#method-chent-add_cwsat'><code>chents::chent$add_cwsat()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_p0"><a href='../../chents/html/chent.html#method-chent-add_p0'><code>chents::chent$add_p0()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_degradation"><a href='../../chents/html/chent.html#method-chent-add_soil_degradation'><code>chents::chent$add_soil_degradation()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_ff"><a href='../../chents/html/chent.html#method-chent-add_soil_ff'><code>chents::chent$add_soil_ff()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_sorption"><a href='../../chents/html/chent.html#method-chent-add_soil_sorption'><code>chents::chent$add_soil_sorption()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_transformation"><a href='../../chents/html/chent.html#method-chent-add_transformation'><code>chents::chent$add_transformation()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="emf"><a href='../../chents/html/chent.html#method-chent-emf'><code>chents::chent$emf()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_chyaml"><a href='../../chents/html/chent.html#method-chent-get_chyaml'><code>chents::chent$get_chyaml()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_pubchem"><a href='../../chents/html/chent.html#method-chent-get_pubchem'><code>chents::chent$get_pubchem()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_rdkit"><a href='../../chents/html/chent.html#method-chent-get_rdkit'><code>chents::chent$get_rdkit()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="pdf"><a href='../../chents/html/chent.html#method-chent-pdf'><code>chents::chent$pdf()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="png"><a href='../../chents/html/chent.html#method-chent-png'><code>chents::chent$png()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="try_pubchem"><a href='../../chents/html/chent.html#method-chent-try_pubchem'><code>chents::chent$try_pubchem()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_PUF"><a href='../../chents/html/chent.html#method-chent-add_PUF'><code>chent$add_PUF()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_TP"><a href='../../chents/html/chent.html#method-chent-add_TP'><code>chent$add_TP()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_cwsat"><a href='../../chents/html/chent.html#method-chent-add_cwsat'><code>chent$add_cwsat()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_p0"><a href='../../chents/html/chent.html#method-chent-add_p0'><code>chent$add_p0()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_degradation"><a href='../../chents/html/chent.html#method-chent-add_soil_degradation'><code>chent$add_soil_degradation()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_ff"><a href='../../chents/html/chent.html#method-chent-add_soil_ff'><code>chent$add_soil_ff()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_soil_sorption"><a href='../../chents/html/chent.html#method-chent-add_soil_sorption'><code>chent$add_soil_sorption()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="add_transformation"><a href='../../chents/html/chent.html#method-chent-add_transformation'><code>chent$add_transformation()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="emf"><a href='../../chents/html/chent.html#method-chent-emf'><code>chent$emf()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_chyaml"><a href='../../chents/html/chent.html#method-chent-get_chyaml'><code>chent$get_chyaml()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_pubchem"><a href='../../chents/html/chent.html#method-chent-get_pubchem'><code>chent$get_pubchem()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="get_rdkit"><a href='../../chents/html/chent.html#method-chent-get_rdkit'><code>chent$get_rdkit()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="pdf"><a href='../../chents/html/chent.html#method-chent-pdf'><code>chent$pdf()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="png"><a href='../../chents/html/chent.html#method-chent-png'><code>chent$png()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="chents" data-topic="chent" data-id="try_pubchem"><a href='../../chents/html/chent.html#method-chent-try_pubchem'><code>chent$try_pubchem()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-pai-new"></a>}}
-\if{latex}{\out{\hypertarget{method-pai-new}{}}}
-\subsection{Method \code{new()}}{
-Create a new pai object
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{pai$new(
+\if{html}{\out{<a id="method-pai-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-pai-initialize}{}}}
+\subsection{\code{pai$new()}}{
+  Create a new pai object
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{pai$new(
   iso,
   identifier = iso,
   smiles = NULL,
@@ -84,55 +83,49 @@ Create a new pai object
   rdkit = TRUE,
   template = NULL,
   chyaml = FALSE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{iso}}{The ISO common name to be used in the query of the
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{iso}}{The ISO common name to be used in the query of the
 BCPC compendium}
-
-\item{\code{identifier}}{Alternative identifier used for querying pubchem}
-
-\item{\code{smiles}}{Optional user provided SMILES code}
-
-\item{\code{inchikey}}{Optional user provided InChI Key}
-
-\item{\code{bcpc}}{Should the BCPC compendium be queried?}
-
-\item{\code{pubchem}}{Should an attempt be made to retrieve chemical
+      \item{\code{identifier}}{Alternative identifier used for querying pubchem}
+      \item{\code{smiles}}{Optional user provided SMILES code}
+      \item{\code{inchikey}}{Optional user provided InChI Key}
+      \item{\code{bcpc}}{Should the BCPC compendium be queried?}
+      \item{\code{pubchem}}{Should an attempt be made to retrieve chemical
 information from PubChem via the webchem package?}
-
-\item{\code{pubchem_from}}{Possibility to select the argument
+      \item{\code{pubchem_from}}{Possibility to select the argument
 that is used to query pubchem}
-
-\item{\code{rdkit}}{Should an attempt be made to retrieve chemical
+      \item{\code{rdkit}}{Should an attempt be made to retrieve chemical
 information from a local rdkit installation via python
 and the reticulate package?}
+      \item{\code{template}}{An optional SMILES code to be used as template for RDKit}
+      \item{\code{chyaml}}{Should we look for a identifier.yaml file in the working}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{template}}{An optional SMILES code to be used as template for RDKit}
-
-\item{\code{chyaml}}{Should we look for a identifier.yaml file in the working}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pai-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-pai-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{pai$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{pai$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{pai$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

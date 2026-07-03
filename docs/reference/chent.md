@@ -6,7 +6,7 @@ RDKit if RDKit and its python bindings are installed.
 
 ## Format
 
-An [R6::R6Class](https://r6.r-lib.org/reference/R6Class.html) generator
+An [R6Class](https://r6.r-lib.org/reference/R6Class.html) generator
 object
 
 ## Public fields
@@ -103,7 +103,7 @@ object
 
 ### Public methods
 
-- [`chent$new()`](#method-chent-new)
+- [`chent$new()`](#method-chent-initialize)
 
 - [`chent$try_pubchem()`](#method-chent-try_pubchem)
 
@@ -139,7 +139,7 @@ object
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `chent$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -195,7 +195,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `try_pubchem()`
+### `chent$try_pubchem()`
 
 Try to get chemical information from PubChem
 
@@ -217,7 +217,7 @@ Try to get chemical information from PubChem
 
 ------------------------------------------------------------------------
 
-### Method `get_pubchem()`
+### `chent$get_pubchem()`
 
 Get chemical information from PubChem for a known PubChem CID
 
@@ -233,7 +233,7 @@ Get chemical information from PubChem for a known PubChem CID
 
 ------------------------------------------------------------------------
 
-### Method `get_rdkit()`
+### `chent$get_rdkit()`
 
 Get chemical information from RDKit if available
 
@@ -249,7 +249,7 @@ Get chemical information from RDKit if available
 
 ------------------------------------------------------------------------
 
-### Method `get_chyaml()`
+### `chent$get_chyaml()`
 
 Obtain information from a YAML file
 
@@ -274,7 +274,7 @@ Obtain information from a YAML file
 
 ------------------------------------------------------------------------
 
-### Method `add_p0()`
+### `chent$add_p0()`
 
 Add a vapour pressure
 
@@ -306,7 +306,7 @@ Add a vapour pressure
 
 ------------------------------------------------------------------------
 
-### Method `add_cwsat()`
+### `chent$add_cwsat()`
 
 Add a water solubility
 
@@ -342,7 +342,7 @@ Add a water solubility
 
 ------------------------------------------------------------------------
 
-### Method `add_PUF()`
+### `chent$add_PUF()`
 
 Add a plant uptake factor
 
@@ -375,7 +375,7 @@ Add a plant uptake factor
 
 ------------------------------------------------------------------------
 
-### Method `add_TP()`
+### `chent$add_TP()`
 
 Add a transformation product to the internal list
 
@@ -399,7 +399,7 @@ Add a transformation product to the internal list
 
 ------------------------------------------------------------------------
 
-### Method `add_transformation()`
+### `chent$add_transformation()`
 
 Add a line in the internal dataframe holding observed transformations
 
@@ -444,7 +444,7 @@ Add a line in the internal dataframe holding observed transformations
 
 ------------------------------------------------------------------------
 
-### Method `add_soil_degradation()`
+### `chent$add_soil_degradation()`
 
 Add a line in the internal dataframe holding modelling DT50 values
 
@@ -549,7 +549,7 @@ Add a line in the internal dataframe holding modelling DT50 values
 
 ------------------------------------------------------------------------
 
-### Method `add_soil_ff()`
+### `chent$add_soil_ff()`
 
 Add one or more formation fractions for degradation in soil
 
@@ -585,7 +585,7 @@ Add one or more formation fractions for degradation in soil
 
 ------------------------------------------------------------------------
 
-### Method `add_soil_sorption()`
+### `chent$add_soil_sorption()`
 
 Add soil sorption data
 
@@ -669,7 +669,7 @@ Add soil sorption data
 
 ------------------------------------------------------------------------
 
-### Method [`pdf()`](https://rdrr.io/r/grDevices/pdf.html)
+### `chent$pdf()`
 
 Write a PDF image of the structure
 
@@ -697,7 +697,7 @@ Write a PDF image of the structure
 
 ------------------------------------------------------------------------
 
-### Method [`png()`](https://rdrr.io/r/grDevices/png.html)
+### `chent$png()`
 
 Write a PNG image of the structure
 
@@ -725,7 +725,7 @@ Write a PNG image of the structure
 
 ------------------------------------------------------------------------
 
-### Method `emf()`
+### `chent$emf()`
 
 Write an EMF image of the structure using
 [emf](https://rdrr.io/pkg/devEMF/man/emf.html)
@@ -746,7 +746,7 @@ Write an EMF image of the structure using
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `chent$clone()`
 
 The objects of this class are cloneable with this method.
 

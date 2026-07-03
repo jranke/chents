@@ -11,78 +11,77 @@ Contains basic information about the active ingredients in the
 product
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{name}}{The name of the product}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{name}}{The name of the product}
 
-\item{\code{ais}}{A list of active ingredients}
+    \item{\code{ais}}{A list of active ingredients}
 
-\item{\code{concentrations}}{The concentration of the ais}
+    \item{\code{concentrations}}{The concentration of the ais}
 
-\item{\code{concentration_units}}{Defaults to g/L}
+    \item{\code{concentration_units}}{Defaults to g/L}
 
-\item{\code{density}}{The density of the product}
+    \item{\code{density}}{The density of the product}
 
-\item{\code{density_units}}{Defaults to g/L}
-}
-\if{html}{\out{</div>}}
+    \item{\code{density_units}}{Defaults to g/L}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-ppp-new}{\code{ppp$new()}}
-\item \href{#method-ppp-clone}{\code{ppp$clone()}}
-}
+  \itemize{
+    \item \href{#method-ppp-initialize}{\code{ppp$new()}}
+    \item \href{#method-ppp-clone}{\code{ppp$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ppp-new"></a>}}
-\if{latex}{\out{\hypertarget{method-ppp-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ppp$new(
+\if{html}{\out{<a id="method-ppp-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-ppp-initialize}{}}}
+\subsection{\code{ppp$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ppp$new(
   name,
   ...,
   concentrations,
   concentration_units = "g/L",
   density = 1000,
   density_units = "g/L"
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{name}}{The name of the product}
+      \item{\code{...}}{Identifiers of the active ingredients}
+      \item{\code{concentrations}}{Concentrations of the active ingredients}
+      \item{\code{concentration_units}}{Defaults to g/L}
+      \item{\code{density}}{The density}
+      \item{\code{density_units}}{Defaults to g/L}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{The name of the product}
-
-\item{\code{...}}{Identifiers of the active ingredients}
-
-\item{\code{concentrations}}{Concentrations of the active ingredients}
-
-\item{\code{concentration_units}}{Defaults to g/L}
-
-\item{\code{density}}{The density}
-
-\item{\code{density_units}}{Defaults to g/L}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ppp-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-ppp-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ppp$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{ppp$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ppp$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

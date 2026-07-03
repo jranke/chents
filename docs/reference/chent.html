@@ -11,7 +11,7 @@ generated using RDKit if RDKit and its python bindings are installed."></head><b
 
     <a class="navbar-brand me-2" href="../index.html">chents</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@ generated using RDKit if RDKit and its python bindings are installed.</p>
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>An <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6::R6Class</a> generator object</p>
+    <p>An <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6Class</a> generator object</p>
     </div>
     <div class="section level2">
     <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
@@ -55,83 +55,83 @@ generated using RDKit if RDKit and its python bindings are installed.</p>
 The identifier that was used to initiate the object, with attribute 'source'</p></dd>
 
 
-<dt><code>inchikey</code></dt>
+    <dt><code>inchikey</code></dt>
 <dd><p>(<code>character(1)</code>)<br>
 InChI Key, with attribute 'source'</p></dd>
 
 
-<dt><code>smiles</code></dt>
+    <dt><code>smiles</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>)<br>
 SMILES code(s), with attribute 'source'</p></dd>
 
 
-<dt><code>mw</code></dt>
+    <dt><code>mw</code></dt>
 <dd><p>(<code>numeric(1)</code>)<br>
 Molecular weight, with attribute 'source'</p></dd>
 
 
-<dt><code>pubchem</code></dt>
+    <dt><code>pubchem</code></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>)<br>
 List of information retrieved from PubChem</p></dd>
 
 
-<dt><code>rdkit</code></dt>
+    <dt><code>rdkit</code></dt>
 <dd><p>List of information obtained with RDKit</p></dd>
 
 
-<dt><code>mol</code></dt>
+    <dt><code>mol</code></dt>
 <dd><p>&lt;rdkit.Chem.rdchem.Mol&gt; object</p></dd>
 
 
-<dt><code>svg</code></dt>
+    <dt><code>svg</code></dt>
 <dd><p>SVG code</p></dd>
 
 
-<dt><code>Picture</code></dt>
+    <dt><code>Picture</code></dt>
 <dd><p>Graph as a <a href="https://rdrr.io/pkg/grImport/man/Picture-class.html" class="external-link">grImport::Picture</a> object obtained using the grImport package</p></dd>
 
 
-<dt><code>Pict_font_size</code></dt>
+    <dt><code>Pict_font_size</code></dt>
 <dd><p>Font size as extracted from the intermediate PostScript file</p></dd>
 
 
-<dt><code>pdf_height</code></dt>
+    <dt><code>pdf_height</code></dt>
 <dd><p>Height of the MediaBox in the pdf after cropping</p></dd>
 
 
-<dt><code>p0</code></dt>
+    <dt><code>p0</code></dt>
 <dd><p>Vapour pressure in Pa</p></dd>
 
 
-<dt><code>cwsat</code></dt>
+    <dt><code>cwsat</code></dt>
 <dd><p>Water solubility in mg/L</p></dd>
 
 
-<dt><code>PUF</code></dt>
+    <dt><code>PUF</code></dt>
 <dd><p>Plant uptake factor</p></dd>
 
 
-<dt><code>chyaml</code></dt>
+    <dt><code>chyaml</code></dt>
 <dd><p>List of information obtained from a YAML file</p></dd>
 
 
-<dt><code>TPs</code></dt>
+    <dt><code>TPs</code></dt>
 <dd><p>List of transformation products as chent objects</p></dd>
 
 
-<dt><code>transformations</code></dt>
+    <dt><code>transformations</code></dt>
 <dd><p>Data frame of observed transformations</p></dd>
 
 
-<dt><code>soil_degradation</code></dt>
+    <dt><code>soil_degradation</code></dt>
 <dd><p>Dataframe of modelling DT50 values</p></dd>
 
 
-<dt><code>soil_ff</code></dt>
+    <dt><code>soil_ff</code></dt>
 <dd><p>Dataframe of formation fractions</p></dd>
 
 
-<dt><code>soil_sorption</code></dt>
+    <dt><code>soil_sorption</code></dt>
 <dd><p>Dataframe of soil sorption data</p></dd>
 
 
@@ -142,8 +142,7 @@ List of information retrieved from PubChem</p></dd>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-chent-new"><code>chent$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-chent-initialize"><code>chent$new()</code></a></p></li>
 <li><p><a href="#method-chent-try_pubchem"><code>chent$try_pubchem()</code></a></p></li>
 <li><p><a href="#method-chent-get_pubchem"><code>chent$get_pubchem()</code></a></p></li>
 <li><p><a href="#method-chent-get_rdkit"><code>chent$get_rdkit()</code></a></p></li>
@@ -160,8 +159,8 @@ List of information retrieved from PubChem</p></dd>
 <li><p><a href="#method-chent-png"><code>chent$png()</code></a></p></li>
 <li><p><a href="#method-chent-emf"><code>chent$emf()</code></a></p></li>
 <li><p><a href="#method-chent-clone"><code>chent$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-chent-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+</ul></div><p></p><hr><a id="method-chent-initialize"></a><div class="section">
+<h3 id="chent-new-"><code>chent$new()</code><a class="anchor" aria-label="anchor" href="#chent-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/chent.html">chent</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
@@ -174,43 +173,34 @@ List of information retrieved from PubChem</p></dd>
 <span>  template <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  chyaml <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>identifier</code></dt>
 <dd><p>Identifier to be stored in the object</p></dd>
 
-
-<dt><code>smiles</code></dt>
+      <dt><code>smiles</code></dt>
 <dd><p>Optional user provided SMILES code</p></dd>
 
-
-<dt><code>inchikey</code></dt>
+      <dt><code>inchikey</code></dt>
 <dd><p>Optional user provided InChI Key</p></dd>
 
-
-<dt><code>pubchem</code></dt>
+      <dt><code>pubchem</code></dt>
 <dd><p>Should an attempt be made to retrieve chemical
 information from PubChem via the webchem package?</p></dd>
 
-
-<dt><code>pubchem_from</code></dt>
+      <dt><code>pubchem_from</code></dt>
 <dd><p>Possibility to select the argument
 that is used to query pubchem</p></dd>
 
-
-<dt><code>rdkit</code></dt>
+      <dt><code>rdkit</code></dt>
 <dd><p>Should an attempt be made to retrieve chemical
 information from a local rdkit installation via python
 and the reticulate package?</p></dd>
 
-
-<dt><code>template</code></dt>
+      <dt><code>template</code></dt>
 <dd><p>An optional SMILES code to be used as template for RDKit</p></dd>
 
-
-<dt><code>chyaml</code></dt>
+      <dt><code>chyaml</code></dt>
 <dd><p>Should we look for a identifier.yaml file in the working
 directory?</p></dd>
 
@@ -218,34 +208,33 @@ directory?</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-try_pubchem"></a><div class="section">
-<h3 id="method-try-pubchem-">Method <code>try_pubchem()</code><a class="anchor" aria-label="anchor" href="#method-try-pubchem-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-try_pubchem"></a><div class="section">
+<h3 id="chent-try-pubchem-"><code>chent$try_pubchem()</code><a class="anchor" aria-label="anchor" href="#chent-try-pubchem-"></a></h3>
 <p>Try to get chemical information from PubChem</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">try_pubchem</span><span class="op">(</span>query <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">identifier</span>, from <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>query</code></dt>
 <dd><p>Query string to be passed to <a href="https://docs.ropensci.org/webchem/reference/get_cid.html" class="external-link">get_cid</a></p></dd>
 
-
-<dt><code>from</code></dt>
+      <dt><code>from</code></dt>
 <dd><p>Passed to <a href="https://docs.ropensci.org/webchem/reference/get_cid.html" class="external-link">get_cid</a></p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-get_pubchem"></a><div class="section">
-<h3 id="method-get-pubchem-">Method <code>get_pubchem()</code><a class="anchor" aria-label="anchor" href="#method-get-pubchem-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-get_pubchem"></a><div class="section">
+<h3 id="chent-get-pubchem-"><code>chent$get_pubchem()</code><a class="anchor" aria-label="anchor" href="#chent-get-pubchem-"></a></h3>
 <p>Get chemical information from PubChem for a known PubChem CID</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">get_pubchem</span><span class="op">(</span><span class="va">pubchem_cid</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>pubchem_cid</code></dt>
 <dd><p>CID</p></dd>
@@ -254,14 +243,14 @@ directory?</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-get_rdkit"></a><div class="section">
-<h3 id="method-get-rdkit-">Method <code>get_rdkit()</code><a class="anchor" aria-label="anchor" href="#method-get-rdkit-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-get_rdkit"></a><div class="section">
+<h3 id="chent-get-rdkit-"><code>chent$get_rdkit()</code><a class="anchor" aria-label="anchor" href="#chent-get-rdkit-"></a></h3>
 <p>Get chemical information from RDKit if available</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">get_rdkit</span><span class="op">(</span>template <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>template</code></dt>
 <dd><p>An optional SMILES code to be used as template for RDKit</p></dd>
@@ -270,101 +259,93 @@ directory?</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-get_chyaml"></a><div class="section">
-<h3 id="method-get-chyaml-">Method <code>get_chyaml()</code><a class="anchor" aria-label="anchor" href="#method-get-chyaml-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-get_chyaml"></a><div class="section">
+<h3 id="chent-get-chyaml-"><code>chent$get_chyaml()</code><a class="anchor" aria-label="anchor" href="#chent-get-chyaml-"></a></h3>
 <p>Obtain information from a YAML file</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">get_chyaml</span><span class="op">(</span></span>
 <span>  repo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wd"</span>, <span class="st">"local"</span>, <span class="st">"web"</span><span class="op">)</span>,</span>
 <span>  chyaml <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/URLencode.html" class="external-link">URLencode</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">identifier</span><span class="op">)</span>, <span class="st">".yaml"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>repo</code></dt>
 <dd><p>Should the file be looked for in the current working
 directory, a local git repository under <code>~/git/chyaml</code>, or from
 the web (not implemented).</p></dd>
 
-
-<dt><code>chyaml</code></dt>
+      <dt><code>chyaml</code></dt>
 <dd><p>The filename to be looked for</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-add_p0"></a><div class="section">
-<h3 id="method-add-p-">Method <code>add_p0()</code><a class="anchor" aria-label="anchor" href="#method-add-p-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-add_p0"></a><div class="section">
+<h3 id="chent-add-p-"><code>chent$add_p0()</code><a class="anchor" aria-label="anchor" href="#chent-add-p-"></a></h3>
 <p>Add a vapour pressure</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_p0</span><span class="op">(</span><span class="va">p0</span>, T <span class="op">=</span> <span class="cn">NA</span>, source <span class="op">=</span> <span class="cn">NA</span>, page <span class="op">=</span> <span class="cn">NA</span>, remark <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>p0</code></dt>
 <dd><p>The vapour pressure in Pa</p></dd>
 
-
-<dt><code>T</code></dt>
+      <dt><code>T</code></dt>
 <dd><p>Temperature</p></dd>
 
-
-<dt><code>source</code></dt>
+      <dt><code>source</code></dt>
 <dd><p>An acronym specifying the source of the information</p></dd>
 
-
-<dt><code>page</code></dt>
+      <dt><code>page</code></dt>
 <dd><p>The page from which the information was taken</p></dd>
 
-
-<dt><code>remark</code></dt>
+      <dt><code>remark</code></dt>
 <dd><p>A remark</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-add_cwsat"></a><div class="section">
-<h3 id="method-add-cwsat-">Method <code>add_cwsat()</code><a class="anchor" aria-label="anchor" href="#method-add-cwsat-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-add_cwsat"></a><div class="section">
+<h3 id="chent-add-cwsat-"><code>chent$add_cwsat()</code><a class="anchor" aria-label="anchor" href="#chent-add-cwsat-"></a></h3>
 <p>Add a water solubility</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_cwsat</span><span class="op">(</span><span class="va">cwsat</span>, T <span class="op">=</span> <span class="cn">NA</span>, pH <span class="op">=</span> <span class="cn">NA</span>, source <span class="op">=</span> <span class="cn">NA</span>, page <span class="op">=</span> <span class="cn">NA</span>, remark <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>cwsat</code></dt>
 <dd><p>The water solubility in mg/L</p></dd>
 
-
-<dt><code>T</code></dt>
+      <dt><code>T</code></dt>
 <dd><p>Temperature</p></dd>
 
-
-<dt><code>pH</code></dt>
+      <dt><code>pH</code></dt>
 <dd><p>pH value</p></dd>
 
-
-<dt><code>source</code></dt>
+      <dt><code>source</code></dt>
 <dd><p>An acronym specifying the source of the information</p></dd>
 
-
-<dt><code>page</code></dt>
+      <dt><code>page</code></dt>
 <dd><p>The page from which the information was taken</p></dd>
 
-
-<dt><code>remark</code></dt>
+      <dt><code>remark</code></dt>
 <dd><p>A remark</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-add_PUF"></a><div class="section">
-<h3 id="method-add-puf-">Method <code>add_PUF()</code><a class="anchor" aria-label="anchor" href="#method-add-puf-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-add_PUF"></a><div class="section">
+<h3 id="chent-add-puf-"><code>chent$add_PUF()</code><a class="anchor" aria-label="anchor" href="#chent-add-puf-"></a></h3>
 <p>Add a plant uptake factor</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_PUF</span><span class="op">(</span></span>
@@ -373,55 +354,50 @@ the web (not implemented).</p></dd>
 <span>  page <span class="op">=</span> <span class="fl">41</span>,</span>
 <span>  remark <span class="op">=</span> <span class="st">"Conservative default value"</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>PUF</code></dt>
 <dd><p>The plant uptake factor, a number between 0 and 1</p></dd>
 
-
-<dt><code>source</code></dt>
+      <dt><code>source</code></dt>
 <dd><p>An acronym specifying the source of the information</p></dd>
 
-
-<dt><code>page</code></dt>
+      <dt><code>page</code></dt>
 <dd><p>The page from which the information was taken</p></dd>
 
-
-<dt><code>remark</code></dt>
+      <dt><code>remark</code></dt>
 <dd><p>A remark</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-add_TP"></a><div class="section">
-<h3 id="method-add-tp-">Method <code>add_TP()</code><a class="anchor" aria-label="anchor" href="#method-add-tp-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-add_TP"></a><div class="section">
+<h3 id="chent-add-tp-"><code>chent$add_TP()</code><a class="anchor" aria-label="anchor" href="#chent-add-tp-"></a></h3>
 <p>Add a transformation product to the internal list</p><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_TP</span><span class="op">(</span><span class="va">x</span>, smiles <span class="op">=</span> <span class="cn">NULL</span>, pubchem <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p>A chent object, or an identifier to generate a chent object</p></dd>
 
-
-<dt><code>smiles</code></dt>
+      <dt><code>smiles</code></dt>
 <dd><p>Optional user provided SMILES code</p></dd>
 
-
-<dt><code>pubchem</code></dt>
+      <dt><code>pubchem</code></dt>
 <dd><p>Should chemical information be obtained from PubChem?</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-add_transformation"></a><div class="section">
-<h3 id="method-add-transformation-">Method <code>add_transformation()</code><a class="anchor" aria-label="anchor" href="#method-add-transformation-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-add_transformation"></a><div class="section">
+<h3 id="chent-add-transformation-"><code>chent$add_transformation()</code><a class="anchor" aria-label="anchor" href="#chent-add-transformation-"></a></h3>
 <p>Add a line in the internal dataframe holding observed transformations</p><div class="section">
 <h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_transformation</span><span class="op">(</span></span>
@@ -432,42 +408,37 @@ the web (not implemented).</p></dd>
 <span>  source <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  pages <span class="op">=</span> <span class="cn">NA</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>study_type</code></dt>
 <dd><p>A characterisation of the study type</p></dd>
 
-
-<dt><code>TP_identifier</code></dt>
+      <dt><code>TP_identifier</code></dt>
 <dd><p>An identifier of one of the transformation products
 in <code>self$TPs</code></p></dd>
 
-
-<dt><code>max_occurrence</code></dt>
+      <dt><code>max_occurrence</code></dt>
 <dd><p>The maximum observed occurrence of the
 transformation product, expressed as a fraction of the amount that would
 result from stochiometric transformation</p></dd>
 
-
-<dt><code>remark</code></dt>
+      <dt><code>remark</code></dt>
 <dd><p>A remark</p></dd>
 
-
-<dt><code>source</code></dt>
+      <dt><code>source</code></dt>
 <dd><p>An acronym specifying the source of the information</p></dd>
 
-
-<dt><code>pages</code></dt>
+      <dt><code>pages</code></dt>
 <dd><p>The pages from which the information was taken</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-add_soil_degradation"></a><div class="section">
-<h3 id="method-add-soil-degradation-">Method <code>add_soil_degradation()</code><a class="anchor" aria-label="anchor" href="#method-add-soil-degradation-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-add_soil_degradation"></a><div class="section">
+<h3 id="chent-add-soil-degradation-"><code>chent$add_soil_degradation()</code><a class="anchor" aria-label="anchor" href="#chent-add-soil-degradation-"></a></h3>
 <p>Add a line in the internal dataframe holding modelling DT50 values</p><div class="section">
 <h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_soil_degradation</span><span class="op">(</span></span>
@@ -490,126 +461,104 @@ result from stochiometric transformation</p></dd>
 <span>  <span class="va">source</span>,</span>
 <span>  page <span class="op">=</span> <span class="cn">NA</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>soils</code></dt>
 <dd><p>Names of the soils</p></dd>
 
-
-<dt><code>DT50_mod</code></dt>
+      <dt><code>DT50_mod</code></dt>
 <dd><p>The modelling DT50 in the sense of regulatory pesticide
 fate modelling</p></dd>
 
-
-<dt><code>DT50_mod_ref</code></dt>
+      <dt><code>DT50_mod_ref</code></dt>
 <dd><p>The normalised modelling DT50 in the sense of
 regulatory pesticide fate modelling</p></dd>
 
-
-<dt><code>type</code></dt>
+      <dt><code>type</code></dt>
 <dd><p>The soil type</p></dd>
 
-
-<dt><code>country</code></dt>
+      <dt><code>country</code></dt>
 <dd><p>The country (mainly for field studies)</p></dd>
 
-
-<dt><code>pH_orig</code></dt>
+      <dt><code>pH_orig</code></dt>
 <dd><p>The pH stated in the study</p></dd>
 
-
-<dt><code>pH_medium</code></dt>
+      <dt><code>pH_medium</code></dt>
 <dd><p>The medium in which this pH was measured</p></dd>
 
-
-<dt><code>pH_H2O</code></dt>
+      <dt><code>pH_H2O</code></dt>
 <dd><p>The pH extrapolated to pure water</p></dd>
 
-
-<dt><code>perc_OC</code></dt>
+      <dt><code>perc_OC</code></dt>
 <dd><p>The percentage of organic carbon in the soil</p></dd>
 
-
-<dt><code>temperature</code></dt>
+      <dt><code>temperature</code></dt>
 <dd><p>The temperature during the study in degrees Celsius</p></dd>
 
-
-<dt><code>moisture</code></dt>
+      <dt><code>moisture</code></dt>
 <dd><p>The moisture during the study</p></dd>
 
-
-<dt><code>category</code></dt>
+      <dt><code>category</code></dt>
 <dd><p>Is it a laboratory ('lab') or field study ('field')</p></dd>
 
-
-<dt><code>formulation</code></dt>
+      <dt><code>formulation</code></dt>
 <dd><p>Name of the formulation applied, if it was not
 the technical active ingredient</p></dd>
 
-
-<dt><code>model</code></dt>
+      <dt><code>model</code></dt>
 <dd><p>The degradation model used for deriving <code>DT50_mod</code></p></dd>
 
-
-<dt><code>chi2</code></dt>
+      <dt><code>chi2</code></dt>
 <dd><p>The relative error as defined in FOCUS kinetics</p></dd>
 
-
-<dt><code>remark</code></dt>
+      <dt><code>remark</code></dt>
 <dd><p>A remark</p></dd>
 
-
-<dt><code>source</code></dt>
+      <dt><code>source</code></dt>
 <dd><p>An acronym specifying the source of the information</p></dd>
 
-
-<dt><code>page</code></dt>
+      <dt><code>page</code></dt>
 <dd><p>The page from which the information was taken</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-add_soil_ff"></a><div class="section">
-<h3 id="method-add-soil-ff-">Method <code>add_soil_ff()</code><a class="anchor" aria-label="anchor" href="#method-add-soil-ff-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-add_soil_ff"></a><div class="section">
+<h3 id="chent-add-soil-ff-"><code>chent$add_soil_ff()</code><a class="anchor" aria-label="anchor" href="#chent-add-soil-ff-"></a></h3>
 <p>Add one or more formation fractions for degradation in soil</p><div class="section">
 <h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_soil_ff</span><span class="op">(</span><span class="va">target</span>, <span class="va">soils</span>, ff <span class="op">=</span> <span class="fl">1</span>, remark <span class="op">=</span> <span class="st">""</span>, <span class="va">source</span>, page <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>target</code></dt>
 <dd><p>The identifier(s) of the transformation product</p></dd>
 
-
-<dt><code>soils</code></dt>
+      <dt><code>soils</code></dt>
 <dd><p>The soil name(s) in which the transformation was observed</p></dd>
 
-
-<dt><code>ff</code></dt>
+      <dt><code>ff</code></dt>
 <dd><p>The formation fraction(s)</p></dd>
 
-
-<dt><code>remark</code></dt>
+      <dt><code>remark</code></dt>
 <dd><p>A remark</p></dd>
 
-
-<dt><code>source</code></dt>
+      <dt><code>source</code></dt>
 <dd><p>An acronym specifying the source of the information</p></dd>
 
-
-<dt><code>page</code></dt>
+      <dt><code>page</code></dt>
 <dd><p>The page from which the information was taken</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-add_soil_sorption"></a><div class="section">
-<h3 id="method-add-soil-sorption-">Method <code>add_soil_sorption()</code><a class="anchor" aria-label="anchor" href="#method-add-soil-sorption-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-add_soil_sorption"></a><div class="section">
+<h3 id="chent-add-soil-sorption-"><code>chent$add_soil_sorption()</code><a class="anchor" aria-label="anchor" href="#chent-add-soil-sorption-"></a></h3>
 <p>Add soil sorption data</p><div class="section">
 <h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">add_soil_sorption</span><span class="op">(</span></span>
@@ -628,72 +577,59 @@ the technical active ingredient</p></dd>
 <span>  <span class="va">source</span>,</span>
 <span>  page <span class="op">=</span> <span class="cn">NA</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>soils</code></dt>
 <dd><p>Names of the soils</p></dd>
 
-
-<dt><code>Kf</code></dt>
+      <dt><code>Kf</code></dt>
 <dd><p>The sorption constant in L/kg, either linear (then <code>N</code> is 1)
 or according to Freundlich</p></dd>
 
-
-<dt><code>Kfoc</code></dt>
+      <dt><code>Kfoc</code></dt>
 <dd><p>The constant from above, normalised to soil organic carbon</p></dd>
 
-
-<dt><code>N</code></dt>
+      <dt><code>N</code></dt>
 <dd><p>The Freundlich exponent</p></dd>
 
-
-<dt><code>type</code></dt>
+      <dt><code>type</code></dt>
 <dd><p>The soil type</p></dd>
 
-
-<dt><code>pH_orig</code></dt>
+      <dt><code>pH_orig</code></dt>
 <dd><p>The pH stated in the study</p></dd>
 
-
-<dt><code>pH_medium</code></dt>
+      <dt><code>pH_medium</code></dt>
 <dd><p>The medium in which this pH was measured</p></dd>
 
-
-<dt><code>pH_H2O</code></dt>
+      <dt><code>pH_H2O</code></dt>
 <dd><p>The pH extrapolated to pure water</p></dd>
 
-
-<dt><code>perc_OC</code></dt>
+      <dt><code>perc_OC</code></dt>
 <dd><p>The percentage of organic carbon in the soil</p></dd>
 
-
-<dt><code>perc_clay</code></dt>
+      <dt><code>perc_clay</code></dt>
 <dd><p>The percentage of clay in the soil</p></dd>
 
-
-<dt><code>CEC</code></dt>
+      <dt><code>CEC</code></dt>
 <dd><p>The cation exchange capacity</p></dd>
 
-
-<dt><code>remark</code></dt>
+      <dt><code>remark</code></dt>
 <dd><p>A remark</p></dd>
 
-
-<dt><code>source</code></dt>
+      <dt><code>source</code></dt>
 <dd><p>An acronym specifying the source of the information</p></dd>
 
-
-<dt><code>page</code></dt>
+      <dt><code>page</code></dt>
 <dd><p>The page from which the information was taken</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-pdf"></a><div class="section">
-<h3 id="method-pdf-">Method <code><a href="https://rdrr.io/r/grDevices/pdf.html" class="external-link">pdf()</a></code><a class="anchor" aria-label="anchor" href="#method-pdf-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-pdf"></a><div class="section">
+<h3 id="chent-pdf-"><code>chent$pdf()</code><a class="anchor" aria-label="anchor" href="#chent-pdf-"></a></h3>
 <p>Write a PDF image of the structure</p><div class="section">
 <h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">pdf</span><span class="op">(</span></span>
@@ -701,27 +637,25 @@ or according to Freundlich</p></dd>
 <span>  dir <span class="op">=</span> <span class="st">"structures/pdf"</span>,</span>
 <span>  template <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>file</code></dt>
 <dd><p>The file to write to</p></dd>
 
-
-<dt><code>dir</code></dt>
+      <dt><code>dir</code></dt>
 <dd><p>The directory to write the file to</p></dd>
 
-
-<dt><code>template</code></dt>
+      <dt><code>template</code></dt>
 <dd><p>An optional SMILES code to be used as template for RDKit</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-png"></a><div class="section">
-<h3 id="method-png-">Method <code><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png()</a></code><a class="anchor" aria-label="anchor" href="#method-png-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-png"></a><div class="section">
+<h3 id="chent-png-"><code>chent$png()</code><a class="anchor" aria-label="anchor" href="#chent-png-"></a></h3>
 <p>Write a PNG image of the structure</p><div class="section">
 <h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">png</span><span class="op">(</span></span>
@@ -729,53 +663,48 @@ or according to Freundlich</p></dd>
 <span>  dir <span class="op">=</span> <span class="st">"structures/png"</span>,</span>
 <span>  antialias <span class="op">=</span> <span class="st">"gray"</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>file</code></dt>
 <dd><p>The file to write to</p></dd>
 
-
-<dt><code>dir</code></dt>
+      <dt><code>dir</code></dt>
 <dd><p>The directory to write the file to</p></dd>
 
-
-<dt><code>antialias</code></dt>
+      <dt><code>antialias</code></dt>
 <dd><p>Passed to <a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-emf"></a><div class="section">
-<h3 id="method-emf-">Method <code>emf()</code><a class="anchor" aria-label="anchor" href="#method-emf-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-emf"></a><div class="section">
+<h3 id="chent-emf-"><code>chent$emf()</code><a class="anchor" aria-label="anchor" href="#chent-emf-"></a></h3>
 <p>Write an EMF image of the structure using <a href="https://rdrr.io/pkg/devEMF/man/emf.html" class="external-link">emf</a></p><div class="section">
 <h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">emf</span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">identifier</span>, <span class="st">".emf"</span><span class="op">)</span>, dir <span class="op">=</span> <span class="st">"structures/emf"</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>file</code></dt>
 <dd><p>The file to write to</p></dd>
 
-
-<dt><code>dir</code></dt>
+      <dt><code>dir</code></dt>
 <dd><p>The directory to write the file to</p></dd>
 
 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-chent-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-chent-clone"></a><div class="section">
+<h3 id="chent-clone-"><code>chent$clone()</code><a class="anchor" aria-label="anchor" href="#chent-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">chent</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-16">Arguments<a class="anchor" aria-label="anchor" href="#arguments-16"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -785,6 +714,7 @@ or according to Freundlich</p></dd>
 </div>
 
 </div>
+
 
     </div>
 

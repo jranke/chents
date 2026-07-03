@@ -12,9 +12,14 @@ coverage](https://img.shields.io/badge/coverage-jrwb.de-blue.svg)](https://pkgdo
 
 When working with data on chemical substances, we often need a reliable
 link between the data and the chemical identity of the substances. The R
-package **chents** provides a way to define an R object corresponding to
-a chemically defined substances (“chemical entity”) and to collect
-related information.
+package ‘chents’ provides a way to define an R object corresponding to a
+chemically defined substances, i.e. a chemical entity and to collect
+related information. If Python and ‘RDKit’ (\> 2015.03) are installed
+and configured for use with ‘reticulate’, some basic chemoinformatics
+functions like the calculation of molecular weight and plotting of
+chemical structures in R graphics are available.
+
+## Usage
 
 When first defining a chemical entity, some chemical information is
 retrieved from the [PubChem](https://pubchem.ncbi.nlm.nih.gov/) website
@@ -59,7 +64,7 @@ There is a very simple plotting method for the chemical structure.
 plot(caffeine)
 ```
 
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
 
 If you have a so-called ISO common name of a pesticide active
 ingredient, you can use the ‘pai’ class derived from the ‘chent’ class,
@@ -75,7 +80,7 @@ delta <- pai$new("Deltamethrin")
 plot(delta)
 ```
 
-![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-6-1.png)<!-- -->
 
 Additional information can be read from a local .yaml file. This
 information can be leveraged e.g. by the

@@ -14,11 +14,11 @@ knitr::opts_chunk$set(
 [![R-Universe status](https://jranke.r-universe.dev/badges/chents)](https://jranke.r-universe.dev/chents)
 [![Code coverage](https://img.shields.io/badge/coverage-jrwb.de-blue.svg)](https://pkgdown.jrwb.de/chents/coverage/coverage.html)
 
-When working with data on chemical substances, we often need a reliable link between
-the data and the chemical identity of the substances. The R package **chents**
-provides a way to define an R object corresponding to a chemically defined substances
-("chemical entity") and to collect related information.
+```{r, results = "asis", echo = FALSE}
+read.dcf("DESCRIPTION")[, "Description"] |> cat()
+```
 
+## Usage
 
 When first defining a chemical entity, some chemical information
 is retrieved from the [PubChem](https://pubchem.ncbi.nlm.nih.gov/) website using
