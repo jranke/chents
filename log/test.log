@@ -11,14 +11,14 @@ The following object is masked from ‘package:devtools’:
 
 ⠏ |          0 | chent                                                          
 ⠸ |          4 | chent                                                          
-⠇ |          9 | chent                                                          
-✔ |          9 | chent [3.2s]
+⠧ |          8 | chent                                                          
+✔ |          9 | chent [6.9s]
 
 ⠏ |          0 | pai                                                            
 ⠋ |          1 | pai                                                            
-✔ |          9 | pai [3.6s]
+✔ |          9 | pai [7.8s]
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 6.8 s
+Duration: 14.7 s
 
 [ FAIL 0 | WARN 0 | SKIP 0 | PASS 18 ]
